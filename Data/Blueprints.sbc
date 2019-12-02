@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Blueprints>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>IceToOxygen</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Item_Oxygen</DisplayName>
+			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Ore" SubtypeId="IceGas" />
+			</Prerequisites>
+			<Result Amount="0.9" TypeId="Ingot" SubtypeId="Stone" />
+			<BaseProductionTimeInSeconds>0.1</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>EmergencyWater_DNSK</SubtypeId>
+			</Id>
+			<DisplayName>Emergency Water - (25pts Thirst/Max 50% Thirst Fill)</DisplayName>
+			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_EmergencyWater_Icon.dds</Icon>
+			<Prerequisites>
+				<Item Amount="90" TypeId="Ore" SubtypeId="IceFiltered" />
+			</Prerequisites>
+			<Result Amount="1" TypeId="Ingot" SubtypeId="EmergencyWater_DNSK" />
+			<BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
+			<Priority>850</Priority>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>EmergencyFood_DNSK</SubtypeId>
+			</Id>
+			<DisplayName>Emergency Food - (10pts Hunger/Max 50% Hunger Fill)</DisplayName>
+			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_EmergencyFood_Icon.dds</Icon>
+			<Prerequisites>
+				<Item Amount="10" TypeId="Ingot" SubtypeId="Stone" />
+			</Prerequisites>
+			<Result Amount="1" TypeId="Ingot" SubtypeId="EmergencyFood_DNSK" />
+			<BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
+			<Priority>800</Priority>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>IceConversion</SubtypeId>
+			</Id>
+			<DisplayName>Refine Ice - Produces Gas, Liquid and Filtered Ice.</DisplayName>
+			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
+			<Prerequisites>
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice" />
+			</Prerequisites>
+			<Results>
+				<Item Amount="25" TypeId="Ore" SubtypeId="IceLiquid" />
+				<Item Amount="25" TypeId="Ore" SubtypeId="IceGas" />
+				<Item Amount="25" TypeId="Ore" SubtypeId="IceFiltered" />				
+			</Results>
+			<Priority>900</Priority>
+			<BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+		</Blueprint>
+		
+	</Blueprints>
+</Definitions>

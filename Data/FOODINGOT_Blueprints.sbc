@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Blueprints>
+		<!-- ***** Ore to Ingot Blueprints **** -->
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>CarbonOreToIngot</SubtypeId>
+			</Id>
+			<DisplayName>Carbon Powder</DisplayName>
+			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_Carbon_Ingot_Icon.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Ore" SubtypeId="Carbon" />
+			</Prerequisites>
+			<Result Amount="0.07" TypeId="Ingot" SubtypeId="Carbon" />
+			<BaseProductionTimeInSeconds>4</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>PotassiumOreToIngot</SubtypeId>
+			</Id>
+			<DisplayName>Potassium Ingot</DisplayName>
+			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_Potassium_Ingot_Icon.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Ore" SubtypeId="Potassium" />
+			</Prerequisites>
+			<Result Amount="0.007" TypeId="Ingot" SubtypeId="Potassium" />
+			<BaseProductionTimeInSeconds>2</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>PhosphorusOreToIngot</SubtypeId>
+			</Id>
+			<DisplayName>Phosphorus Ingot</DisplayName>
+			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_Phosphorus_Ingot_Icon.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Ore" SubtypeId="Phosphorus" />
+			</Prerequisites>
+			<Result Amount="0.007" TypeId="Ingot" SubtypeId="Phosphorus" />
+			<BaseProductionTimeInSeconds>4</BaseProductionTimeInSeconds>
+		</Blueprint>
+	</Blueprints>
+</Definitions>

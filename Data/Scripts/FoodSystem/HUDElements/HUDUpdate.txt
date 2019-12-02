@@ -1,0 +1,305 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Sandbox.ModAPI;
+using VRage.Game;
+using VRage.Game.Components;
+using VRage.Game.ModAPI;
+using VRage.ModAPI;
+using Sandbox.Common.ObjectBuilders;
+using Sandbox.Game;
+using Sandbox.Game.Entities;
+using Sandbox.Game.Gui;
+using Sandbox.Game.Localization;
+using Sandbox.ModAPI.Interfaces.Terminal;
+using VRage.Game.Entity;
+using VRage.Utils;
+using VRageMath;
+using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
+using VRage.Game.ObjectBuilders.Definitions;
+using Rek.FoodSystem;
+using Draygo.API;
+
+namespace Stollie.DailyNeeds
+{
+    [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
+    public class HUDUpdate : MySessionComponentBase
+    {
+        private static readonly MyStringId ThirstIcon = MyStringId.GetOrCompute("ThirstIcon_LightBlue");
+        private static readonly MyStringId ThirstIconRed = MyStringId.GetOrCompute("ThirstIcon_Red");
+        private static readonly MyStringId ThirstIconGreen = MyStringId.GetOrCompute("ThirstIcon_Green");
+        private static readonly MyStringId HungerIcon = MyStringId.GetOrCompute("HungerIcon_LightBlue");
+        private static readonly MyStringId HungerIconRed = MyStringId.GetOrCompute("HungerIcon_Red");
+        private static readonly MyStringId HungerIconGreen = MyStringId.GetOrCompute("HungerIcon_Green");
+        private static readonly MyStringId FatigueIcon = MyStringId.GetOrCompute("FatigueIcon_LightBlue");
+        private static readonly MyStringId FatigueIconRed = MyStringId.GetOrCompute("FatigueIcon_Red");
+        private static readonly MyStringId FatigueIconGreen = MyStringId.GetOrCompute("FatigueIcon_Green");
+        private static readonly MyStringId TwentyFivePercentHudIconFull = MyStringId.GetOrCompute("25PercentFull");
+        private static readonly MyStringId TwentyFivePercentHudIconRed = MyStringId.GetOrCompute("25PercentProgressBarRed");
+        private static readonly MyStringId FiftyPercentHudIconHudIconFull = MyStringId.GetOrCompute("50PercentFull");
+        private static readonly MyStringId FiftyPercentProgressBarAmber = MyStringId.GetOrCompute("50PercentProgressBarAmber");
+        private static readonly MyStringId SeventyFivePercentHudIconFull = MyStringId.GetOrCompute("75PercentFull");
+        private static readonly MyStringId OneHundredPercentHudIconFull = MyStringId.GetOrCompute("100PercentFull");
+
+        private PlayerData mPlayerData = null;
+        private bool mStarted = false;
+        private double hungerValue = 100;
+        private float thirstValue = 100;
+        private float fatigueValue = 100;
+        private bool eventsReady = false;
+        private int count = -1;
+
+        private void Init()
+        {
+            //Calls Server to send PlayerData
+            MyAPIGateway.Multiplayer.RegisterMessageHandler(6789, UpdateNeedsFromServer);
+        }
+
+        public override void UpdateAfterSimulation()
+        {
+            if (MyAPIGateway.Session == null)
+                return;
+
+            try
+            {
+                var isHost = MyAPIGateway.Session.OnlineMode == MyOnlineModeEnum.OFFLINE || MyAPIGateway.Multiplayer.IsServer;
+
+                var isDedicatedHost = isHost && MyAPIGateway.Utilities.IsDedicated;
+
+                if (isDedicatedHost)
+                    return;
+
+                if (!mStarted)
+                {
+                    mStarted = true;
+                    Init();
+                }
+                count++;
+                if (count == 199) count = 0;
+            }
+            catch (Exception e)
+            {
+                //MyLog.Default.WriteLineAndConsole("(FoodSystem) Error: " + e.Message + "\n" + e.StackTrace);
+                MyAPIGateway.Utilities.ShowMessage("Error", e.Message + "\n" + e.StackTrace);
+            }
+        }
+
+        /*public override void Draw()
+        {
+            var config = MyAPIGateway.Session.Config;
+            if (!config.MinimalHud && !MyAPIGateway.Gui.IsCursorVisible && eventsReady)
+            {
+                #region DrawHunger
+                if (Math.Floor(hungerValue) > 100)
+                {
+                    DrawHunger(new Vector2D(-4.7000, -2.04), HungerIconGreen, 0.02f);
+                }
+                if ((Math.Floor(hungerValue) > 0 && (Math.Floor(hungerValue) <=100)) || ((Math.Floor(hungerValue) <= 0 && count <= 100)))
+                {
+                    DrawHunger(new Vector2D(-4.7000, -2.04), HungerIcon, 0.02f);
+                }
+                if (count > 100 && (Math.Floor(hungerValue) <= 0))
+                {
+                    DrawHunger(new Vector2D(-4.7000, -2.04), HungerIconRed, 0.02f);
+                    
+                }
+                if (Math.Floor(hungerValue) > 50)
+                {
+                    DrawHunger(new Vector2D(-1.2010, -0.545), TwentyFivePercentHudIconFull, 0.075f);
+                    DrawHunger(new Vector2D(-1.1470, -0.545), FiftyPercentHudIconHudIconFull, 0.075f);
+                    DrawHunger(new Vector2D(-1.0930, -0.545), SeventyFivePercentHudIconFull, 0.075f);
+                    
+                }
+                if (Math.Floor(hungerValue) > 75)
+                {
+                    DrawHunger(new Vector2D(-1.0395, -0.545), OneHundredPercentHudIconFull, 0.075f);
+                }
+                if (Math.Floor(hungerValue) < 51 && Math.Floor(hungerValue) > 25)
+                {
+                    DrawHunger(new Vector2D(-1.2010, -0.545), TwentyFivePercentHudIconRed, 0.075f);
+                    DrawHunger(new Vector2D(-1.1470, -0.545), FiftyPercentProgressBarAmber, 0.075f);
+                }
+                if (Math.Floor(hungerValue) < 26 && Math.Floor(hungerValue) > 0)
+                {
+                    DrawHunger(new Vector2D(-1.2010, -0.545), TwentyFivePercentHudIconRed, 0.075f);
+                }
+                #endregion
+
+                #region DrawThirst
+                if (Math.Floor(thirstValue) > 100)
+                {
+                    DrawThirst(new Vector2D(-4.7000, -2.33), ThirstIconGreen, 0.02f);
+                }
+                if ((Math.Floor(thirstValue) > 0 && (Math.Floor(thirstValue) <= 100)) || ((Math.Floor(thirstValue) <= 0 && count <= 100)))
+                {
+                    DrawThirst(new Vector2D(-4.7000, -2.33), ThirstIcon, 0.02f);
+                }
+                if (count > 100 && (Math.Floor(thirstValue) <= 0))
+                {
+                    DrawThirst(new Vector2D(-4.7000, -2.33), ThirstIconRed, 0.02f);
+                }
+                if (Math.Floor(thirstValue) > 50)
+                {
+                    DrawThirst(new Vector2D(-1.2010, -0.625), TwentyFivePercentHudIconFull, 0.075f);
+                    DrawThirst(new Vector2D(-1.1470, -0.625), FiftyPercentHudIconHudIconFull, 0.075f);
+                    DrawThirst(new Vector2D(-1.0930, -0.625), SeventyFivePercentHudIconFull, 0.075f);
+                }
+                if (Math.Floor(thirstValue) > 75)
+                {
+                    DrawThirst(new Vector2D(-1.0395, -0.625), OneHundredPercentHudIconFull, 0.075f);
+                }
+                if (Math.Floor(thirstValue) < 51 && Math.Floor(thirstValue) > 25)
+                {
+                    DrawThirst(new Vector2D(-1.2010, -0.625), TwentyFivePercentHudIconRed, 0.075f);
+                    DrawThirst(new Vector2D(-1.1470, -0.625), FiftyPercentProgressBarAmber, 0.075f);
+
+                }
+                if (Math.Floor(thirstValue) < 26 && Math.Floor(thirstValue) > 0)
+                {
+                    DrawThirst(new Vector2D(-1.2010, -0.625), TwentyFivePercentHudIconRed, 0.075f);
+                }
+                #endregion
+
+                #region DrawFatigue
+                if (Math.Floor(fatigueValue) > 100)
+                {
+                    DrawFatigue(new Vector2D(-4.7000, -2.63), FatigueIconGreen, 0.02f);
+                }
+                if ((Math.Floor(fatigueValue) > 0 && (Math.Floor(fatigueValue) <= 100)) || ((Math.Floor(fatigueValue) <= 0 && count <= 100)))
+                {
+                    DrawFatigue(new Vector2D(-4.7000, -2.63), FatigueIcon, 0.02f);
+                }
+                if (count > 100 && (Math.Floor(fatigueValue) <= 0))
+                {
+                    DrawFatigue(new Vector2D(-4.7000, -2.63), FatigueIconRed, 0.02f);
+                }
+                if (Math.Floor(fatigueValue) > 50)
+                {
+                    DrawFatigue(new Vector2D(-1.2010, -0.70), TwentyFivePercentHudIconFull, 0.075f);
+                    DrawFatigue(new Vector2D(-1.1470, -0.70), FiftyPercentHudIconHudIconFull, 0.075f);
+                    DrawFatigue(new Vector2D(-1.0930, -0.70), SeventyFivePercentHudIconFull, 0.075f);
+                }
+                if (Math.Floor(fatigueValue) > 75)
+                {
+                    DrawFatigue(new Vector2D(-1.0395, -0.70), OneHundredPercentHudIconFull, 0.075f);
+                }
+                if (Math.Floor(fatigueValue) < 51 && Math.Floor(fatigueValue) > 25)
+                {
+                    DrawFatigue(new Vector2D(-1.2010, -0.70), TwentyFivePercentHudIconRed, 0.075f);
+                    DrawFatigue(new Vector2D(-1.1470, -0.70), FiftyPercentProgressBarAmber, 0.075f);
+
+                }
+                if (Math.Floor(fatigueValue) < 26 && Math.Floor(fatigueValue) > 0)
+                {
+                    DrawFatigue(new Vector2D(-1.2010, -0.70), TwentyFivePercentHudIconRed, 0.075f);
+                }
+                #endregion
+            }
+        }
+        */
+
+        public void DrawHunger(Vector2D vector, MyStringId icon, float size)
+        {
+            Vector2D iconPos = new Vector2D(vector.X, vector.Y);
+            var position = new Vector3D(iconPos.X, iconPos.Y, 0);
+            var fov = MyAPIGateway.Session.Camera.FovWithZoom;
+            double aspectratio =
+                MyAPIGateway.Session.Camera.ViewportSize.X / MyAPIGateway.Session.Camera.ViewportSize.Y;
+            var scale = size * Math.Tan(fov * 0.5);
+            position.X *= scale * aspectratio;
+            position.Y *= scale;
+
+            var cameraWorldMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
+            position = Vector3D.Transform(new Vector3D(position.X, position.Y, -.1), cameraWorldMatrix);
+
+            var origin = position;
+            var left = cameraWorldMatrix.Left;
+            var up = cameraWorldMatrix.Up;
+            const double scaler = 0.08;
+            scale = scaler * scale;
+            
+            MyTransparentGeometry.AddBillboardOriented(icon, Color.White, origin, left, up, (float) scale * 1.11f, BlendTypeEnum.LDR);
+        }
+
+        public void DrawThirst(Vector2D vector, MyStringId icon, float size)
+        {
+            var config = MyAPIGateway.Session.Config;
+            if (!config.MinimalHud)
+            {
+                Vector2D iconPos = new Vector2D(vector.X, vector.Y);
+                var position = new Vector3D(iconPos.X, iconPos.Y, 0);
+                var fov = MyAPIGateway.Session.Camera.FovWithZoom;
+                double aspectratio = MyAPIGateway.Session.Camera.ViewportSize.X /
+                                     MyAPIGateway.Session.Camera.ViewportSize.Y;
+                var scale = size * Math.Tan(fov * 0.5);
+                position.X *= scale * aspectratio;
+                position.Y *= scale;
+
+                var cameraWorldMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
+                position = Vector3D.Transform(new Vector3D(position.X, position.Y, -.1), cameraWorldMatrix);
+
+                var origin = position;
+                var left = cameraWorldMatrix.Left;
+                var up = cameraWorldMatrix.Up;
+                const double scaler = 0.08;
+                scale = scaler * scale;
+                var color = Color.Blue;
+
+                MyTransparentGeometry.AddBillboardOriented(icon, Color.White, origin, left, up, (float) scale * 1.11f,
+                    BlendTypeEnum.SDR);
+            }
+        }
+
+        public void DrawFatigue(Vector2D vector, MyStringId icon, float size)
+        {
+            var config = MyAPIGateway.Session.Config;
+            if (!config.MinimalHud)
+            {
+                Vector2D iconPos = new Vector2D(vector.X, vector.Y);
+                var position = new Vector3D(iconPos.X, iconPos.Y, 0);
+                var fov = MyAPIGateway.Session.Camera.FovWithZoom;
+                double aspectratio = MyAPIGateway.Session.Camera.ViewportSize.X /
+                                     MyAPIGateway.Session.Camera.ViewportSize.Y;
+                var scale = size * Math.Tan(fov * 0.5);
+                position.X *= scale * aspectratio;
+                position.Y *= scale;
+
+                var cameraWorldMatrix = MyAPIGateway.Session.Camera.WorldMatrix;
+                position = Vector3D.Transform(new Vector3D(position.X, position.Y, -.1), cameraWorldMatrix);
+
+                var origin = position;
+                var left = cameraWorldMatrix.Left;
+                var up = cameraWorldMatrix.Up;
+                const double scaler = 0.08;
+                scale = scaler * scale;
+                var color = Color.Blue;
+
+                MyTransparentGeometry.AddBillboardOriented(icon, Color.White, origin, left, up, (float) scale * 1.11f,
+                    BlendTypeEnum.LDR);
+            }
+        }
+
+        private void UpdateNeedsFromServer(byte[] data)
+        {
+            //MyAPIGateway.Utilities.ShowMessage("Debug", "Heartbeat: " + mHud.Heartbeat);
+            mPlayerData = MyAPIGateway.Utilities.SerializeFromXML<PlayerData>(Encoding.Unicode.GetString(data));
+            hungerValue = Math.Floor(mPlayerData.hunger);
+            thirstValue = mPlayerData.thirst;
+            fatigueValue = mPlayerData.fatigue;
+            eventsReady = true;
+        }
+
+        protected override void UnloadData() // will act up without the try-catches. yes it's ugly and slow. it only gets called on disconnect so we don't care
+        {
+            try
+            {
+                MyAPIGateway.Multiplayer.UnregisterMessageHandler(6789, UpdateNeedsFromServer);
+            }
+            catch (Exception e)
+            {
+                MyAPIGateway.Utilities.ShowMessage("Error", e.Message + "\n" + e.StackTrace);
+            }
+        }
+    }
+}

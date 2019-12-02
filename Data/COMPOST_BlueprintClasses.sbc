@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<BlueprintClasses>
+		<Class>
+			<Id>                   
+				<TypeId>BlueprintClassDefinition</TypeId>
+				<SubtypeId>Compost</SubtypeId>
+			</Id>
+			<DisplayName>Compost</DisplayName>
+			<Icon>Textures\GUI\Icons\food.dds</Icon>
+			<HighlightIcon>Textures\GUI\Icons\food_highlight.dds</HighlightIcon>
+		</Class>
+	</BlueprintClasses>
+	<BlueprintClassEntries>
+		<Entry Class="LargeBlocks" BlueprintSubtypeId="Refinery/LargeCompost" />
+		
+	</BlueprintClassEntries>
+</Definitions>

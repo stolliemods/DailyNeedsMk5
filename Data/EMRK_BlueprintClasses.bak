@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<BlueprintClasses>
+		<Class>
+			<Id>                   
+				<TypeId>BlueprintClassDefinition</TypeId>
+				<SubtypeId>EmergencyRations</SubtypeId>
+			</Id>
+			<DisplayName>Emergency Rations</DisplayName>
+			<Icon>Textures\GUI\Icons\food.dds</Icon>
+			<HighlightIcon>Textures\GUI\Icons\food_highlight.dds</HighlightIcon>
+		</Class>
+	</BlueprintClasses>
+	<BlueprintClassEntries>
+		<Entry Class="SmallBlocks" BlueprintSubtypeId="SmallEmergencyRationsKit" />
+		*** Liquids ***
+		<Entry Class="EmergencyRations" BlueprintSubtypeId="EmergencyWater_DNSK" />
+		*** Foods ***
+		<Entry Class="EmergencyRations" BlueprintSubtypeId="EmergencyFood_DNSK" />
+	</BlueprintClassEntries>
+</Definitions>

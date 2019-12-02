@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_AssemblerDefinition">
+			<Id>
+				<TypeId>Assembler</TypeId>
+				<SubtypeId>SmallEmergencyRationsKit</SubtypeId>
+			</Id>
+			<DisplayName>Emergency Rations Dispenser</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\EmergencyRations.dds</Icon>
+			<Description>The Emergency Rations Dispenser is a low build cost unit that produces emergency food and water from Gravel and Ice. Commonly found in escape pods of all types. Eating this food is only a bare survival scenario as they are barely enough to sustain you and thus your level dont go past 50% using them.They have very long production times so upgrading to more efficient production systems as soon as possible is advised. Small block ONLY! </Description>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1" /> 
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\Cubes\Small\EmergencyRationsKit_Small.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="4" />
+				<Component Subtype="Construction" Count="5" />
+				<Component Subtype="Motor" Count="2" />
+				<Component Subtype="Computer" Count="2" />
+				<Component Subtype="Construction" Count="3" />
+				<Component Subtype="Display" Count="2" />
+				<Component Subtype="Girder" Count="2" />
+				<Component Subtype="InteriorPlate" Count="2" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Small\EmergencyRationsKit_Small_Constr1.mwm" />
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Small\EmergencyRationsKit_Small_Constr2.mwm" />
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\EmergencyRationsKit_Small_Constr3.mwm" />
+			</BuildProgressModels>
+			<BlockPairName>EmergencyRationsKit</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<InventoryMaxVolume>0.35</InventoryMaxVolume>
+			<InventorySize>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</InventorySize>
+			<StandbyPowerConsumption>0.001</StandbyPowerConsumption>
+			<OperationalPowerConsumption>0.15</OperationalPowerConsumption>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<BlueprintClasses>
+				<Class>EmergencyRations</Class>
+			</BlueprintClasses>
+			<ResourceSinkGroup>Factory</ResourceSinkGroup>
+			<DamageEffectId>212</DamageEffectId>
+			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<PCU>3</PCU>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

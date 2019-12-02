@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DC227365-3AC1-4996-9BB4-BFD96FB44B4D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>ClassLibrary</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>DailyNeeds</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Sandbox.Common">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Sandbox.Game">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="Sandbox.Graphics">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sandbox.RenderDirect">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.RenderDirect.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.Game">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.ObjectBuilders">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.ObjectBuilders.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers.ObjectBuilders.XmlSerializers">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.ObjectBuilders.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="VRage">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Ansel">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Ansel.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Audio">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Game">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Game.XmlSerializers">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Game.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Input">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Library">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Math">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Math.XmlSerializers">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Math.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Native">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Native.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.NativeAftermath">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.NativeAftermath.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.OpenVRWrapper">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.OpenVRWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Render">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Render.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Render11">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Render11.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Scripting">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Scripting.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Steam">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Steam.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.XmlSerializers">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.XmlSerializers.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Audio\drinking.wav" />
+    <Content Include="Audio\eating.wav" />
+    <Content Include="Data\Scripts\FoodSystem\HUDElements\HUDUpdate.txt" />
+    <Content Include="Textures\GUI\Icons\Cubes\DailyNeeds_BlankLCD_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\EmergencyRations.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\EnclosedHydroponics.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\FoodResequencer.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\OpenHydroponics.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\SoilTrayCropGrower.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\WaterRecycler.dds" />
+    <Content Include="Textures\GUI\Icons\food.dds" />
+    <Content Include="Textures\GUI\Icons\food_highlight.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\100PercentProgressBarEmpty.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\100PercentProgressBarFull.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\25PercentProgressBarFull.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\25PercentProgressBarRed.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\50PercentProgressBarAmber.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\50PercentProgressBarFull.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\75PercentProgressBarEmpty.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\75PercentProgressBarFull.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\FatigueIcon_Green.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\FatigueIcon_LightBlue.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\FatigueIcon_Red.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\HungerIcon_Green.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\HungerIcon_LightBlue.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\HungerIcon_Red.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\ThirstIcon_Green.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\ThirstIcon_LightBlue.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\ThirstIcon_Red.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Carbon_Ingot_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Carbon_Ore_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Coffee_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_EmergencyFood_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_EmergencyWater_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Fertilizer_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_FineMeal_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_GreyWater_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_HotChocolate_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_LuxuryMeal_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Meat_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Organic_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Phosphorus_Ingot_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Phosphorus_Ore_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_PlantMatter_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_PlantSeeds_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Potassium_Ingot_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Potassium_Ore_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_ProteinShake_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_SimpleMeal_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_SpaceBar_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_VegetableSeeds_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Vegetables_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Water_Icon.dds" />
+    <Content Include="Textures\Models\Cubes\Apple_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Banana_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Dirt_add.dds" />
+    <Content Include="Textures\Models\Cubes\Dirt_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Dirt_ng.dds" />
+    <Content Include="Textures\Models\Cubes\HydrophonicsLeaf_add.DDS" />
+    <Content Include="Textures\Models\Cubes\HydrophonicsLeaf_alphamask.DDS" />
+    <Content Include="Textures\Models\Cubes\HydrophonicsLeaf_cm.DDS" />
+    <Content Include="Textures\Models\Cubes\HydrophonicsLeaf_ng.DDS" />
+    <Content Include="Textures\Models\Cubes\KitchenMeat_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Orange_cm.dds" />
+    <Content Include="Textures\Models\Cubes\OrganicMeat_cm.dds" />
+    <Content Include="Textures\Models\Cubes\OrganicMeat_ng.dds" />
+    <Content Include="Textures\Models\Cubes\Pear_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\BlackRubber_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\BlackRubber_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterBlack_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterBlue_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterBronze_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterBronze_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterBrown_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterGlass.DDS" />
+    <Content Include="Textures\Models\Physical_Item\CanisterGold_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterGreen_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterPurple_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterRed_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterSilver_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterWhite_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterYellow_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\chocolate_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\chocolate_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\chocolate_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\coffeebeans_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\coffeebeans_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\coffeebeans_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\coffee_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\coffee_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\coffee_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\emergencymeal_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\emergencymeal_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\emergencymeal_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\emergencywater_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\emergencywater_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\emergencywater_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\Fertilizer_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\Fertilizer_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\Fertilizer_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\GreyWater_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\GreyWater_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\GreyWater_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\ingots_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\ingots_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\ingots_de.dds" />
+    <Content Include="Textures\Models\Physical_Item\ingots_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\ingots_ns.dds" />
+    <Content Include="Textures\Models\Physical_Item\meal-fine-silver_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\meal-luxury-gold_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\meal-simple-brown_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\meal_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\meal_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\Meat_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\mud_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\plastic_components_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\proteinshake_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\proteinshake_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\proteinshake_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\spacebar_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\spacebar_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\spacebar_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\VegetableSeeds_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\VegetableSeeds_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\VegetableSeeds_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\vegetables_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\vegetables_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\vegetables_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\Water_add.dds" />
+    <Content Include="Textures\Models\Physical_Item\Water_cm.dds" />
+    <Content Include="Textures\Models\Physical_Item\Water_ng.dds" />
+    <Content Include="Textures\Particles\ClearGlass_ca.dds" />
+    <Content Include="Textures\Particles\Glass.DDS" />
+    <Content Include="Textures\Voxels\Carbon_01_ForAxisXZ_add.dds" />
+    <Content Include="Textures\Voxels\Carbon_01_ForAxisXZ_cm.dds" />
+    <Content Include="Textures\Voxels\Carbon_01_ForAxisXZ_ng.dds" />
+    <Content Include="Textures\Voxels\Phosphorus_01_ForAxisXZ_add.dds" />
+    <Content Include="Textures\Voxels\Phosphorus_01_ForAxisXZ_cm.dds" />
+    <Content Include="Textures\Voxels\Phosphorus_01_ForAxisXZ_ng.dds" />
+    <Content Include="Textures\Voxels\Potassium_01_ForAxisXZ_add.dds" />
+    <Content Include="Textures\Voxels\Potassium_01_ForAxisXZ_cm.dds" />
+    <Content Include="Textures\Voxels\Potassium_01_ForAxisXZ_ng.dds" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\Audio.sbc" />
+    <None Include="Data\BlueprintClasses.sbc" />
+    <None Include="Data\Blueprints.sbc" />
+    <None Include="Data\COMPOST_BlockCategories.sbc" />
+    <None Include="Data\COMPOST_BlueprintClasses.sbc" />
+    <None Include="Data\COMPOST_Blueprints.sbc" />
+    <None Include="Data\COMPOST_CubeBlocks_Large_Ship.sbc" />
+    <None Include="Data\EMRK_BlockCategories.bak" />
+    <None Include="Data\EMRK_BlueprintClasses.bak" />
+    <None Include="Data\EMRK_Blueprints.bak" />
+    <None Include="Data\EMRK_CubeBlocks_Small_Ship.bak" />
+    <None Include="Data\FOODINGOT_BlueprintClasses.sbc" />
+    <None Include="Data\FOODINGOT_Blueprints.sbc" />
+    <None Include="Data\HYDROPONICS_BlockCategories.sbc" />
+    <None Include="Data\HYDROPONICS_BlueprintClasses.sbc" />
+    <None Include="Data\HYDROPONICS_Blueprints.sbc" />
+    <None Include="Data\HYDROPONICS_CubeBlocks_Large_Ship.sbc" />
+    <None Include="Data\HYDROPONICS_CubeBlocks_Small_Ship.sbc" />
+    <None Include="Data\ICEREFINERY_BlockCategories.sbc" />
+    <None Include="Data\ICEREFINERY_BlueprintClasses.sbc" />
+    <None Include="Data\ICEREFINERY_Blueprints.sbc" />
+    <None Include="Data\ICEREFINERY_CubeBlocks_Large_Ship.sbc" />
+    <None Include="Data\ICEREFINERY_CubeBlocks_Small_Ship.sbc" />
+    <None Include="Data\Kitchen_BlockCategories.sbc" />
+    <None Include="Data\Kitchen_BlueprintClasses.sbc" />
+    <None Include="Data\Kitchen_Blueprints.sbc" />
+    <None Include="Data\Kitchen_CubeBlocks_Large_Ship.sbc" />
+    <None Include="Data\Kitchen_CubeBlocks_Small_Ship.sbc" />
+    <None Include="Data\LCD_BlockCategories.sbc" />
+    <None Include="Data\LCD_CubeBlocks_Large_Ship.sbc" />
+    <None Include="Data\Scripts\FoodSystem\AnimationsAndLighting\EmergencyRationsKit.bak" />
+    <None Include="Data\Scripts\FoodSystem\AnimationsAndLighting\OpenHydroAnimation.bak" />
+    <None Include="Data\zContainerTypesAndSupplyDrops.sbc" />
+    <None Include="Data\zModStorageComponentGUID.sbc" />
+    <None Include="Data\zPhysicalItems.sbc" />
+    <None Include="Data\zTransparentMaterials.sbc" />
+    <None Include="Data\zVoxelMaterialChanges.sbc" />
+    <None Include="Data\zVoxelMaterials_asteroids.sbc" />
+    <None Include="Data\zVoxelMaterials_planetary.sbc" />
+    <None Include="Models\Cubes\Large\CropGrower_Large.mwm" />
+    <None Include="Models\Cubes\Large\CropGrower_Large_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\CropGrower_Large_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\CropGrower_Large_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\DailyNeeds_BlankLCD_Large.mwm" />
+    <None Include="Models\Cubes\Large\DailyNeeds_BlankLCD_Large_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\DailyNeeds_BlankLCD_Large_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\DailyNeeds_BlankLCD_Large_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\EnclosedHydroponics_Large.mwm" />
+    <None Include="Models\Cubes\Large\EnclosedHydroponics_Large_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\EnclosedHydroponics_Large_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\EnclosedHydroponics_Large_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\EnclosedHydroponics_Leaves_Large.mwm" />
+    <None Include="Models\Cubes\Large\EnclosedHydroponics_Leaves_Small.mwm" />
+    <None Include="Models\Cubes\Large\EnclosedHydroponics_Small.mwm" />
+    <None Include="Models\Cubes\Large\EnclosedHydroponics_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\EnclosedHydroponics_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\EnclosedHydroponics_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\FoodProteinResequencer_Grinder_Large.mwm" />
+    <None Include="Models\Cubes\Large\FoodProteinResequencer_Head_Large.mwm" />
+    <None Include="Models\Cubes\Large\FoodProteinResequencer_Large.mwm" />
+    <None Include="Models\Cubes\Large\FoodProteinResequencer_Large_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\FoodProteinResequencer_Large_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\FoodProteinResequencer_Large_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\FoodProteinResequencer_LeftArm_Large.mwm" />
+    <None Include="Models\Cubes\Large\FoodProteinResequencer_RightArm_Large.mwm" />
+    <None Include="Models\Cubes\Large\IceRefinery_Small.mwm" />
+    <None Include="Models\Cubes\Large\IceRefinery_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\IceRefinery_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\IceRefinery_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\OpenHydroponics_Large.mwm" />
+    <None Include="Models\Cubes\Large\OpenHydroponics_Large_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\OpenHydroponics_Large_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\OpenHydroponics_Large_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\OpenHydroponics_Rotor_Large.mwm" />
+    <None Include="Models\Cubes\Large\WaterRecyclingSystem_Large.mwm" />
+    <None Include="Models\Cubes\Large\WaterRecyclingSystem_Large_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\WaterRecyclingSystem_Large_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\WaterRecyclingSystem_Large_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\WaterRecyclingSystem_Small.mwm" />
+    <None Include="Models\Cubes\Large\WaterRecyclingSystem_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\WaterRecyclingSystem_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\WaterRecyclingSystem_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\WaterRecyclingSystem_Turbine_Large.mwm" />
+    <None Include="Models\Cubes\Small\EmergencyRationsKit_Generator_Small.mwm" />
+    <None Include="Models\Cubes\Small\EmergencyRationsKit_Small.mwm" />
+    <None Include="Models\Cubes\Small\EmergencyRationsKit_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Small\EmergencyRationsKit_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Small\EmergencyRationsKit_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Leaves_Small.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Mini_Leaves_Small.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Mini_Small.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Mini_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Mini_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Mini_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Small.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Small_LOD1.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Small_LOD2.mwm" />
+    <None Include="Models\Cubes\Small\EnclosedHydroponics_Small_LOD3.mwm" />
+    <None Include="Models\Cubes\Small\IceRefinery_Mini_Small.mwm" />
+    <None Include="Models\Cubes\Small\IceRefinery_Mini_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Small\IceRefinery_Mini_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Small\IceRefinery_Mini_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Small\IceRefinery_Mini_Turbine_Small.mwm" />
+    <None Include="Models\Cubes\Small\IceRefinery_Small.mwm" />
+    <None Include="Models\Cubes\Small\IceRefinery_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Small\IceRefinery_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Small\IceRefinery_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Small\IceRefinery_Turbine_Small.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Grinder_Small.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_LeftArm_Small.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Mini_Grinder_Small.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Mini_LeftArm_Small.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Mini_RightArm_Small.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Mini_Small.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Mini_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Mini_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Mini_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_RightArm_Small.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Small.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Small\Kitchen_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Small\WaterRecyclingSystem_Mini_Small.mwm" />
+    <None Include="Models\Cubes\Small\WaterRecyclingSystem_Mini_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Small\WaterRecyclingSystem_Mini_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Small\WaterRecyclingSystem_Mini_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Small\WaterRecyclingSystem_Mini_Turbine_Small.mwm" />
+    <None Include="Models\Cubes\Small\WaterRecyclingSystem_Small.mwm" />
+    <None Include="Models\Cubes\Small\WaterRecyclingSystem_Small_Constr1.mwm" />
+    <None Include="Models\Cubes\Small\WaterRecyclingSystem_Small_Constr2.mwm" />
+    <None Include="Models\Cubes\Small\WaterRecyclingSystem_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Small\WaterRecyclingSystem_Turbine_Small.mwm" />
+    <None Include="Models\Ingots\generic_ingot.mwm" />
+    <None Include="Models\Ingots\potassium_ingot.mwm" />
+    <None Include="Models\Physical_Items\CanisterHChoc_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\CanisterHChoc_Small.mwm" />
+    <None Include="Models\Physical_Items\CanisterWater_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\CanisterWater_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_Coffee_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_Coffee_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_EmergencyMeal_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_EmergencyMeal_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_EmergencyWater_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_EmergencyWater_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_Fertilizer_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_Fertilizer_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_FineMeal_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_FineMeal_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_GreyWater_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_GreyWater_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_HotChocolate_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_HotChocolate_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_LuxuryMeal_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_LuxuryMeal_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_OrganicFertilizer_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_OrganicFertilizer_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_ProteinShake_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_ProteinShake_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_SimpleMeal_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_SimpleMeal_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_SpaceBar_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_SpaceBar_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_VegetableSeeds_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_VegetableSeeds_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_Vegetables_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_Vegetables_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_Water_InnerCylinder_Small.mwm" />
+    <None Include="Models\Physical_Items\Canister_Water_Small.mwm" />
+    <None Include="Models\Physical_Items\DailyNeeds_Meat_Small.mwm" />
+    <None Include="obj\x64\Debug\DailyNeeds.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\x64\Debug\DailyNeeds.csprojAssemblyReference.cache" />
+    <None Include="obj\x64\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Canisters.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Compost.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Emissives.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Hydroponics.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\IceRefinery.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Kitchen.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\Client.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\Command.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\Config.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\ConfigData.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\ConfigDataStore.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\HudAPIv2.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\Logger.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\NeedsApi.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\PlayerData.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\PlayerDataStore.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\Server.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\SorterGroup.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\Utils.cs" />
+    <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\x64\Debug\" />
+    <Folder Include="obj\x64\Debug\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>

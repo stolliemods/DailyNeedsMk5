@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Blueprints>
+		
+		<!-- *** Ice Conversion Blueprints *** -->
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>RefineIce</SubtypeId>
+			</Id>
+			<DisplayName>Refine Ice</DisplayName>
+			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Ore" SubtypeId="Ice" />
+			</Prerequisites>
+			<Results>
+				<Item Amount="0.5" TypeId="Ore" SubtypeId="IceLiquid" />
+				<Item Amount="0.5" TypeId="Ore" SubtypeId="IceGas" />
+				<Item Amount="0.5" TypeId="Ore" SubtypeId="IceFiltered" />
+			</Results>
+			<Priority>900</Priority>
+			<BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+		</Blueprint>
+		
+		<!-- *** Liquid Conversion Blueprints *** -->
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>GreyWaterToWater_DNSK</SubtypeId>
+			</Id>
+			<DisplayName>Grey Water -> Water - (50pts Thirst)</DisplayName>
+			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_Water_Icon.dds</Icon>
+			<Prerequisites>
+				<Item Amount="0.35" TypeId="Ingot" SubtypeId="GreyWater_DNSK" />
+			</Prerequisites>
+			<Results>
+				<Item Amount="0.09" TypeId="Ingot" SubtypeId="Water_DNSK" />
+				<Item Amount="0.001" TypeId="Ore" SubtypeId="Organic" />
+			</Results>
+			<BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
+		</Blueprint>
+		
+		<!-- 
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>Water_DNSK</SubtypeId>
+			</Id>
+			<DisplayName>Water - (50pts Thirst)</DisplayName>
+			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_Water_Icon.dds</Icon>
+			<Prerequisites>
+				<Item Amount="25" TypeId="Ingot" SubtypeId="IceFiltered" />
+			</Prerequisites>
+			<Results>
+				<Item Amount="0.6" TypeId="Ingot" SubtypeId="Water_DNSK" />
+				<Item Amount="0.01" TypeId="Ore" SubtypeId="Organic" />
+				<Item Amount="1" TypeId="Ingot" SubtypeId="Stone" />
+			</Results>
+			<BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
+		</Blueprint>
+		-->
+		
+	</Blueprints>
+</Definitions>

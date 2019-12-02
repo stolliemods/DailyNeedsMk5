@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <EntityComponents>
+    <EntityComponent xsi:type="MyObjectBuilder_ModStorageComponentDefinition">
+      <Id>
+        <TypeId>ModStorageComponent</TypeId>
+        <SubtypeId>DailyNeedsModStorage</SubtypeId>
+      </Id>
+      <RegisteredStorageGuids>
+        <guid>0A9A3146-F8D1-40FD-A664-D0B9D071B0AC</guid>
+      </RegisteredStorageGuids>
+    </EntityComponent>
+  </EntityComponents>
+ </Definitions>

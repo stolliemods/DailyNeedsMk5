@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<BlueprintClasses>
+	<Class>
+			<Id>                   
+				<TypeId>BlueprintClassDefinition</TypeId>
+				<SubtypeId>LiquidConversion</SubtypeId>
+			</Id>
+			<DisplayName>LiquidConversion</DisplayName>
+			<Icon>Textures\GUI\Icons\food.dds</Icon>
+			<HighlightIcon>Textures\GUI\Icons\food_highlight.dds</HighlightIcon>
+		</Class>
+	</BlueprintClasses>
+	<BlueprintClassEntries>
+		<!-- *** WRS Block *** -->
+		<Entry Class="LargeBlocks" BlueprintSubtypeId="Refinery/LargeIceRefinery" />
+		<Entry Class="SmallBlocks" BlueprintSubtypeId="Refinery/SmallIceRefinery" />
+		<Entry Class="SmallBlocks" BlueprintSubtypeId="Refinery/MiniIceRefinery" />
+		<Entry Class="LiquidConversion" BlueprintSubtypeId="RefineIce" />
+		<!-- <Entry Class="LiquidConversion" BlueprintSubtypeId="Water_DNSK" /> -->
+		<Entry Class="LiquidConversion" BlueprintSubtypeId="GreyWaterToWater_DNSK" />
+		
+	</BlueprintClassEntries>
+</Definitions>

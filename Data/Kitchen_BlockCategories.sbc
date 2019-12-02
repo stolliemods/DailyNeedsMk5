@@ -1,0 +1,18 @@
+<?xml version="1.0"  encoding="utf-8"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CategoryClasses>
+		<Category xsi:type="MyObjectBuilder_GuiBlockCategoryDefinition">
+			<Id>
+				<TypeId>GuiBlockCategoryDefinition</TypeId>
+				<SubtypeId/>
+			</Id>
+			<DisplayName>Daily Needs</DisplayName>
+			<Name>Daily Needs Survival Kit</Name>
+			<ItemIds>
+				<string>Assembler/LargeKitchen_DNSK</string>
+				<string>Assembler/SmallKitchen_DNSK</string>
+				<string>Assembler/MiniKitchen_DNSK</string>
+			</ItemIds>
+		</Category>
+	</CategoryClasses>
+</Definitions>
