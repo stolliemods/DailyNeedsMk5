@@ -68,14 +68,6 @@
 						<SubtypeId>PlantMatter_DNSK</SubtypeId>
 					</Id>
 				</Item>
-				
-				<Item AmountMin="0.5" AmountMax="1">
-					<Frequency>0.2</Frequency>
-					<Id>
-						<TypeId>Ingot</TypeId>
-						<SubtypeId>PlantMatterSeeds_DNSK</SubtypeId>
-					</Id>
-				</Item>
 			</Items>
 		</ContainerType>
 		       

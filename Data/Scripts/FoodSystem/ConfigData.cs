@@ -78,6 +78,8 @@ namespace Rek.FoodSystem {
         public bool AUTOMATIC_BLOCK_COLOR;
         public bool CREATIVETOOLS_NODECAY;
 
+        public bool EATING_AND_DRINKING_REQUIRES_PRESSURISATION;
+
         public ConfigData()
         {
             MAX_NEEDS_VALUE = 100f;
@@ -144,6 +146,7 @@ namespace Rek.FoodSystem {
 
             AUTOMATIC_BLOCK_COLOR = true;
             CREATIVETOOLS_NODECAY = false;
-    }
+            EATING_AND_DRINKING_REQUIRES_PRESSURISATION = true;
+        }
     }
 }

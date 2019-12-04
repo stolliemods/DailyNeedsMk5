@@ -82,7 +82,7 @@
 			<DisplayName>Water - (25pts Thirst)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_Water_Icon.dds</Icon>
 			<Prerequisites>
-				<Item Amount="100" TypeId="Ore" SubtypeId="IceFiltered" />
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Filtered" />
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="Water_DNSK" />
 			<BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
@@ -96,8 +96,8 @@
 			<DisplayName>Coffee - (50pts Thirst/100pts Fatigue)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_Coffee_Icon.dds</Icon>
 			<Prerequisites>
-				<Item Amount="10" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />
-				<Item Amount="100" TypeId="Ore" SubtypeId="IceFiltered" />
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Filtered" />
+				<Item Amount="10" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />				
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="Coffee_DNSK" />
 			<BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
@@ -111,8 +111,9 @@
 			<DisplayName>Hot Chocolate - (50pts Thirst/100pts Fatigue)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_HotChocolate_Icon.dds</Icon>
 			<Prerequisites>
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Filtered" />
 				<Item Amount="10" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />
-				<Item Amount="100" TypeId="Ore" SubtypeId="IceFiltered" />
+				
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="HotChocolate_DNSK" />
 			<BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>
@@ -128,8 +129,8 @@
 			<DisplayName>Protein Shake - (25pts Thirst/25pts Hunger)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_ProteinShake_Icon.dds</Icon>
 			<Prerequisites>
-				<Item Amount="10" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />
-				<Item Amount="100" TypeId="Ore" SubtypeId="IceFiltered" />
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Filtered" />
+				<Item Amount="10" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />				
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="ProteinShake_DNSK" />
 			<BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>

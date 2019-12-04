@@ -21,7 +21,7 @@ using Rek.FoodSystem;
 namespace Stollie.DailyNeeds
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Refinery), false, "LargeHydroponics", "SmallHydroponics", "MiniHydroponics")]
-    public class Hydroponics : MyGameLogicComponent
+    public class EnclosedHydroponics : MyGameLogicComponent
     {
         private int RotationTimeWRS = 0;
         private int AnimationLoopWRS = 0;

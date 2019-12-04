@@ -12,7 +12,8 @@
 				<string>Refinery/LargeHydroponics</string>		        				
 				<string>Refinery/SmallHydroponics</string>
 				<string>Refinery/MiniHydroponics</string>
-				<!-- <string>Refinery/LargeOpenHydroponics</string>-->
+				
+				<string>OxygenGenerator/LargeOpenHydroponics</string>
 			</ItemIds>
 		</Category>
 	</CategoryClasses>

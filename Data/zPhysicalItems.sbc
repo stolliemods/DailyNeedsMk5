@@ -1,6 +1,32 @@
 <?xml version="1.0"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<PhysicalItems>
+			
+		<PhysicalItem>
+            <Id>
+                <TypeId>Ingot</TypeId>
+                <SubtypeId>Cyanobacteria</SubtypeId>
+            </Id>
+            <DisplayName>Cyanobacteria (Oxygen)</DisplayName>
+            <Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_Organic_Icon.dds</Icon>
+            <Size>
+                <X>0.07</X>
+                <Y>0.07</Y>
+                <Z>0.07</Z>
+            </Size>
+            <Mass>1</Mass>
+            <Volume>0.25</Volume>
+            <Model>Models\Components\Sphere.mwm</Model>
+            <PhysicalMaterial>Stone</PhysicalMaterial>
+            <IconSymbol>CyanoB</IconSymbol>
+            <MinimalPricePerUnit>50</MinimalPricePerUnit>
+            <MinimumOfferAmount>1000</MinimumOfferAmount>
+            <MaximumOfferAmount>10000</MaximumOfferAmount>
+            <MinimumOrderAmount>1000</MinimumOrderAmount>
+            <MaximumOrderAmount>20000</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+        </PhysicalItem>
+		
 		<PhysicalItem>
             <Id>
                 <TypeId>Ore</TypeId>
@@ -54,7 +80,32 @@
 		<PhysicalItem>
             <Id>
                 <TypeId>Ore</TypeId>
-                <SubtypeId>IceFiltered</SubtypeId>
+                <SubtypeId>Ice_Unrefined</SubtypeId>
+            </Id>
+            <DisplayName>Ice (Unrefined)</DisplayName>
+            <Icon>Textures\GUI\Icons\ore_H2O_ice.dds</Icon>
+            <Size>
+                <X>0.07</X>
+                <Y>0.07</Y>
+                <Z>0.07</Z>
+            </Size>
+            <Mass>1</Mass>
+            <Volume>0.37</Volume>
+            <Model>Models\Components\Sphere.mwm</Model>
+            <PhysicalMaterial>Stone</PhysicalMaterial>
+            <IconSymbol>Filtered</IconSymbol>
+            <MinimalPricePerUnit>50</MinimalPricePerUnit>
+            <MinimumOfferAmount>1000</MinimumOfferAmount>
+            <MaximumOfferAmount>10000</MaximumOfferAmount>
+            <MinimumOrderAmount>1000</MinimumOrderAmount>
+            <MaximumOrderAmount>20000</MaximumOrderAmount>
+            <CanPlayerOrder>false</CanPlayerOrder>
+        </PhysicalItem>
+		
+		<PhysicalItem>
+            <Id>
+                <TypeId>Ore</TypeId>
+                <SubtypeId>Ice_Filtered</SubtypeId>
             </Id>
             <DisplayName>Ice (Filtered)</DisplayName>
             <Icon>Textures\GUI\Icons\ore_H2O_ice.dds</Icon>

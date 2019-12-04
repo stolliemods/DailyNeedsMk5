@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<Blueprints>
+		<!--
 		<Blueprint>
 			<Id>
 				<TypeId>BlueprintDefinition</TypeId>
@@ -9,11 +10,12 @@
 			<DisplayName>DisplayName_Item_Oxygen</DisplayName>
 			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
 			<Prerequisites>
-				<Item Amount="1" TypeId="Ore" SubtypeId="IceGas" />
+				<Item Amount="1" TypeId="Ore" SubtypeId="Ice" />
 			</Prerequisites>
 			<Result Amount="0.9" TypeId="Ingot" SubtypeId="Stone" />
 			<BaseProductionTimeInSeconds>0.1</BaseProductionTimeInSeconds>
 		</Blueprint>
+		-->
 		<Blueprint>
 			<Id>
 				<TypeId>BlueprintDefinition</TypeId>
@@ -22,7 +24,7 @@
 			<DisplayName>Emergency Water - (25pts Thirst/Max 50% Thirst Fill)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_EmergencyWater_Icon.dds</Icon>
 			<Prerequisites>
-				<Item Amount="90" TypeId="Ore" SubtypeId="IceFiltered" />
+				<Item Amount="90" TypeId="Ore" SubtypeId="Ice_Filtered" />
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="EmergencyWater_DNSK" />
 			<BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
@@ -50,12 +52,11 @@
 			<DisplayName>Refine Ice - Produces Gas, Liquid and Filtered Ice.</DisplayName>
 			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
 			<Prerequisites>
-				<Item Amount="100" TypeId="Ore" SubtypeId="Ice" />
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Unrefined" />
 			</Prerequisites>
 			<Results>
-				<Item Amount="25" TypeId="Ore" SubtypeId="IceLiquid" />
-				<Item Amount="25" TypeId="Ore" SubtypeId="IceGas" />
-				<Item Amount="25" TypeId="Ore" SubtypeId="IceFiltered" />				
+				<Item Amount="25" TypeId="Ore" SubtypeId="Ice" />
+				<Item Amount="25" TypeId="Ore" SubtypeId="Ice_Filtered" />
 			</Results>
 			<Priority>900</Priority>
 			<BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>

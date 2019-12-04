@@ -80,6 +80,7 @@ namespace Rek.FoodSystem
         private static float FATIGUE_ICON_POSITION_Y;
 
         private static bool CREATIVETOOLS_NODECAY;
+        private static bool EATING_AND_DRINKING_REQUIRES_PRESSURISATION;
 
         private int food_logic_skip = 0; // internal counter, init at 0
         private const int FOOD_LOGIC_SKIP_TICKS = 60 * 1; // Updates in realtime every second
@@ -163,6 +164,7 @@ namespace Rek.FoodSystem
             RESPAWN_FATIGUE = mConfigDataStore.get_RESPAWN_FATIGUE();
 
             CREATIVETOOLS_NODECAY = mConfigDataStore.get_CREATIVETOOLS_NODECAY();
+            EATING_AND_DRINKING_REQUIRES_PRESSURISATION = mConfigDataStore.get_EATING_AND_DRINKING_REQUIRES_PRESSURISATION();
            
             // Minimum of 2h, because it's unplayable under....
             IsAutohealingOn = MyAPIGateway.Session.SessionSettings.AutoHealing; dayLen = Math.Max(MyAPIGateway.Session.SessionSettings.SunRotationIntervalMinutes, 120f);
@@ -232,11 +234,18 @@ namespace Rek.FoodSystem
             }
         }
 
+        // Update the player list
+        private void UpdatePlayerList()
+        {
+            mPlayers.Clear();
+            MyAPIGateway.Players.GetPlayers(mPlayers);
+        }
+
+        // Run needs logic
         private void UpdateFoodLogic()
         {
             bool ChangedStance = false;
             MyObjectBuilder_Character character;
-            
             MyCharacterMovementEnum curmove = MyCharacterMovementEnum.Sitting;
 
             foreach (IMyPlayer player in mPlayers)
@@ -249,7 +258,11 @@ namespace Rek.FoodSystem
                     IMyEntity controlledEnt = player.Controller.ControlledEntity.Entity;
                     controlledEnt = GetCharacterEntity(controlledEnt);
 
-                    //MyAPIGateway.Utilities.ShowMessage("DEBUG", "Character: " + entity.DisplayName); // gets me player name
+                    //MyAPIGateway.Utilities.ShowMessage("DEBUG", "Character: " + controlledEntity.DisplayName); // gets me player name
+
+                    // Calculate players current gravity.
+                    var currentPlayerGravity = Math.Round(player.Character.Physics.Gravity.Length() / 20.0 * 1.02, 2);
+                    //MyVisualScriptLogicProvider.SendChatMessage("Gravity: " + currentPlayerGravity.ToString());
 
                     float CurrentModifier = 1f;
                     float FatigueRate = 0f;
@@ -309,6 +322,9 @@ namespace Rek.FoodSystem
 
                         }
 
+                        
+                        
+                        #region Movement States Fatigue Calculations
                         //MyAPIGateway.Utilities.ShowMessage("DEBUG", "State: " + character.MovementState + ":" + playerData.lastmovement);
                         ChangedStance = playerData.lastmovement != character.MovementState;
                         curmove = character.MovementState;
@@ -408,8 +424,6 @@ namespace Rek.FoodSystem
                                 FatigueRate = FATIGUE_RUNNING; // doing the duckwalk is more tiring than walking: try it if you don't believe me
                                 break;
 
-
-
                             case MyCharacterMovementEnum.Walking:
                             case MyCharacterMovementEnum.BackWalking:
                             case MyCharacterMovementEnum.WalkStrafingLeft:
@@ -458,6 +472,7 @@ namespace Rek.FoodSystem
 
                         }
                         playerData.lastmovement = character.MovementState; // track delta
+                        #endregion
 
                     }
                     else if (playerData.entity != null || !playerData.entity.Closed)
@@ -498,7 +513,7 @@ namespace Rek.FoodSystem
                             decayEnabled = true;
                         }
                     }
-                    
+
                     // Process fatigue needs
                     if (FATIGUE_ENABLED && decayEnabled)
                     {
@@ -581,6 +596,7 @@ namespace Rek.FoodSystem
 
                         if (playerData.fatigue <= (FATIGUE_LEVEL_HELMET * MIN_NEEDS_VALUE))
                         {
+                            
                             VRage.Game.ModAPI.Interfaces.IMyControllableEntity ce = player.Controller.ControlledEntity.Entity as VRage.Game.ModAPI.Interfaces.IMyControllableEntity;
                             ce.SwitchHelmet(); // force player to switch helmet, panic reaction from trying to catch breath
 
@@ -652,7 +668,7 @@ namespace Rek.FoodSystem
                     }
 
                     /*
-					character = entity.GetObjectBuilder(false) as MyObjectBuilder_Character;
+					character = controlledEntity.GetObjectBuilder(false) as MyObjectBuilder_Character;
 					if (character.Health == null) // ok, so the variable exists, but it's always null for some reason?
 						CurPlayerHealth = 101f;
 					else
@@ -661,7 +677,7 @@ namespace Rek.FoodSystem
 					if (IsAutohealingOn && CurPlayerHealth < 70f)
 					{
 						const float HealthTick = 100f / 240f * FOOD_LOGIC_SKIP_TICKS / 60f;
-						var destroyable = entity as IMyDestroyableObject;
+						var destroyable = controlledEntity as IMyDestroyableObject;
 						destroyable.DoDamage(HealthTick, MyStringHash.GetOrCompute("Testing"), false);
 					}
 					 */
@@ -687,18 +703,15 @@ namespace Rek.FoodSystem
             }
         }
 
-        // Update the player list
-        private void UpdatePlayerList()
+        private static bool playerEatSomething(IMyEntity controlledEntity, PlayerData playerData, float maxval_cap, float crapbonus)
         {
-            mPlayers.Clear();
-            MyAPIGateway.Players.GetPlayers(mPlayers);
-        }
+            MyObjectBuilder_Character character;
+            character = controlledEntity.GetObjectBuilder(false) as MyObjectBuilder_Character;
+            if (EATING_AND_DRINKING_REQUIRES_PRESSURISATION && character.EnvironmentOxygenLevel <= 0)
+                return false;
 
-        private static bool playerEatSomething(IMyEntity entity, PlayerData playerData, float maxval_cap, float crapbonus)
-        {
-            MyInventoryBase inventory = ((MyEntity)entity).GetInventoryBase();
+            MyInventoryBase inventory = ((MyEntity)controlledEntity).GetInventoryBase();
             var items = inventory.GetItems();
-
             foreach (IMyInventoryItem item in items)
             {
                 float result;
@@ -713,31 +726,30 @@ namespace Rek.FoodSystem
 
                 if (mFoodTypes.TryGetValue(item.Content.SubtypeName, out result))
                 {
-                                    
                     float canConsumeNum = 0f;
-
                     // if a food is registered as negative, reduce the maximum value. Useful for low nutrition meals.
                     if (result < 0)
                     {
                         result = Math.Abs(result);
                         canConsumeNum = Math.Min((((maxval_cap / 2f) - playerData.hunger) / result), (float)item.Amount);
                     }
+
                     else
                     {
                         canConsumeNum = Math.Min(((maxval_cap - playerData.hunger) / result), (float)item.Amount);
                     }
 
                     //MyAPIGateway.Utilities.ShowMessage("DEBUG", "canEat: " + canConsumeNum);
-
                     if (canConsumeNum > 0)
                     {
                         // Play eating sound
-                        //MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("Eating", playerData.entity.PositionComp.WorldAABB.Matrix.Forward * 2.0);
-                        soundEmitter.Entity = (MyEntity) entity;
+                        // MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("Eating", playerData.controlledEntity.PositionComp.WorldAABB.Matrix.Forward * 2.0);
+                        soundEmitter.Entity = (MyEntity) controlledEntity;
                         soundEmitter.PlaySound(EATING_SOUND);
                         
                         inventory.Remove(item, (MyFixedPoint)canConsumeNum);
                         playerData.hunger += result * (float)canConsumeNum;
+
                         if (item.Content.SubtypeName.Contains("Shake")) // TODO parametrize this
                             playerData.thirst += Math.Max(0f, Math.Min(result * (float)canConsumeNum, maxval_cap - playerData.thirst)); // TODO parametrize this
                             
@@ -762,15 +774,20 @@ namespace Rek.FoodSystem
                     }
                 }
             }
-
             return false;
         }
 
-        private static bool playerDrinkSomething(IMyEntity entity, PlayerData playerData, float maxval_cap, float crapbonus)
+        private static bool playerDrinkSomething(IMyEntity controlledEntity, PlayerData playerData, float maxval_cap, float crapbonus)
         {
-            MyInventoryBase inventory = ((MyEntity)entity).GetInventoryBase();
-            var items = inventory.GetItems();
+            MyObjectBuilder_Character character;
+            character = controlledEntity.GetObjectBuilder(false) as MyObjectBuilder_Character;
+            if (EATING_AND_DRINKING_REQUIRES_PRESSURISATION && character.EnvironmentOxygenLevel <= 0)
+            {
+                return false;
+            }
 
+            MyInventoryBase inventory = ((MyEntity)controlledEntity).GetInventoryBase();
+            var items = inventory.GetItems();
             foreach (IMyInventoryItem item in items)
             {
                 float result;
@@ -812,7 +829,7 @@ namespace Rek.FoodSystem
                     //MyAPIGateway.Utilities.ShowMessage("DEBUG", "canDrink: " + canConsumeNum);
                     if (canConsumeNum > 0)
                     {
-                        soundEmitter.Entity = (MyEntity)entity;
+                        soundEmitter.Entity = (MyEntity)controlledEntity;
                         soundEmitter.PlaySound(DRINKING_SOUND);
 
                         inventory.Remove(item, (MyFixedPoint)canConsumeNum);

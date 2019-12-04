@@ -330,7 +330,6 @@
     <None Include="Data\LCD_BlockCategories.sbc" />
     <None Include="Data\LCD_CubeBlocks_Large_Ship.sbc" />
     <None Include="Data\Scripts\FoodSystem\AnimationsAndLighting\EmergencyRationsKit.bak" />
-    <None Include="Data\Scripts\FoodSystem\AnimationsAndLighting\OpenHydroAnimation.bak" />
     <None Include="Data\zContainerTypesAndSupplyDrops.sbc" />
     <None Include="Data\zModStorageComponentGUID.sbc" />
     <None Include="Data\zPhysicalItems.sbc" />
@@ -479,9 +478,11 @@
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Canisters.cs" />
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Compost.cs" />
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Emissives.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Hydroponics.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\EnclosedHydroponics.cs" />
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\IceRefinery.cs" />
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Kitchen.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\OpenHydroponics.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\SpawnSupport.cs" />
     <Compile Include="Data\Scripts\FoodSystem\Client.cs" />
     <Compile Include="Data\Scripts\FoodSystem\Command.cs" />
     <Compile Include="Data\Scripts\FoodSystem\Config.cs" />

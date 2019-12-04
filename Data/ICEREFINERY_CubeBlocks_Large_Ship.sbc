@@ -47,7 +47,7 @@
 			</BlueprintClasses>
 			<RefineSpeed>1.0</RefineSpeed>
 			<MaterialEfficiency>1.0</MaterialEfficiency>
-			<OreAmountPerPullRequest>1000</OreAmountPerPullRequest>
+			<OreAmountPerPullRequest>2000</OreAmountPerPullRequest>
 			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
 			<Center x="0" y="0" z="0" />
 			<DamagedSound>ParticleHeavyMech</DamagedSound>

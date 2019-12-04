@@ -12,14 +12,20 @@ using Sandbox.Definitions;
 using SpaceEngineers.Game.ModAPI;
 using VRage.Game;
 using VRage;
-using VRage.Game.ModAPI;
 using VRage.Game.Entity;
 using Sandbox.Game.Lights;
 using Sandbox.Game.EntityComponents;
+using Sandbox.ModAPI.Weapons;
+using VRage.Game.ModAPI.Ingame;
+using IMyCubeBlock = VRage.Game.ModAPI.IMyCubeBlock;
+using IMyEntity = VRage.ModAPI.IMyEntity;
+using Sandbox.Common.ObjectBuilders.Definitions;
+using VRage.Collections;
+using MyEngineerToolBaseDefinition = Sandbox.Definitions.MyEngineerToolBaseDefinition;
 
 namespace Stollie.DailyNeeds
 {
-    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Assembler), false, "LargeOpenHydroponics")]
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_OxygenGenerator), false, "LargeOpenHydroponics")]
     public class OpenHydroAnimation : MyGameLogicComponent
     {
         private int RotationTimeWRS = 0;
@@ -28,9 +34,11 @@ namespace Stollie.DailyNeeds
         private MyLight _light;
         public Dictionary<string, MyEntitySubpart> subparts;
         private static Guid ColorCheckStorageGUID = new Guid("0A9A3146-F8D1-40FD-A664-D0B9D071B0AC");
+        private bool init = false;
 
         MyObjectBuilder_EntityBase objectBuilder = null;
         IMyCubeBlock openHydroponics = null;
+        private int tick = 0;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -43,6 +51,7 @@ namespace Stollie.DailyNeeds
                 {
                     openHydroponics.Storage = new MyModStorageComponent();
                 }
+                
                 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME;
             }
             catch (Exception e)
@@ -69,7 +78,7 @@ namespace Stollie.DailyNeeds
             if (isDedicatedHost)
                 return;
 
-            try
+           try
             {
                 if (!openHydroponics.Storage.ContainsKey(ColorCheckStorageGUID))
                 {
@@ -127,6 +136,8 @@ namespace Stollie.DailyNeeds
                         }
                     }
                 }
+
+                tick = 0;
             }
             catch (Exception e)
             {
@@ -139,10 +150,14 @@ namespace Stollie.DailyNeeds
             try
             {
                 var subpart = openHydroponics.GetSubpart("OpenHydroponics_Rotor");
+                if (subpart == null)
+                    return;
+
                 var rotation = 0.003f;
                 var initialMatrix = subpart.PositionComp.LocalMatrix;
                 var rotationMatrix = MatrixD.CreateRotationZ(rotation);
                 var matrix = rotationMatrix * initialMatrix;
+
                 if (!subpart.Closed)
                 {
                     subpart.PositionComp.LocalMatrix = matrix;

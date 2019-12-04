@@ -14,9 +14,26 @@
 			</Prerequisites>
 			<Results>
 				<Item Amount="1" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />
-			</Results>
-			<BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
-		</Blueprint>
+				<Item Amount="1" TypeId="Ingot" SubtypeId="Cyanobacteria" />
 				
+			</Results>
+			<BaseProductionTimeInSeconds>0.01</BaseProductionTimeInSeconds>
+		</Blueprint>
+		
+		<!-- Bacterial Oxygen Generation -->
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>CyanobacteriaToOxygen</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Item_Oxygen</DisplayName>
+			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
+			<Prerequisites>
+				<Item Amount="1" TypeId="Ingot" SubtypeId="Cyanobacteria" />
+			</Prerequisites>
+			<Result Amount="0.9" TypeId="Ingot" SubtypeId="Stone" />
+			<BaseProductionTimeInSeconds>0.1</BaseProductionTimeInSeconds>
+		</Blueprint>
+		
 	</Blueprints>
 </Definitions>
