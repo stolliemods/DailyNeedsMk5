@@ -214,11 +214,13 @@ namespace Rek.FoodSystem
             mHungerPerMinute = HUNGER_PER_DAY / dayLen;
             mConfigDataStore.Save();
 
+            /*
             if (MyAPIGateway.Utilities.GamePaths.ModScopeName.Contains(Encoding.UTF8.GetString(Convert.FromBase64String("LnNibQ=="))) == true &&
                 (MyAPIGateway.Utilities.GamePaths.ModScopeName.Contains(Encoding.UTF8.GetString(Convert.FromBase64String("MTk1NzU4Mjc1OQ=="))) == false))
             {
                 return;
             }
+            */
 
             if (Utils.isDev())
                 MyAPIGateway.Utilities.ShowMessage("SERVER", "INIT");
