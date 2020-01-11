@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model Name="K_Imperial_Ingot_SynthFuel">
+	<Parameter Name="RescaleFactor">0.01</Parameter>
+	<Parameter Name="RescaleToLengthInMeters">false</Parameter>
+	<Parameter Name="Centered">false</Parameter>
+	<MaterialRef Name="PaintedMetal_Darker" />
+	<MaterialRef Name="PaintedMetal_VeryDark" />
+	<MaterialRef Name="GenericGlass" />
+	<MaterialRef Name="SolarPanel" />
+</Model>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_AssemblerDefinition">
+			<Id>
+				<TypeId>Assembler</TypeId>
+				<SubtypeId>LargeKitchen_DNSK</SubtypeId>
+			</Id>
+			<DisplayName>Kitchen (Daily Needs)</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\Kitchen.dds</Icon>
+			<Description>This Food Protein Resequencer assembles meals from raw vegetables and meat protein. This is the basic starter block and should be built first.</Description>
+			<CubeSize>Large</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1" /> 
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\Cubes\Large\KitchenDNSK_Large.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="45" />
+				<Component Subtype="Construction" Count="30" />
+				<Component Subtype="Motor" Count="6" />
+				<Component Subtype="Computer" Count="8" />
+				<Component Subtype="Construction" Count="30" />
+				<Component Subtype="Display" Count="6" />
+				<Component Subtype="Girder" Count="12" />
+				<Component Subtype="InteriorPlate" Count="12" />
+				<Component Subtype="SteelPlate" Count="25" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\KitchenDNSK_Large_Constr1.mwm" />
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\KitchenDNSK_Large_Constr2.mwm" />
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\KitchenDNSK_Large_Constr3.mwm" />
+			</BuildProgressModels>
+			<BlockPairName>Kitchen_DNSK</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<InventoryMaxVolume>1</InventoryMaxVolume>
+			<InventorySize>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</InventorySize>
+			<StandbyPowerConsumption>0.001</StandbyPowerConsumption>
+			<OperationalPowerConsumption>0.25</OperationalPowerConsumption>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<BlueprintClasses>
+				<Class>Food</Class>
+				<Class>Liquids</Class>
+			</BlueprintClasses>
+			<ResourceSinkGroup>Factory</ResourceSinkGroup>
+			<DamageEffectId>212</DamageEffectId>
+			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<PCU>10</PCU>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

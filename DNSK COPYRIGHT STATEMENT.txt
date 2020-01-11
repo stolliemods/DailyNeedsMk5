@@ -1,0 +1,35 @@
+COPYRIGHT STATEMENT
+This Mod, Daily Needs Survival Kit - Survival Needs for Space
+, previously known as Daily Needs Mk4a - True Survival Needs in Space,
+
+( to be referred to herein as "the mod" or "this mod" )
+
+is Copyright © 2018-2019
+
+General Summary of Statement of Copyright.
+
+A full document of all items under this Copyright and its details and official list of Authors and Contributors
+ is held by the law firm McDermidt Lamarche, Barristers and Solicitors, Saskatoon, Sk, Canada ( North American 
+Copyright ) and the law firm Gurtz - Helms and Hister, Frankfurt, Germany ( International Copyright ).
+
+In Summary;
+
+The core code, assembly, and structure of this mod, including but not limited to the coding and new model content,
+ are the property of "Stollie" and "Skallabjorn". Content within this mod from the original mod on which its 
+concept is based are property of their original creators and not claimed by "Stolie" or "Skallabjorn". Any content
+ from within the Space Engineers game itself used in this mod remains the property of Keen Software House and is 
+not claimed.
+
+This mod may only be posted on the Steam Space Engineers Workshop ( or in any other data holding repository that 
+may be contracted to support Space Engineers ) by its Original Creators and Official Contributors, and may not in
+ whole or part be republished in public, or private, nor used in any other way.
+
+Permission is freely granted to all players of Space Engineers to use this mod in game with no alterations to its
+ published form. No altered form of this mod may be used in game in any circumstance except by its Creators and 
+Official Contributors.
+
+Keen Software House is expressly forbidden to use this mod or any of its claimed content, in its current or any
+ altered form, in Keen's published games or products without express permission from and compensation to ALL this
+ mod's Authors and Official Contributors, past and present.
+
+All rights will be enforced without prejudice to the furthest extent possible under the law.

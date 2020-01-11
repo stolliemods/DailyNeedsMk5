@@ -13,7 +13,8 @@ namespace Rek.FoodSystem
         public class Event {
             public enum Type {
                 RegisterEdibleItem,
-                RegisterDrinkableItem
+                RegisterDrinkableItem,
+                RegisterDrugItem
             };
     
             public Type type;
@@ -39,7 +40,19 @@ namespace Rek.FoodSystem
             public string item;
             public float value;
         }
-    
+
+        public class RegisterDrugItemEvent
+        {
+            public RegisterDrugItemEvent(string szItemName, float value)
+            {
+                this.item = szItemName;
+                this.value = value;
+            }
+
+            public string item;
+            public float value;
+        }
+
         public NeedsApi() {
         
         }
@@ -62,6 +75,15 @@ namespace Rek.FoodSystem
             MyAPIGateway.Utilities.SendModMessage(1339, message);
         }
 
+        public void RegisterDrugItem(string szItemName, float value)
+        {
+            Event message = new Event();
+            message.type = Event.Type.RegisterDrugItem;
+            message.payload = new RegisterDrugItemEvent(szItemName, value);
+
+            MyAPIGateway.Utilities.SendModMessage(1339, message);
+        }
+
         public void SetPlayerHunger(ulong player, float value) {
         
         }
@@ -69,14 +91,27 @@ namespace Rek.FoodSystem
         public void SetPlayerThirst(ulong player, float value) {
         
         }
-        
+
+        public void SetPlayerDrug(ulong player, float value)
+        {
+
+        }
+
         public void AddPlayerHunger(ulong player, float value) {
         
         }
         
         public void AddPlayerThirst(ulong player, float value) {
         
-        }  
+        }
+
+        public void AddPlayerDrug(ulong player, float value)
+        {
+
+        }
+
+
+
     }
 
 }

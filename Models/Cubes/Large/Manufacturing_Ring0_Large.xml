@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model Name="Manufacturing_Ring0">
+	<Parameter Name="RescaleFactor">0.01</Parameter>
+	<Parameter Name="RescaleToLengthInMeters">false</Parameter>
+	<Parameter Name="Centered">false</Parameter>
+	<Material Name="ClearGlass">
+		<Parameter Name="Technique">GLASS</Parameter>
+	</Material>
+</Model>

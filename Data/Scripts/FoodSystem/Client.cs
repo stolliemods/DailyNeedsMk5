@@ -31,8 +31,9 @@ namespace Rek.FoodSystem
         private HudAPIv2.HUDMessage hunger_Hud_Message = null;
 	    private HudAPIv2.HUDMessage thirst_Hud_Message = null;
 	    private HudAPIv2.HUDMessage fatigue_Hud_Message = null;
+        private HudAPIv2.HUDMessage juiced_Hud_Message = null;
 
-	    private HudAPIv2.BillBoardHUDMessage hunger_Icon_Billboard_Message = null;
+        private HudAPIv2.BillBoardHUDMessage hunger_Icon_Billboard_Message = null;
 	    private HudAPIv2.BillBoardHUDMessage hunger_Bar25_Billboard_Message = null;
 	    private HudAPIv2.BillBoardHUDMessage hunger_Bar50_Billboard_Message = null;
 	    private HudAPIv2.BillBoardHUDMessage hunger_Bar75_Billboard_Message = null;
@@ -50,22 +51,30 @@ namespace Rek.FoodSystem
 	    private HudAPIv2.BillBoardHUDMessage fatigue_Bar75_Billboard_Message = null;
 	    private HudAPIv2.BillBoardHUDMessage fatigue_Bar100_Billboard_Message = null;
 
+        private HudAPIv2.BillBoardHUDMessage juiced_Icon_Billboard_Message = null;
+
         private StringBuilder hunger_Hud_StringBuilder = new StringBuilder();
 	    private StringBuilder thirst_Hud_StringBuilder = new StringBuilder();
 	    private StringBuilder fatigue_Hud_StringBuilder = new StringBuilder();
+        private StringBuilder juiced_Hud_StringBuilder = new StringBuilder();
         #endregion
 
         #region HUD Icon String References
         private static readonly MyStringId ThirstIcon = MyStringId.GetOrCompute("ThirstIcon_LightBlue");
 	    private static readonly MyStringId ThirstIconRed = MyStringId.GetOrCompute("ThirstIcon_Red");
 	    private static readonly MyStringId ThirstIconGreen = MyStringId.GetOrCompute("ThirstIcon_Green");
-	    private static readonly MyStringId HungerIcon = MyStringId.GetOrCompute("HungerIcon_LightBlue");
+
+        private static readonly MyStringId HungerIcon = MyStringId.GetOrCompute("HungerIcon_LightBlue");
 	    private static readonly MyStringId HungerIconRed = MyStringId.GetOrCompute("HungerIcon_Red");
 	    private static readonly MyStringId HungerIconGreen = MyStringId.GetOrCompute("HungerIcon_Green");
-	    private static readonly MyStringId FatigueIcon = MyStringId.GetOrCompute("FatigueIcon_LightBlue");
+
+        private static readonly MyStringId FatigueIcon = MyStringId.GetOrCompute("FatigueIcon_LightBlue");
 	    private static readonly MyStringId FatigueIconRed = MyStringId.GetOrCompute("FatigueIcon_Red");
 	    private static readonly MyStringId FatigueIconGreen = MyStringId.GetOrCompute("FatigueIcon_Green");
-	    private static readonly MyStringId TwentyFivePercentHudIconFull = MyStringId.GetOrCompute("25PercentFull");
+
+        private static readonly MyStringId JuicedIcon = MyStringId.GetOrCompute("JuicedIcon");
+
+        private static readonly MyStringId TwentyFivePercentHudIconFull = MyStringId.GetOrCompute("25PercentFull");
 	    private static readonly MyStringId TwentyFivePercentHudIconRed = MyStringId.GetOrCompute("25PercentProgressBarRed");
 	    private static readonly MyStringId FiftyPercentHudIconHudIconFull = MyStringId.GetOrCompute("50PercentFull");
 	    private static readonly MyStringId FiftyPercentProgressBarAmber = MyStringId.GetOrCompute("50PercentProgressBarAmber");
@@ -81,6 +90,8 @@ namespace Rek.FoodSystem
         private static float THIRST_ICON_POSITION_Y = 0.85f;
         private static float FATIGUE_ICON_POSITION_X = -0.941f;
         private static float FATIGUE_ICON_POSITION_Y = 0.80f;
+        private static float JUICED_ICON_POSITION_X = 0.93f;
+        private static float JUICED_ICON_POSITION_Y = 0.70f;
 
         private float hungerIconPositionX = -0.941f;
         private float hungerIconPositionY = 0.90f;
@@ -88,6 +99,8 @@ namespace Rek.FoodSystem
         private float thirstIconPositionY = 0.85f;
         private float fatigueIconPositionX = -0.941f;
         private float fatigueIconPositionY = 0.80f;
+        private float juicedIconPositionX = -0.93f;
+        private float juicedIconPositionY = 0.70f;
         #endregion
 
         private float tick;
@@ -340,11 +353,26 @@ namespace Rek.FoodSystem
                         fatigue_Hud_Message = new HudAPIv2.HUDMessage(fatigue_Hud_StringBuilder,
                             new Vector2D(fatigueIconPositionX + numberTextAlignmentValue, fatigueIconPositionY + 0.02f), Scale: 1.2d, Blend: BlendTypeEnum.PostPP);
                         #endregion
+
+                        #region JuiceInitialisation
+                        juiced_Icon_Billboard_Message =
+                            new HudAPIv2.BillBoardHUDMessage(JuicedIcon, new Vector2D(juicedIconPositionX, juicedIconPositionY), Color.White);
+                        juiced_Icon_Billboard_Message.Height = 1.55f;
+                        juiced_Icon_Billboard_Message.Scale = 0.04d;
+                        juiced_Icon_Billboard_Message.Rotation = 0f;
+                        juiced_Icon_Billboard_Message.Blend = BlendTypeEnum.PostPP;
+
+                        //Number Text Component with slight adjustments to line up with Icon
+                        juiced_Hud_Message = new HudAPIv2.HUDMessage(juiced_Hud_StringBuilder, new Vector2D(juicedIconPositionX - 0.007f, juicedIconPositionY - 0.05f),
+                                Scale: 1.2d, Blend: BlendTypeEnum.PostPP);
+                         juiced_Hud_Message.Offset = new Vector2D(0.0f);
+                            
+                        #endregion
                     }
+
                     if (textHUDInit)
                     {
                         #region HungerUpdate
-
                         //Hunger Text
                         hunger_Hud_StringBuilder.Clear();
                         if (Math.Floor(mPlayerData.hunger) <= 125 && Math.Floor(mPlayerData.hunger) > 30)
@@ -511,7 +539,6 @@ namespace Rek.FoodSystem
                         #endregion
 
                         #region FatigueUpdate
-
                         //Fatigue
                         fatigue_Hud_StringBuilder.Clear();
                         if (Math.Floor(mPlayerData.fatigue) <= 125 && Math.Floor(mPlayerData.fatigue) > 30)
@@ -591,6 +618,31 @@ namespace Rek.FoodSystem
                             fatigue_Bar100_Billboard_Message.Visible = false;
                         }
 
+                        #endregion
+
+                        #region JuiceUpdate
+                        juiced_Hud_StringBuilder.Clear();
+                        if (Math.Floor(mPlayerData.juice) > 0 && Math.Floor(mPlayerData.juice) < 10)
+                        {
+                            juiced_Hud_StringBuilder.AppendFormat("<color=white>{0}", Math.Floor(mPlayerData.juice));
+                            juiced_Hud_Message.Offset = new Vector2D(0.0f);
+                        }
+                        else if (Math.Floor(mPlayerData.juice) > 9)
+                        {
+                            juiced_Hud_StringBuilder.AppendFormat("<color=white>{0}", Math.Floor(mPlayerData.juice));
+                            juiced_Hud_Message.Offset = new Vector2D(-0.005f, 0.00f);
+                        }
+
+                                if (Math.Floor(mPlayerData.juice) > 0)
+                        {
+                            juiced_Icon_Billboard_Message.Visible = true;
+                            juiced_Icon_Billboard_Message.Material = JuicedIcon;
+                        }
+
+                        if (Math.Floor(mPlayerData.juice) <= 0)
+                        {
+                            juiced_Icon_Billboard_Message.Visible = false;
+                        }
                         #endregion
                     }
                 }

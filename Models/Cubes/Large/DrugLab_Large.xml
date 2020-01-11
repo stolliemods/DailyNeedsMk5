@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model Name="DrugLab">
+	<Parameter Name="RescaleFactor">0.01</Parameter>
+	<Parameter Name="RescaleToLengthInMeters">false</Parameter>
+	<Parameter Name="Centered">false</Parameter>
+	<Material Name="ClearGlass">
+		<Parameter Name="Technique">GLASS</Parameter>
+	</Material>
+	<Material Name="GlassInside">
+		<Parameter Name="Technique">GLASS</Parameter>
+	</Material>
+	<Material Name="Canister_Yellow">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Physical_Item\CanisterYellow_cm.dds</Parameter>
+		<!--material has no NormalGlossTexture-->
+		<!--material has no AddMapsTexture-->
+	</Material>
+	<Material Name="TextAtlas">
+		<Parameter Name="Technique">ALPHA_MASKED</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Cubes\TextAtlas_cm.DDS</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Cubes\TextAtlas_ng.DDS</Parameter>
+		<Parameter Name="AddMapsTexture">Textures\Models\Cubes\TextAtlas_add.DDS</Parameter>
+		<Parameter Name="AlphamaskTexture">Textures\Models\Cubes\TextAtlas_alphamask.DDS</Parameter>
+	</Material>
+	<Material Name="BlackRubber">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Physical_Item\BlackRubber_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Physical_Item\BlackRubber_ng.dds</Parameter>
+		<!--material has no AddMapsTexture-->
+	</Material>
+	<MaterialRef Name="PaintedMetal_Colorable" />
+	<MaterialRef Name="Terminal" />
+	<MaterialRef Name="Doodads" />
+	<MaterialRef Name="PaintedMetalScratched_Colorable" />
+	<MaterialRef Name="PaintedMetalScratched_Yellow" />
+	<MaterialRef Name="PaintedMetal_Yellow" />
+	<MaterialRef Name="Chrome" />
+	<MaterialRef Name="PaintedMetal_Darker" />
+	<MaterialRef Name="Metal_Dull" />
+	<MaterialRef Name="PaintedMetalScratched_Darker" />
+	<MaterialRef Name="Conveyor" />
+	<MaterialRef Name="PaintedMetal_VeryDark" />
+	<MaterialRef Name="Decals" />
+	<MaterialRef Name="PanelingColorable" />
+	<MaterialRef Name="BlackMetal" />
+</Model>

@@ -75,17 +75,38 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\netstandard.dll</HintPath>
+    </Reference>
+    <Reference Include="ProtoBuf.Net">
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\ProtoBuf.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ProtoBuf.Net.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\ProtoBuf.Net.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Sandbox.Common">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Common.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Game">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Game.dll</HintPath>
     </Reference>
+    <Reference Include="Sandbox.Game.XmlSerializers, Version=0.1.1.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Game.XmlSerializers.dll</HintPath>
+    </Reference>
     <Reference Include="Sandbox.Graphics">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.RenderDirect">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.RenderDirect.dll</HintPath>
+    </Reference>
+    <Reference Include="SEWhitelistChecker">
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SEWhitelistChecker.dll</HintPath>
+    </Reference>
+    <Reference Include="SpaceEngineers">
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.exe</HintPath>
     </Reference>
     <Reference Include="SpaceEngineers.Game">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.Game.dll</HintPath>
@@ -129,14 +150,15 @@
     <Reference Include="VRage.Math.XmlSerializers">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Math.XmlSerializers.dll</HintPath>
     </Reference>
-    <Reference Include="VRage.Native">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Native.dll</HintPath>
-    </Reference>
     <Reference Include="VRage.NativeAftermath">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.NativeAftermath.dll</HintPath>
     </Reference>
-    <Reference Include="VRage.OpenVRWrapper">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.OpenVRWrapper.dll</HintPath>
+    <Reference Include="VRage.Network, Version=1.0.53.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Platform.Windows">
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Platform.Windows.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Render">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Render.dll</HintPath>
@@ -149,6 +171,10 @@
     </Reference>
     <Reference Include="VRage.Steam">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Steam.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.UserInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.UserInterface.dll</HintPath>
     </Reference>
     <Reference Include="VRage.XmlSerializers">
       <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.XmlSerializers.dll</HintPath>
@@ -476,18 +502,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Canisters.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Compost.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Manufacturing.cs" />
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Emissives.cs" />
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\EnclosedHydroponics.cs" />
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\IceRefinery.cs" />
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Kitchen.cs" />
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\OpenHydroponics.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\SpawnSupport.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\SWCanisters.cs" />
     <Compile Include="Data\Scripts\FoodSystem\Client.cs" />
     <Compile Include="Data\Scripts\FoodSystem\Command.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Config.cs" />
     <Compile Include="Data\Scripts\FoodSystem\ConfigData.cs" />
     <Compile Include="Data\Scripts\FoodSystem\ConfigDataStore.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\EasyInventoryApi.cs" />
     <Compile Include="Data\Scripts\FoodSystem\HudAPIv2.cs" />
     <Compile Include="Data\Scripts\FoodSystem\Logger.cs" />
     <Compile Include="Data\Scripts\FoodSystem\NeedsApi.cs" />
@@ -495,7 +521,9 @@
     <Compile Include="Data\Scripts\FoodSystem\PlayerDataStore.cs" />
     <Compile Include="Data\Scripts\FoodSystem\Server.cs" />
     <Compile Include="Data\Scripts\FoodSystem\SorterGroup.cs" />
+    <Compile Include="Data\Scripts\FoodSystem\StopWatch.cs" />
     <Compile Include="Data\Scripts\FoodSystem\Utils.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />

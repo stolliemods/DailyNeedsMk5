@@ -83,7 +83,7 @@ namespace Stollie.DailyNeeds
                 if (!openHydroponics.Storage.ContainsKey(ColorCheckStorageGUID))
                 {
                     openHydroponics.Storage[ColorCheckStorageGUID] = "ColorChanged";
-                    openHydroponics.CubeGrid.ColorBlocks(openHydroponics.Min, openHydroponics.Max, new Color(new Vector3(0.0f, 0.45f, 0.0f)).ColorToHSVDX11());
+                    openHydroponics.CubeGrid.ColorBlocks(openHydroponics.Min, openHydroponics.Max, new Color(new Vector3(0.6f, 0.3f, 0.0f)).ColorToHSVDX11());
                 }
 
                 subparts = (openHydroponics as MyEntity).Subparts;

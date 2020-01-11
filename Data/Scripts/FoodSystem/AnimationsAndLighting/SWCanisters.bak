@@ -1,0 +1,266 @@
+﻿using VRage.Game.Components;
+using Sandbox.Common.ObjectBuilders;
+using VRage.ObjectBuilders;
+using System.Collections.Generic;
+using VRage.ModAPI;
+using Sandbox.ModAPI;
+using VRageMath;
+using Sandbox.Game.Entities;
+using System;
+using Sandbox.Game;
+using Sandbox.Definitions;
+using SpaceEngineers.Game.ModAPI;
+using VRage.Game;
+using VRage;
+using VRage.Game.ModAPI;
+using VRage.Game.Entity;
+using Sandbox.Game.Lights;
+using Sandbox.Game.EntityComponents;
+
+namespace Kreeg.AnimatedStarwarsStollie
+{
+    [MyEntityComponentDescriptor(typeof(MyObjectBuilder_FloatingObject), true)]
+    public class SWCanisters : MyGameLogicComponent
+    {
+
+        MyObjectBuilder_FloatingObject floatingobject = null;
+        MyObjectBuilder_InventoryItem item = null;
+
+        private MyLight _light;
+        private bool initalized = false;
+
+        private int AnimationLoop = 0;
+        private int RotationTime = 0;
+
+        private Dictionary<string, MyEntitySubpart> subparts;
+        private Dictionary<IMyModelDummy, MyParticleEffect> gasParticleEffects = new Dictionary<IMyModelDummy, MyParticleEffect>();
+        MyParticleEffect _gasEffect1 = null;
+        MyParticleEffect _gasEffect2 = null;
+        MyParticleEffect _gasEffect3 = null;
+        MyParticleEffect _gasEffect4 = null;
+        MyParticleEffect _gasEffect5 = null;
+
+        public void Init()
+        {
+            try
+            {
+                initalized = true;
+                //var _light = new MyLight();
+                floatingobject = (MyObjectBuilder_FloatingObject)Entity.GetObjectBuilder();
+                item = floatingobject.Item;
+
+                string itemName = item.PhysicalContent.SubtypeName;
+                // MyVisualScriptLogicProvider.SendChatMessage(itemName);
+
+                NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME;
+            }
+            catch (Exception e)
+            {
+                MyVisualScriptLogicProvider.ShowNotificationToAll("Init Error" + e, 10000, "Red");
+            }
+        }
+
+        public override void UpdateAfterSimulation()
+        {
+            try
+            {
+                if (MyAPIGateway.Session == null)
+                    return;
+
+                var isHost = MyAPIGateway.Session.OnlineMode == MyOnlineModeEnum.OFFLINE ||
+                             MyAPIGateway.Multiplayer.IsServer;
+
+                var isDedicatedHost = isHost && MyAPIGateway.Utilities.IsDedicated;
+
+                if (isDedicatedHost)
+                    return;
+
+                if (!initalized)
+                    Init();
+
+                floatingobject = (MyObjectBuilder_FloatingObject) Entity.GetObjectBuilder();
+                item = floatingobject.Item;
+
+                if (item.PhysicalContent.SubtypeName.Contains("K_Imperial_Resources_Basic_Spin") ||
+                    item.PhysicalContent.SubtypeName.Contains("EmergencyWater_DNSK") ||
+                    item.PhysicalContent.SubtypeName.Contains("K_Imperial_Resources_Basic_Ions") ||
+                    item.PhysicalContent.SubtypeName.Contains("K_Imperial_Resources_Basic_Protons") ||
+                    item.PhysicalContent.SubtypeName.Contains("K_Imperial_Resources_Basic_Spin_Tibanna") ||
+                    item.PhysicalContent.SubtypeName.Contains("K_Imperial_Resources_Basic_Spin_SyntheticFuel") ||
+                    item.PhysicalContent.SubtypeName.Contains("K_Imperial_Resources_Basic_Exonium"))
+                {
+                    subparts = (Entity as MyEntity).Subparts;
+                    RotateInnerCylinder();
+                    UpdateGasParticles();
+                }
+            }
+            catch (Exception e)
+            {
+                MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 10000, "Red");
+            }
+        }
+
+        public void UpdateGasParticles()
+        {
+            Dictionary<string, IMyModelDummy> dummyList = new Dictionary<string, IMyModelDummy>();
+            (Entity.Model as IMyModel)?.GetDummies(dummyList);
+            foreach (var dummy in dummyList)
+            {
+                // GAS ONE
+                if (dummy.Key.Contains("Gas1"))
+                {
+                    MatrixD dummyMatrix = dummy.Value.Matrix * Entity.WorldMatrix;
+                    Vector3D dummyPosition = dummy.Value.Matrix.Translation;
+
+                    if (!gasParticleEffects.ContainsKey(dummy.Value))
+                    {
+                        MyParticlesManager.TryCreateParticleEffect("SW_Canister_Gas", ref dummyMatrix, ref dummyPosition, uint.MaxValue, out _gasEffect1);
+                        _gasEffect1.UserScale = 0.3f; // Use this to change size of the particle through code. Its called 'Radius' in the SBC file.
+                        _gasEffect1.Loop = true;
+                        gasParticleEffects.Add(dummy.Value, _gasEffect1);
+                    }
+                    else
+                    {
+                        gasParticleEffects.TryGetValue(dummy.Value, out _gasEffect1);
+                        _gasEffect1.WorldMatrix = dummyMatrix;
+                    }
+                }
+
+                // GAS TWO
+                if (dummy.Key.Contains("Gas2"))
+                {
+                    MatrixD dummyMatrix = dummy.Value.Matrix * Entity.WorldMatrix;
+                    Vector3D dummyPosition = dummy.Value.Matrix.Translation;
+
+                    if (!gasParticleEffects.ContainsKey(dummy.Value))
+                    {
+                        MyParticlesManager.TryCreateParticleEffect("SW_Canister_Gas", ref dummyMatrix, ref dummyPosition, uint.MaxValue, out _gasEffect2);
+                        _gasEffect2.UserScale = 0.3f; // Use this to change size of the particle through code. Its called 'Radius' in the SBC file.
+                        _gasEffect2.Loop = true;
+                        gasParticleEffects.Add(dummy.Value, _gasEffect2);
+                    }
+                    else
+                    {
+                        gasParticleEffects.TryGetValue(dummy.Value, out _gasEffect2);
+                        _gasEffect2.WorldMatrix = dummyMatrix;
+                    }
+                }
+
+                // GAS THREE
+                if (dummy.Key.Contains("Gas3"))
+                {
+                    MatrixD dummyMatrix = dummy.Value.Matrix * Entity.WorldMatrix;
+                    Vector3D dummyPosition = dummy.Value.Matrix.Translation;
+
+                    if (!gasParticleEffects.ContainsKey(dummy.Value))
+                    {
+                        MyParticlesManager.TryCreateParticleEffect("SW_Canister_Gas", ref dummyMatrix, ref dummyPosition, uint.MaxValue, out _gasEffect3);
+                        _gasEffect3.UserScale = 0.3f; // Use this to change size of the particle through code. Its called 'Radius' in the SBC file.
+                        _gasEffect3.Loop = true;
+                        gasParticleEffects.Add(dummy.Value, _gasEffect3);
+                    }
+                    else
+                    {
+                        gasParticleEffects.TryGetValue(dummy.Value, out _gasEffect3);
+                        _gasEffect3.WorldMatrix = dummyMatrix;
+                    }
+                }
+
+                // GAS FOUR
+                if (dummy.Key.Contains("Gas4"))
+                {
+                    MatrixD dummyMatrix = dummy.Value.Matrix * Entity.WorldMatrix;
+                    Vector3D dummyPosition = dummy.Value.Matrix.Translation;
+
+                    if (!gasParticleEffects.ContainsKey(dummy.Value))
+                    {
+                        MyParticlesManager.TryCreateParticleEffect("SW_Canister_Gas", ref dummyMatrix, ref dummyPosition, uint.MaxValue, out _gasEffect4);
+                        _gasEffect4.UserScale = 0.3f; // Use this to change size of the particle through code. Its called 'Radius' in the SBC file.
+                        _gasEffect4.Loop = true;
+                        gasParticleEffects.Add(dummy.Value, _gasEffect4);
+                    }
+                    else
+                    {
+                        gasParticleEffects.TryGetValue(dummy.Value, out _gasEffect4);
+                        _gasEffect4.WorldMatrix = dummyMatrix;
+                    }
+                }
+
+                // GAS FIVE
+                if (dummy.Key.Contains("Gas5"))
+                {
+                    MatrixD dummyMatrix = dummy.Value.Matrix * Entity.WorldMatrix;
+                    Vector3D dummyPosition = dummy.Value.Matrix.Translation;
+
+                    if (!gasParticleEffects.ContainsKey(dummy.Value))
+                    {
+                        MyParticlesManager.TryCreateParticleEffect("SW_Canister_Gas", ref dummyMatrix, ref dummyPosition, uint.MaxValue, out _gasEffect5);
+                        _gasEffect5.UserScale = 0.3f; // Use this to change size of the particle through code. Its called 'Radius' in the SBC file.
+                        _gasEffect5.Loop = true;
+                        gasParticleEffects.Add(dummy.Value, _gasEffect5);
+                    }
+                    else
+                    {
+                        gasParticleEffects.TryGetValue(dummy.Value, out _gasEffect5);
+                        _gasEffect5.WorldMatrix = dummyMatrix;
+                    }
+                }
+            }
+        }
+
+        public void RotateInnerCylinder()
+        {
+            try
+            {
+                foreach (var subpart in subparts)
+                {
+                    var initialMatrix = subpart.Value.PositionComp.LocalMatrix;
+
+                    double rotationX = 0.0f;
+                    double rotationY = 0.003f;
+                    double rotationZ = 0.0;
+
+                    if (AnimationLoop == 200) AnimationLoop = 0;
+                    if (AnimationLoop == 0) RotationTime = -1;
+                    if (AnimationLoop == 100) RotationTime = 1;
+
+                    var rotationMatrix = MatrixD.CreateRotationX(rotationX) * MatrixD.CreateRotationY(rotationY) * MatrixD.CreateRotationZ(rotationZ);
+                    var matrix = rotationMatrix * initialMatrix;
+                    subpart.Value.PositionComp.LocalMatrix = matrix;
+                    AnimationLoop++;
+                }
+            }
+            catch (Exception e)
+            {
+                MyVisualScriptLogicProvider.ShowNotificationToAll("Animation Error" + e, 2500, "Red");
+            }
+        }
+
+        public override void OnRemovedFromScene()
+        {
+            if (_light != null) MyLights.RemoveLight(_light);
+
+            foreach (var gas in gasParticleEffects)
+            {
+                gas.Value?.Stop();
+                MyParticlesManager.RemoveParticleEffect(gas.Value);
+                
+            }
+            gasParticleEffects.Clear();
+            base.OnRemovedFromScene();
+        }
+
+        public override void Close()
+        {
+            if (_light != null) MyLights.RemoveLight(_light);
+
+            foreach (var gas in gasParticleEffects)
+            {
+                gas.Value?.Stop();
+                MyParticlesManager.RemoveParticleEffect(gas.Value);
+                
+            }
+            gasParticleEffects.Clear();
+        }
+    }
+}

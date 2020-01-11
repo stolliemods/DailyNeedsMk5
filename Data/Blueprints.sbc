@@ -22,7 +22,7 @@
 				<SubtypeId>EmergencyWater_DNSK</SubtypeId>
 			</Id>
 			<DisplayName>Emergency Water - (25pts Thirst/Max 50% Thirst Fill)</DisplayName>
-			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_EmergencyWater_Icon.dds</Icon>
+			<Icon>Textures\GUI\Icons\Physical_Items\EmergencyWater_Icon.dds</Icon>
 			<Prerequisites>
 				<Item Amount="90" TypeId="Ore" SubtypeId="Ice_Filtered" />
 			</Prerequisites>
@@ -36,7 +36,7 @@
 				<SubtypeId>EmergencyFood_DNSK</SubtypeId>
 			</Id>
 			<DisplayName>Emergency Food - (10pts Hunger/Max 50% Hunger Fill)</DisplayName>
-			<Icon>Textures\GUI\Icons\Physical_Items\DailyNeeds_EmergencyFood_Icon.dds</Icon>
+			<Icon>Textures\GUI\Icons\Physical_Items\EmergencyFood_Icon.dds</Icon>
 			<Prerequisites>
 				<Item Amount="10" TypeId="Ingot" SubtypeId="Stone" />
 			</Prerequisites>
@@ -52,7 +52,7 @@
 			<DisplayName>Refine Ice - Produces Gas, Liquid and Filtered Ice.</DisplayName>
 			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
 			<Prerequisites>
-				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Unrefined" />
+				<Item Amount="100" TypeId="Ore" SubtypeId="DirtyIce" />
 			</Prerequisites>
 			<Results>
 				<Item Amount="25" TypeId="Ore" SubtypeId="Ice" />

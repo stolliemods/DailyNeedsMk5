@@ -74,7 +74,7 @@ namespace Stollie.DailyNeeds
 
                 floatingobject = (MyObjectBuilder_FloatingObject)Entity.GetObjectBuilder();
                 item = floatingobject.Item;
-
+                
                 if (item.PhysicalContent.SubtypeName.Contains("_DNSK"))
                 {
                     //CreateLight(Entity as MyEntity, Color.Brown);
@@ -120,6 +120,9 @@ namespace Stollie.DailyNeeds
             {
                 foreach (var subpart in subparts)
                 {
+                    if (subparts.Count == 0)
+                        return;
+                    
                     var initialMatrix = subpart.Value.PositionComp.LocalMatrix;
 
                     double rotationX = 0.0f;

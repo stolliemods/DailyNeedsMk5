@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<StatDefinitions>
+		<Stat xsi:type="MyObjectBuilder_EntityStatDefinition">
+			<Id>
+				<TypeId>MyObjectBuilder_EntityStat</TypeId>
+				<SubtypeId>Juice</SubtypeId>
+			</Id>
+			<Name>Juice</Name>
+			<MinValue>0</MinValue>
+			<DefaultValue>0</DefaultValue>
+			<MaxValue>100</MaxValue>
+		</Stat>
+		
+		<Stat xsi:type="MyObjectBuilder_EntityStatDefinition">
+			<Id>
+				<TypeId>MyObjectBuilder_EntityStat</TypeId>
+				<SubtypeId>Hunger</SubtypeId>
+			</Id>
+			<Name>Hunger</Name>
+			<MinValue>0</MinValue>
+			<DefaultValue>0</DefaultValue>
+			<MaxValue>100</MaxValue>
+		</Stat>
+		
+	</StatDefinitions>
+</Definitions>

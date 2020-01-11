@@ -115,7 +115,7 @@ namespace Rek.FoodSystem {
             FATIGUE_LEVEL_NOHEALING = 0.01f; // at this fraction of MIN_NEEDS_VALUE, prevent autoheal
 		    FATIGUE_LEVEL_FORCEWALK = 0.2f; // at this fraction of MIN_NEEDS_VALUE, try to force walking
 		    FATIGUE_LEVEL_FORCECROUCH = 0.5f; // at this fraction of MIN_NEEDS_VALUE, try to force walking
-		    FATIGUE_LEVEL_HELMET = 0.85f; // at this fraction of MIN_NEEDS_VALUE, toggle helmet
+		    FATIGUE_LEVEL_HELMET = 0.70f; // at this fraction of MIN_NEEDS_VALUE, toggle helmet
 		    FATIGUE_LEVEL_HEARTATTACK = 0.999f; // at this fraction of MIN_NEEDS_VALUE, heart attack
 
             CHICKEN_SOUP_STRING = "ChickenSoupString"; // effectively disabled
@@ -134,7 +134,7 @@ namespace Rek.FoodSystem {
             // Clone Sickness Resspawn Values
             RESPAWN_HUNGER = 31f;
             RESPAWN_THIRST = 31f;
-            RESPAWN_FATIGUE = 31f;
+            RESPAWN_FATIGUE = 51f;
 
             //HUD Values
             HUNGER_ICON_POSITION_X = -0.941f;

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definition>
+	<Id>
+		<SubtypeId>Manufacturing_Ring3_Large</SubtypeId>
+	</Id>
+	<Icon>Textures\Icons\Manufacturing_Ring3.dds</Icon>
+	<CubeSize>Large</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="1" y="1" z="1" />
+	<ModelOffset x="0" y="0" z="0" />
+	<Model>..\..\..\Users\Cheyne\AppData\Roaming\SpaceEngineers\Mods\DailyNeeds\Models\Cubes\Large\Manufacturing_Ring3_Large.mwm</Model>
+	<BlockPairName>Manufacturing_Ring3</BlockPairName>
+</Definition>
