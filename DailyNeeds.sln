@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.329
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyNeeds", "DailyNeeds.csproj", "{DC227365-3AC1-4996-9BB4-BFD96FB44B4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyNeeedsMk5", "DailyNeeedsMk5.csproj", "{DC227365-3AC1-4996-9BB4-BFD96FB44B4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
