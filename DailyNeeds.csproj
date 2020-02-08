@@ -157,7 +157,7 @@
   <ItemGroup>
     <Content Include="Audio\drinking.wav" />
     <Content Include="Audio\eating.wav" />
-    <Content Include="Data\Scripts\FoodSystem\HUDElements\HUDUpdate.txt" />
+    <Content Include="Data\Scripts\DailyNeeedsMk5\HUDElements\HUDUpdate.txt" />
     <Content Include="Textures\GUI\Icons\Cubes\DailyNeeds_BlankLCD_Icon.dds" />
     <Content Include="Textures\GUI\Icons\Cubes\EmergencyRations.dds" />
     <Content Include="Textures\GUI\Icons\Cubes\EnclosedHydroponics.dds" />
@@ -329,8 +329,8 @@
     <None Include="Data\Kitchen_CubeBlocks_Small_Ship.sbc" />
     <None Include="Data\LCD_BlockCategories.sbc" />
     <None Include="Data\LCD_CubeBlocks_Large_Ship.sbc" />
-    <None Include="Data\Scripts\FoodSystem\AnimationsAndLighting\EmergencyRationsKit.bak" />
-    <None Include="Data\Scripts\FoodSystem\AnimationsAndLighting\OpenHydroAnimation.bak" />
+    <None Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\EmergencyRationsKit.bak" />
+    <None Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\OpenHydroAnimation.bak" />
     <None Include="Data\zContainerTypesAndSupplyDrops.sbc" />
     <None Include="Data\zModStorageComponentGUID.sbc" />
     <None Include="Data\zPhysicalItems.sbc" />
@@ -476,25 +476,25 @@
     <None Include="obj\x64\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Canisters.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Compost.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Emissives.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Hydroponics.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\IceRefinery.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Kitchen.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Client.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Command.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Config.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\ConfigData.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\ConfigDataStore.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\HudAPIv2.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Logger.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\NeedsApi.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\PlayerData.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\PlayerDataStore.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Server.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\SorterGroup.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Utils.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Canisters.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Compost.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Emissives.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Hydroponics.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\IceRefinery.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Kitchen.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Client.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Command.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Config.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\ConfigData.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\ConfigDataStore.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\HudAPIv2.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Logger.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\NeedsApi.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\PlayerData.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\PlayerDataStore.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Server.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\SorterGroup.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Utils.cs" />
     <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
