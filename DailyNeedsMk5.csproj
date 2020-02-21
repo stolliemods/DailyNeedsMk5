@@ -1,15 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC227365-3AC1-4996-9BB4-BFD96FB44B4D}</ProjectGuid>
+    <ProjectGuid>{36079D51-A73F-4F9E-AD4B-85D9B3CA23E9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>ClassLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,7 +17,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,10 +25,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>DailyNeeds</RootNamespace>
+    <RootNamespace>DailyNeedsMk5</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -39,9 +35,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -49,73 +45,47 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="netstandard">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\netstandard.dll</HintPath>
     </Reference>
     <Reference Include="ProtoBuf.Net">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\ProtoBuf.Net.dll</HintPath>
     </Reference>
-    <Reference Include="ProtoBuf.Net.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="ProtoBuf.Net.Core">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\ProtoBuf.Net.Core.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Common">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Common.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Common.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Game">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Game.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Game.dll</HintPath>
     </Reference>
-    <Reference Include="Sandbox.Game.XmlSerializers, Version=0.1.1.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Sandbox.Game.XmlSerializers">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Game.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.Graphics">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Graphics.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="Sandbox.RenderDirect">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.RenderDirect.dll</HintPath>
-    </Reference>
-    <Reference Include="SEWhitelistChecker">
-      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SEWhitelistChecker.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\Sandbox.RenderDirect.dll</HintPath>
     </Reference>
     <Reference Include="SpaceEngineers">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.exe</HintPath>
     </Reference>
     <Reference Include="SpaceEngineers.Game">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.Game.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.Game.dll</HintPath>
     </Reference>
     <Reference Include="SpaceEngineers.ObjectBuilders">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.ObjectBuilders.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.ObjectBuilders.dll</HintPath>
     </Reference>
     <Reference Include="SpaceEngineers.ObjectBuilders.XmlSerializers">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.ObjectBuilders.XmlSerializers.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\SpaceEngineers.ObjectBuilders.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -124,77 +94,107 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="VRage">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Ansel">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Ansel.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Ansel.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Audio">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Audio.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Audio.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Game">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Game.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Game.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Game.XmlSerializers">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Game.XmlSerializers.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Game.XmlSerializers.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Input">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Input.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Input.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Library">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Library.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Library.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Math">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Math.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Math.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Math.XmlSerializers">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Math.XmlSerializers.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Math.XmlSerializers.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Mod.Io">
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Mod.Io.dll</HintPath>
     </Reference>
     <Reference Include="VRage.NativeAftermath">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.NativeAftermath.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.NativeAftermath.dll</HintPath>
     </Reference>
-    <Reference Include="VRage.Network, Version=1.0.53.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="VRage.NativeWrapper">
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.NativeWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Network">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Network.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Platform.Windows">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Platform.Windows.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Render">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Render.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Render.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Render11">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Render11.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Render11.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Scripting">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Scripting.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Scripting.dll</HintPath>
     </Reference>
     <Reference Include="VRage.Steam">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Steam.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.Steam.dll</HintPath>
     </Reference>
-    <Reference Include="VRage.UserInterface, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="VRage.UserInterface">
       <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.UserInterface.dll</HintPath>
     </Reference>
     <Reference Include="VRage.XmlSerializers">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.XmlSerializers.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Games\Steam\steamapps\common\SpaceEngineers\Bin64\VRage.XmlSerializers.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitattributes" />
-    <Content Include=".gitignore" />
+    <Content Include=".git\ms-persist.xml" />
     <Content Include="Audio\drinking.wav" />
     <Content Include="Audio\eating.wav" />
-    <Content Include="Data\Scripts\FoodSystem\HUDElements\HUDUpdate.txt" />
+    <Content Include="Audio\fastheartbeatwithbeep_4slong.wav" />
+    <Content Include="Audio\fastheartbeatwithbeep_4slong_fadeout.wav" />
+    <Content Include="Audio\fastheartbeatwithbeep_hb_4slong.wav" />
+    <Content Include="Audio\heavybreathing.wav" />
+    <Content Include="Audio\xWMAEncode.exe" />
+    <Content Include="Data\Scripts\DailyNeeedsMk5\HUDElements\HUDUpdate.txt" />
     <Content Include="DNSK COPYRIGHT STATEMENT.txt" />
     <Content Include="metadata.mod" />
+    <Content Include="Models\Cubes\Large\DrugLab_Large.blockdef.xml" />
+    <Content Include="Models\Cubes\Large\DrugLab_Large.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Centrifuge_Large.blockdef.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Centrifuge_Large.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Large.blockdef.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Large.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Ring0_Large.blockdef.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Ring0_Large.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Ring1_Large.blockdef.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Ring1_Large.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Ring2_Large.blockdef.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Ring2_Large.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Ring3_Large.blockdef.xml" />
+    <Content Include="Models\Cubes\Large\Manufacturing_Ring3_Large.xml" />
+    <Content Include="Models\Physical_Items\K_Imperial_Ingot_SynthFuel_Small.blockdef.xml" />
+    <Content Include="Models\Physical_Items\K_Imperial_Ingot_SynthFuel_Small.xml" />
     <Content Include="Textures\GUI\Icons\Cubes\DailyNeeds_BlankLCD_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\DrugLab.dds" />
     <Content Include="Textures\GUI\Icons\Cubes\EmergencyRations.dds" />
     <Content Include="Textures\GUI\Icons\Cubes\EnclosedHydroponics.dds" />
-    <Content Include="Textures\GUI\Icons\Cubes\FoodResequencer.dds" />
-    <Content Include="Textures\GUI\Icons\Cubes\OpenHydroponics.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\EnclosedHydroponics_Mini.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\IceRefinery.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\IceRefinery_Mini.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\Icon Specifactions.txt" />
+    <Content Include="Textures\GUI\Icons\Cubes\Kitchen.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\Kitchen_Mini.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\Manufacturing.dds" />
+    <Content Include="Textures\GUI\Icons\Cubes\OrganicOxygen.dds" />
     <Content Include="Textures\GUI\Icons\Cubes\SoilTrayCropGrower.dds" />
-    <Content Include="Textures\GUI\Icons\Cubes\WaterRecycler.dds" />
     <Content Include="Textures\GUI\Icons\food.dds" />
     <Content Include="Textures\GUI\Icons\food_highlight.dds" />
     <Content Include="Textures\GUI\Icons\HUD\100PercentProgressBarEmpty.dds" />
@@ -211,53 +211,73 @@
     <Content Include="Textures\GUI\Icons\HUD\HungerIcon_Green.dds" />
     <Content Include="Textures\GUI\Icons\HUD\HungerIcon_LightBlue.dds" />
     <Content Include="Textures\GUI\Icons\HUD\HungerIcon_Red.dds" />
+    <Content Include="Textures\GUI\Icons\HUD\JuicedIcon.dds" />
     <Content Include="Textures\GUI\Icons\HUD\ThirstIcon_Green.dds" />
     <Content Include="Textures\GUI\Icons\HUD\ThirstIcon_LightBlue.dds" />
     <Content Include="Textures\GUI\Icons\HUD\ThirstIcon_Red.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Carbon_Ingot_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Carbon_Ore_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Coffee_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_EmergencyFood_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_EmergencyWater_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Fertilizer_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_FineMeal_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_GreyWater_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_HotChocolate_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_LuxuryMeal_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Meat_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Organic_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Phosphorus_Ingot_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Phosphorus_Ore_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_PlantMatter_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_PlantSeeds_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Potassium_Ingot_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Potassium_Ore_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_ProteinShake_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Carbon_Ingot_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Carbon_Ore_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Coffee_Icon.dds" />
     <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_SimpleMeal_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_SpaceBar_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_VegetableSeeds_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Vegetables_Icon.dds" />
-    <Content Include="Textures\GUI\Icons\Physical_Items\DailyNeeds_Water_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\EmergencyFood_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\EmergencyWater_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Fertilizer_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\FineMeal_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\GreyWater_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\HotChocolate_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Juice_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\LuxuryMeal_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Meat_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Organic_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Phosphorus_Ingot_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Phosphorus_Ore_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\PlantMatter_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\PlantSeeds_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Potassium_Ingot_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Potassium_Ore_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\ProteinShake_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\SimpleMeal_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\SpaceBar_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\VegetableSeeds_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Vegetables_Icon.dds" />
+    <Content Include="Textures\GUI\Icons\Physical_Items\Water_Icon.dds" />
     <Content Include="Textures\Models\Cubes\Apple_cm.dds" />
     <Content Include="Textures\Models\Cubes\Banana_cm.dds" />
     <Content Include="Textures\Models\Cubes\Dirt_add.dds" />
     <Content Include="Textures\Models\Cubes\Dirt_cm.dds" />
     <Content Include="Textures\Models\Cubes\Dirt_ng.dds" />
+    <Content Include="Textures\Models\Cubes\Egg_add.dds" />
+    <Content Include="Textures\Models\Cubes\Egg_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Egg_ng.dds" />
     <Content Include="Textures\Models\Cubes\HydrophonicsLeaf_add.DDS" />
     <Content Include="Textures\Models\Cubes\HydrophonicsLeaf_alphamask.DDS" />
     <Content Include="Textures\Models\Cubes\HydrophonicsLeaf_cm.DDS" />
     <Content Include="Textures\Models\Cubes\HydrophonicsLeaf_ng.DDS" />
     <Content Include="Textures\Models\Cubes\KitchenMeat_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Motor_add.dds" />
+    <Content Include="Textures\Models\Cubes\Motor_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Motor_ng.dds" />
     <Content Include="Textures\Models\Cubes\Orange_cm.dds" />
     <Content Include="Textures\Models\Cubes\OrganicMeat_cm.dds" />
     <Content Include="Textures\Models\Cubes\OrganicMeat_ng.dds" />
     <Content Include="Textures\Models\Cubes\Pear_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Radial_add.dds" />
+    <Content Include="Textures\Models\Cubes\Radial_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Radial_ng.dds" />
+    <Content Include="Textures\Models\Cubes\Scanner_add.dds" />
+    <Content Include="Textures\Models\Cubes\Scanner_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Scanner_ng.dds" />
+    <Content Include="Textures\Models\Cubes\Tank_add.dds" />
+    <Content Include="Textures\Models\Cubes\Tank_cm.dds" />
+    <Content Include="Textures\Models\Cubes\Tank_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\BlackRubber_add.dds" />
     <Content Include="Textures\Models\Physical_Item\BlackRubber_cm.dds" />
     <Content Include="Textures\Models\Physical_Item\BlackRubber_ng.dds" />
     <Content Include="Textures\Models\Physical_Item\CanisterBlack_cm.dds" />
     <Content Include="Textures\Models\Physical_Item\CanisterBlue_cm.dds" />
     <Content Include="Textures\Models\Physical_Item\CanisterBronze_cm.dds" />
     <Content Include="Textures\Models\Physical_Item\CanisterBronze_ng.dds" />
+    <Content Include="Textures\Models\Physical_Item\CanisterBrown_add.dds" />
     <Content Include="Textures\Models\Physical_Item\CanisterBrown_cm.dds" />
     <Content Include="Textures\Models\Physical_Item\CanisterGlass.DDS" />
     <Content Include="Textures\Models\Physical_Item\CanisterGold_cm.dds" />
@@ -317,6 +337,7 @@
     <Content Include="Textures\Models\Physical_Item\Water_cm.dds" />
     <Content Include="Textures\Models\Physical_Item\Water_ng.dds" />
     <Content Include="Textures\Particles\ClearGlass_ca.dds" />
+    <Content Include="Textures\Particles\DrugLaser.dds" />
     <Content Include="Textures\Particles\Glass.DDS" />
     <Content Include="Textures\Voxels\Carbon_01_ForAxisXZ_add.dds" />
     <Content Include="Textures\Voxels\Carbon_01_ForAxisXZ_cm.dds" />
@@ -329,45 +350,110 @@
     <Content Include="Textures\Voxels\Potassium_01_ForAxisXZ_ng.dds" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DailyNeeds.csproj.DotSettings" />
+    <None Include=".git\COMMIT_EDITMSG" />
+    <None Include=".git\config" />
+    <None Include=".git\description" />
+    <None Include=".git\FETCH_HEAD" />
+    <None Include=".git\HEAD" />
+    <None Include=".git\hooks\applypatch-msg.sample" />
+    <None Include=".git\hooks\commit-msg.sample" />
+    <None Include=".git\hooks\fsmonitor-watchman.sample" />
+    <None Include=".git\hooks\post-update.sample" />
+    <None Include=".git\hooks\pre-applypatch.sample" />
+    <None Include=".git\hooks\pre-commit.sample" />
+    <None Include=".git\hooks\pre-push.sample" />
+    <None Include=".git\hooks\pre-rebase.sample" />
+    <None Include=".git\hooks\pre-receive.sample" />
+    <None Include=".git\hooks\prepare-commit-msg.sample" />
+    <None Include=".git\hooks\update.sample" />
+    <None Include=".git\index" />
+    <None Include=".git\info\exclude" />
+    <None Include=".git\logs\HEAD" />
+    <None Include=".git\logs\refs\heads\Experimental" />
+    <None Include=".git\logs\refs\heads\master" />
+    <None Include=".git\logs\refs\remotes\origin\Experimental" />
+    <None Include=".git\logs\refs\remotes\origin\master" />
+    <None Include=".git\objects\08\87e850cc5710d3544fe89117782c36f79ed78a" />
+    <None Include=".git\objects\1f\f50c6f00b5cf5a141de48c2f8b4aca6f8f7fae" />
+    <None Include=".git\objects\28\50764d9912723ae6496b5120422ad8dd81c20e" />
+    <None Include=".git\objects\34\05901f200274bdf0b575d2c1bd803f4f9c4499" />
+    <None Include=".git\objects\40\0833bb02f5507a1339f2874da34b2ec1ade848" />
+    <None Include=".git\objects\40\22044276725bf7daa828a219494c9d1e4c8039" />
+    <None Include=".git\objects\4a\e582b30b44e169111af47c143f6552ad4c0d50" />
+    <None Include=".git\objects\51\33c6b77a66c55b11b1ae95794639ebc34accb2" />
+    <None Include=".git\objects\59\f90988b7bc56ce52bb218bcc61f64d3708ea12" />
+    <None Include=".git\objects\5c\05c3a581f429974ce68b1c8668f747f7af8be7" />
+    <None Include=".git\objects\5c\d4a50d735602e0c6efc4d6214e16912c617cd4" />
+    <None Include=".git\objects\62\5b6a24dc5f0918024408ba338a35514a049047" />
+    <None Include=".git\objects\73\1310f86d5b9641605c19cc6045d25856c926fb" />
+    <None Include=".git\objects\87\418816d9455b312e5fd8bba56c03ce8c6a3e6f" />
+    <None Include=".git\objects\92\1f28152f834ed3befab369fa19cad1abeca9c4" />
+    <None Include=".git\objects\a2\abc78de0c3bee5acfa508625d22fbf02666df0" />
+    <None Include=".git\objects\a7\b261865aa5f0b27f3ee3841779029138ac2227" />
+    <None Include=".git\objects\ab\00d598c9a1e8531eb344300ebba3dff5664899" />
+    <None Include=".git\objects\b3\09d117c5c65d3858fd1eae56f7195039a6dcb5" />
+    <None Include=".git\objects\b8\255190ee2d94190f5a3b510af7517d857d3f10" />
+    <None Include=".git\objects\be\28427b5041dada1136b6c56812d9e90d0783c9" />
+    <None Include=".git\objects\c8\a89c3e6675c0d22c1fbae326e80ba444cd2f77" />
+    <None Include=".git\objects\cf\9b7d07309dc527c7d1b2432eb5f902230cc41a" />
+    <None Include=".git\objects\d7\7e670a48603296c370c3fb28ffb55284f88c2c" />
+    <None Include=".git\objects\df\1946a1def573a978d75b02b747887ccbcd2612" />
+    <None Include=".git\objects\e0\efe405ad5ba03b12094326da7e9753b7c0d72f" />
+    <None Include=".git\objects\eb\6f7cdd4620b78d24f2e27de2c0aacf0ec93ef5" />
+    <None Include=".git\objects\pack\pack-c41536b61db4276c68c1a7ac3a128fb244157e77.idx" />
+    <None Include=".git\objects\pack\pack-c41536b61db4276c68c1a7ac3a128fb244157e77.pack" />
+    <None Include=".git\ORIG_HEAD" />
+    <None Include=".git\packed-refs" />
+    <None Include=".git\refs\heads\Experimental" />
+    <None Include=".git\refs\heads\master" />
+    <None Include=".git\refs\remotes\origin\Experimental" />
+    <None Include=".git\refs\remotes\origin\master" />
+    <None Include="Audio\convert.bat" />
     <None Include="Data\Audio.sbc" />
+    <None Include="Data\BlockCategories_DailyNeedsConsumables.sbc" />
     <None Include="Data\BlueprintClasses.sbc" />
     <None Include="Data\Blueprints.sbc" />
-    <None Include="Data\COMPOST_BlockCategories.sbc" />
-    <None Include="Data\COMPOST_BlueprintClasses.sbc" />
-    <None Include="Data\COMPOST_Blueprints.sbc" />
-    <None Include="Data\COMPOST_CubeBlocks_Large_Ship.sbc" />
-    <None Include="Data\EMRK_BlockCategories.bak" />
-    <None Include="Data\EMRK_BlueprintClasses.bak" />
-    <None Include="Data\EMRK_Blueprints.bak" />
-    <None Include="Data\EMRK_CubeBlocks_Small_Ship.bak" />
-    <None Include="Data\FOODINGOT_BlueprintClasses.sbc" />
-    <None Include="Data\FOODINGOT_Blueprints.sbc" />
-    <None Include="Data\HYDROPONICS_BlockCategories.sbc" />
-    <None Include="Data\HYDROPONICS_BlueprintClasses.sbc" />
-    <None Include="Data\HYDROPONICS_Blueprints.sbc" />
-    <None Include="Data\HYDROPONICS_CubeBlocks_Large_Ship.sbc" />
-    <None Include="Data\HYDROPONICS_CubeBlocks_Small_Ship.sbc" />
-    <None Include="Data\ICEREFINERY_BlockCategories.sbc" />
-    <None Include="Data\ICEREFINERY_BlueprintClasses.sbc" />
-    <None Include="Data\ICEREFINERY_Blueprints.sbc" />
-    <None Include="Data\ICEREFINERY_CubeBlocks_Large_Ship.sbc" />
-    <None Include="Data\ICEREFINERY_CubeBlocks_Small_Ship.sbc" />
-    <None Include="Data\Kitchen_BlockCategories.sbc" />
-    <None Include="Data\Kitchen_BlueprintClasses.sbc" />
-    <None Include="Data\Kitchen_Blueprints.sbc" />
-    <None Include="Data\Kitchen_CubeBlocks_Large_Ship.sbc" />
-    <None Include="Data\Kitchen_CubeBlocks_Small_Ship.sbc" />
+    <None Include="Data\ContainerTypesAndSupplyDrops.sbc" />
+    <None Include="Data\CubeBlocks\FOODINGOT_BlueprintClasses.sbc" />
+    <None Include="Data\CubeBlocks\FOODINGOT_Blueprints.sbc" />
+    <None Include="Data\CubeBlocks\HYDROPONICS_BlockCategories.sbc" />
+    <None Include="Data\CubeBlocks\HYDROPONICS_BlueprintClasses.sbc" />
+    <None Include="Data\CubeBlocks\HYDROPONICS_Blueprints.sbc" />
+    <None Include="Data\CubeBlocks\HYDROPONICS_CubeBlocks_Large_Ship.sbc" />
+    <None Include="Data\CubeBlocks\HYDROPONICS_CubeBlocks_Small_Ship.sbc" />
+    <None Include="Data\CubeBlocks\ICEREFINERY_BlockCategories.sbc" />
+    <None Include="Data\CubeBlocks\ICEREFINERY_BlueprintClasses.sbc" />
+    <None Include="Data\CubeBlocks\ICEREFINERY_Blueprints.sbc" />
+    <None Include="Data\CubeBlocks\ICEREFINERY_CubeBlocks_Large_Ship.sbc" />
+    <None Include="Data\CubeBlocks\ICEREFINERY_CubeBlocks_Small_Ship.sbc" />
+    <None Include="Data\CubeBlocks\KITCHEN_BlockCategories.sbc" />
+    <None Include="Data\CubeBlocks\KITCHEN_BlueprintClasses.sbc" />
+    <None Include="Data\CubeBlocks\KITCHEN_Blueprints.sbc" />
+    <None Include="Data\CubeBlocks\KITCHEN_CubeBlocks_Large_Ship.sbc" />
+    <None Include="Data\CubeBlocks\KITCHEN_CubeBlocks_Small_Ship.sbc" />
+    <None Include="Data\CubeBlocks\MANUFACTURING_BlockCategories.sbc" />
+    <None Include="Data\CubeBlocks\MANUFACTURING_BlueprintClasses.sbc" />
+    <None Include="Data\CubeBlocks\MANUFACTURING_Blueprints.sbc" />
+    <None Include="Data\CubeBlocks\MANUFACTURING_CubeBlocks_Large_Ship.sbc" />
+    <None Include="Data\EntityComponents.sbc" />
+    <None Include="Data\Kreeg_SWParticles.sbc" />
     <None Include="Data\LCD_BlockCategories.sbc" />
     <None Include="Data\LCD_CubeBlocks_Large_Ship.sbc" />
-    <None Include="Data\Scripts\FoodSystem\AnimationsAndLighting\EmergencyRationsKit.bak" />
-    <None Include="Data\zContainerTypesAndSupplyDrops.sbc" />
-    <None Include="Data\zModStorageComponentGUID.sbc" />
-    <None Include="Data\zPhysicalItems.sbc" />
-    <None Include="Data\zTransparentMaterials.sbc" />
-    <None Include="Data\zVoxelMaterialChanges.sbc" />
-    <None Include="Data\zVoxelMaterials_asteroids.sbc" />
-    <None Include="Data\zVoxelMaterials_planetary.sbc" />
+    <None Include="Data\ModStorageComponentGUID.sbc" />
+    <None Include="Data\Particle.sbc" />
+    <None Include="Data\PhysicalItems.sbc" />
+    <None Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\EmergencyRationsKit.bak" />
+    <None Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\SWCanisters.bak" />
+    <None Include="Data\Scripts\DailyNeeedsMk5\Config.bak" />
+    <None Include="Data\Stats.sbc" />
+    <None Include="Data\TransparentMaterials.sbc" />
+    <None Include="Data\Unused\EMRK_BlockCategories.bak" />
+    <None Include="Data\Unused\EMRK_BlueprintClasses.bak" />
+    <None Include="Data\Unused\EMRK_Blueprints.bak" />
+    <None Include="Data\Unused\EMRK_CubeBlocks_Small_Ship.bak" />
+    <None Include="Data\VoxelMaterialChanges.sbc" />
+    <None Include="Data\VoxelMaterials_asteroids.sbc" />
+    <None Include="Data\VoxelMaterials_planetary.sbc" />
     <None Include="Models\Cubes\Large\CropGrower_Large.mwm" />
     <None Include="Models\Cubes\Large\CropGrower_Large_Constr1.mwm" />
     <None Include="Models\Cubes\Large\CropGrower_Large_Constr2.mwm" />
@@ -376,6 +462,17 @@
     <None Include="Models\Cubes\Large\DailyNeeds_BlankLCD_Large_Constr1.mwm" />
     <None Include="Models\Cubes\Large\DailyNeeds_BlankLCD_Large_Constr2.mwm" />
     <None Include="Models\Cubes\Large\DailyNeeds_BlankLCD_Large_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\DrugLab_Centrifuge_Large.mwm" />
+    <None Include="Models\Cubes\Large\DrugLab_FuckYou_Large.mwm" />
+    <None Include="Models\Cubes\Large\DrugLab_Large.fbx" />
+    <None Include="Models\Cubes\Large\DrugLab_Large.mwm" />
+    <None Include="Models\Cubes\Large\DrugLab_Large_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\DrugLab_Large_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\DrugLab_Large_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\DrugLab_Ring0_Large.mwm" />
+    <None Include="Models\Cubes\Large\DrugLab_Ring1_Large.mwm" />
+    <None Include="Models\Cubes\Large\DrugLab_Ring2_Large.mwm" />
+    <None Include="Models\Cubes\Large\DrugLab_Ring3_Large.mwm" />
     <None Include="Models\Cubes\Large\EnclosedHydroponics_Large.mwm" />
     <None Include="Models\Cubes\Large\EnclosedHydroponics_Large_Constr1.mwm" />
     <None Include="Models\Cubes\Large\EnclosedHydroponics_Large_Constr2.mwm" />
@@ -398,6 +495,25 @@
     <None Include="Models\Cubes\Large\IceRefinery_Small_Constr1.mwm" />
     <None Include="Models\Cubes\Large\IceRefinery_Small_Constr2.mwm" />
     <None Include="Models\Cubes\Large\IceRefinery_Small_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\KitchenDNSK_Grinder_Large.mwm" />
+    <None Include="Models\Cubes\Large\KitchenDNSK_Large.mwm" />
+    <None Include="Models\Cubes\Large\KitchenDNSK_Large_Constr1.mwm" />
+    <None Include="Models\Cubes\Large\KitchenDNSK_Large_Constr2.mwm" />
+    <None Include="Models\Cubes\Large\KitchenDNSK_Large_Constr3.mwm" />
+    <None Include="Models\Cubes\Large\KitchenDNSK_LeftArm_Large.mwm" />
+    <None Include="Models\Cubes\Large\KitchenDNSK_RightArm_Large.mwm" />
+    <None Include="Models\Cubes\Large\Manufacturing_Centrifuge_Large.fbx" />
+    <None Include="Models\Cubes\Large\Manufacturing_Centrifuge_Large.mwm" />
+    <None Include="Models\Cubes\Large\Manufacturing_Large.fbx" />
+    <None Include="Models\Cubes\Large\Manufacturing_Large.mwm" />
+    <None Include="Models\Cubes\Large\Manufacturing_Ring0_Large.fbx" />
+    <None Include="Models\Cubes\Large\Manufacturing_Ring0_Large.mwm" />
+    <None Include="Models\Cubes\Large\Manufacturing_Ring1_Large.fbx" />
+    <None Include="Models\Cubes\Large\Manufacturing_Ring1_Large.mwm" />
+    <None Include="Models\Cubes\Large\Manufacturing_Ring2_Large.fbx" />
+    <None Include="Models\Cubes\Large\Manufacturing_Ring2_Large.mwm" />
+    <None Include="Models\Cubes\Large\Manufacturing_Ring3_Large.fbx" />
+    <None Include="Models\Cubes\Large\Manufacturing_Ring3_Large.mwm" />
     <None Include="Models\Cubes\Large\OpenHydroponics_Large.mwm" />
     <None Include="Models\Cubes\Large\OpenHydroponics_Large_Constr1.mwm" />
     <None Include="Models\Cubes\Large\OpenHydroponics_Large_Constr2.mwm" />
@@ -501,34 +617,39 @@
     <None Include="Models\Physical_Items\Canister_Water_InnerCylinder_Small.mwm" />
     <None Include="Models\Physical_Items\Canister_Water_Small.mwm" />
     <None Include="Models\Physical_Items\DailyNeeds_Meat_Small.mwm" />
+    <None Include="Models\Physical_Items\K_Imperial_Ingot_SynthFuel_Small.fbx" />
+    <None Include="Models\Physical_Items\K_Imperial_Ingot_SynthFuel_Small.mwm" />
+    <None Include="Models\Physical_Items\K_Imperial_Ingot_SynthFuel_Spinner_Small.mwm" />
     <None Include="modinfo.sbmi" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Canisters.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Manufacturing.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Emissives.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\EnclosedHydroponics.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\IceRefinery.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Kitchen.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\OpenHydroponics.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\SWCanisters.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Client.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Command.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\ConfigData.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\ConfigDataStore.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\EasyInventoryApi.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\HudAPIv2.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Logger.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\NeedsApi.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\PlayerData.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\PlayerDataStore.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Server.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\SorterGroup.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\StopWatch.cs" />
-    <Compile Include="Data\Scripts\FoodSystem\Utils.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Canisters.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Emissives.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\EnclosedHydroponics.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\IceRefinery.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Kitchen.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Manufacturing.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\OpenHydroponics.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Client.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Command.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Config.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\ConfigData.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\ConfigDataStore.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\EasyInventoryApi.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\HudAPIv2.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Logger.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\NeedsApi.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\PlayerData.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\PlayerDataStore.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Server.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\SorterGroup.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\StopWatch.cs" />
+    <Compile Include="Data\Scripts\DailyNeeedsMk5\Utils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include=".git\objects\info\" />
+    <Folder Include=".git\refs\tags\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
