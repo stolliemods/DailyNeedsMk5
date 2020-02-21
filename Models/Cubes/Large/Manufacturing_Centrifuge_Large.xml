@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model Name="Manufacturing_Centrifuge">
+	<Parameter Name="RescaleFactor">0.01</Parameter>
+	<Parameter Name="RescaleToLengthInMeters">false</Parameter>
+	<Parameter Name="Centered">false</Parameter>
+	<Material Name="BlackRubber">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Physical_Item\BlackRubber_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Physical_Item\BlackRubber_ng.dds</Parameter>
+		<!--material has no AddMapsTexture-->
+	</Material>
+	<Material Name="ClearGlass">
+		<Parameter Name="Technique">GLASS</Parameter>
+	</Material>
+	<Material Name="Canister_Yellow">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Physical_Item\CanisterYellow_cm.dds</Parameter>
+		<!--material has no NormalGlossTexture-->
+		<!--material has no AddMapsTexture-->
+	</Material>
+	<MaterialRef Name="PaintedMetal_VeryDark" />
+	<MaterialRef Name="Metal_Shiny" />
+	<MaterialRef Name="Chrome" />
+</Model>

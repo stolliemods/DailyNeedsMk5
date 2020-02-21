@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Model Name="Manufacturing">
+	<Parameter Name="RescaleFactor">0.01</Parameter>
+	<Parameter Name="RescaleToLengthInMeters">false</Parameter>
+	<Parameter Name="Centered">false</Parameter>
+	<Material Name="ClearGlass">
+		<Parameter Name="Technique">GLASS</Parameter>
+	</Material>
+	<Material Name="Canister_Yellow">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Physical_Item\CanisterYellow_cm.dds</Parameter>
+		<!--material has no NormalGlossTexture-->
+		<!--material has no AddMapsTexture-->
+	</Material>
+	<Material Name="GlassInside">
+		<Parameter Name="Technique">GLASS</Parameter>
+	</Material>
+	<Material Name="BlackRubber">
+		<Parameter Name="Technique">MESH</Parameter>
+		<Parameter Name="ColorMetalTexture">Textures\Models\Physical_Item\BlackRubber_cm.dds</Parameter>
+		<Parameter Name="NormalGlossTexture">Textures\Models\Physical_Item\BlackRubber_ng.dds</Parameter>
+		<!--material has no AddMapsTexture-->
+	</Material>
+	<MaterialRef Name="BlackMetal" />
+	<MaterialRef Name="TextAtlas" />
+	<MaterialRef Name="PaintedMetal_VeryDark" />
+	<MaterialRef Name="Doodads" />
+	<MaterialRef Name="Decals" />
+	<MaterialRef Name="PaintedMetal_Darker" />
+	<MaterialRef Name="Terminal" />
+	<MaterialRef Name="Conveyor" />
+	<MaterialRef Name="PaintedMetal_Yellow" />
+	<MaterialRef Name="PaintedMetalScratched_Colorable" />
+	<MaterialRef Name="PaintedMetalScratched_Darker" />
+	<MaterialRef Name="PaintedMetal_Colorable" />
+	<MaterialRef Name="PaintedMetalScratched_Yellow" />
+	<MaterialRef Name="PanelingColorable" />
+	<MaterialRef Name="Metal_Dull" />
+	<MaterialRef Name="Chrome" />
+</Model>

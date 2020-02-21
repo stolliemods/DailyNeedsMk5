@@ -1,0 +1,4 @@
+20px from top for text for One Line
+10px from top for text for Two Lines
+20px Microsoft Sans Serif Regular using Crisp
+Bottom of Icon ~115-116px

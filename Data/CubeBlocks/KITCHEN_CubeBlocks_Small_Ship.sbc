@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<CubeBlocks>
+		<Definition xsi:type="MyObjectBuilder_AssemblerDefinition">
+			<Id>
+				<TypeId>Assembler</TypeId>
+				<SubtypeId>SmallKitchen_DNSK</SubtypeId>
+			</Id>
+			<DisplayName>Kitchen (Daily Needs)</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\Kitchen.dds</Icon>
+			<Description>This Food Protein Resequencer assembles meals from raw vegetables and meat protein. This is the basic survival block and should be built first. Note that the large Block versions are more efficient.</Description>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="3" y="3" z="3" /> 
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\Cubes\Small\Kitchen_Small.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="45" />
+				<Component Subtype="Construction" Count="30" />
+				<Component Subtype="Motor" Count="6" />
+				<Component Subtype="Computer" Count="8" />
+				<Component Subtype="Construction" Count="30" />
+				<Component Subtype="Display" Count="6" />
+				<Component Subtype="Girder" Count="12" />
+				<Component Subtype="InteriorPlate" Count="12" />
+				<Component Subtype="SteelPlate" Count="25" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Small\Kitchen_Small_Constr1.mwm" />
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Small\Kitchen_Small_Constr2.mwm" />
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\Kitchen_Small_Constr3.mwm" />
+			</BuildProgressModels>
+			<BlockPairName>Kitchen_DNSK</BlockPairName>
+			<EdgeType>Light</EdgeType>
+			<InventoryMaxVolume>0.35</InventoryMaxVolume>
+			<InventorySize>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</InventorySize>
+			<StandbyPowerConsumption>0.001</StandbyPowerConsumption>
+			<OperationalPowerConsumption>0.15</OperationalPowerConsumption>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<BlueprintClasses>
+				<Class>Food</Class>
+				<Class>Liquids</Class>
+			</BlueprintClasses>
+			<RefineSpeed>0.5</RefineSpeed>
+			<MaterialEfficiency>0.75</MaterialEfficiency>
+			<ResourceSinkGroup>Factory</ResourceSinkGroup>
+			<DamageEffectId>212</DamageEffectId>
+			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<PCU>3</PCU>
+		</Definition>
+		<Definition xsi:type="MyObjectBuilder_AssemblerDefinition">
+			<Id>
+				<TypeId>Assembler</TypeId>
+				<SubtypeId>MiniKitchen_DNSK</SubtypeId>
+			</Id>
+			<DisplayName>Miniaturized Kitchen (Daily Needs)</DisplayName>
+			<Icon>Textures\GUI\Icons\Cubes\Kitchen_Mini.dds</Icon>
+			<Description>This Food Protein Resequencer assembles meals from raw vegetables and meat protein. This is the basic survival block and should be built first. Note that the large Block versions are more efficient.</Description>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1" /> 
+			<ModelOffset x="0" y="0" z="0" />
+			<Model>Models\Cubes\Small\Kitchen_Mini_Small.mwm</Model>
+			<Components>
+				<Component Subtype="SteelPlate" Count="15" />
+				<Component Subtype="Construction" Count="10" />
+				<Component Subtype="Motor" Count="3" />
+				<Component Subtype="Computer" Count="4" />
+				<Component Subtype="Construction" Count="10" />
+				<Component Subtype="Display" Count="2" />
+				<Component Subtype="Girder" Count="4" />
+				<Component Subtype="InteriorPlate" Count="4" />
+				<Component Subtype="SteelPlate" Count="15" />
+			</Components>
+			<CriticalComponent Subtype="Computer" Index="0" />
+			<MountPoints>
+				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+			</MountPoints>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Small\Kitchen_Small_Constr1.mwm" />
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Small\Kitchen_Small_Constr2.mwm" />
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Small\Kitchen_Small_Constr3.mwm" />
+			</BuildProgressModels>
+			<EdgeType>Light</EdgeType>
+			<InventoryMaxVolume>0.35</InventoryMaxVolume>
+			<InventorySize>
+				<X>1</X>
+				<Y>1</Y>
+				<Z>1</Z>
+			</InventorySize>
+			<StandbyPowerConsumption>0.001</StandbyPowerConsumption>
+			<OperationalPowerConsumption>0.15</OperationalPowerConsumption>
+			<BuildTimeSeconds>30</BuildTimeSeconds>
+			<BlueprintClasses>
+				<Class>Food</Class>
+				<Class>Liquids</Class>
+			</BlueprintClasses>
+			<RefineSpeed>0.5</RefineSpeed>
+			<MaterialEfficiency>0.75</MaterialEfficiency>
+			<ResourceSinkGroup>Factory</ResourceSinkGroup>
+			<DamageEffectId>212</DamageEffectId>
+			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<PCU>3</PCU>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

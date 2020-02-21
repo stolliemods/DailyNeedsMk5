@@ -186,7 +186,7 @@ namespace Stollie.DailyNeeds
         {
             try
             {
-                var subpart = Entity.GetSubpart("FoodProteinResequencer_LeftArm");
+                var subpart = Entity.GetSubpart("KitchenDNSK_LeftArm");
                 //double rotation = 0.002f;
                 var initialMatrix = subpart.PositionComp.LocalMatrix;
                 double rotationX = 0.001f;
@@ -211,7 +211,7 @@ namespace Stollie.DailyNeeds
         {
             try
             {
-                var subpart = Entity.GetSubpart("FoodProteinResequencer_RightArm");
+                var subpart = Entity.GetSubpart("KitchenDNSK_RightArm");
                 var rotation = -0.001f;
                 var initialMatrix = subpart.PositionComp.LocalMatrix;
 
@@ -234,8 +234,8 @@ namespace Stollie.DailyNeeds
         {
             try
             {
-                var subpart = Entity.GetSubpart("FoodProteinResequencer_RightArm");
-                var cutterSubpart = subpart.GetSubpart("FoodProteinResequencer_Grinder");
+                MyEntitySubpart subpart = Entity.GetSubpart("KitchenDNSK_RightArm");
+                var cutterSubpart = subpart.GetSubpart("KitchenDNSK_Grinder");
                 var initialMatrix = cutterSubpart.PositionComp.LocalMatrix;
 
                 double rotationX = 0.0f;
@@ -265,6 +265,5 @@ namespace Stollie.DailyNeeds
                 _light = null;
             }
         }
-
     }
 }

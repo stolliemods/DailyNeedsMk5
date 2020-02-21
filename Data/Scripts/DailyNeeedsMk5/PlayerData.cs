@@ -6,9 +6,12 @@ namespace Rek.FoodSystem {
     public class PlayerData
     {
         public ulong steamid;
+        public long playerId;
         public float hunger;
         public float thirst;
         public float fatigue;
+        public float juice;
+        public bool dead;
 
         [XmlIgnoreAttribute]
         public VRage.Game.MyCharacterMovementEnum lastmovement;
@@ -21,20 +24,26 @@ namespace Rek.FoodSystem {
 
         public PlayerData(ulong id)
         {
-            thirst = 100;
-            hunger = 100;
-            fatigue = 100;
-            lastmovement = 0;
-            entity = null;
             steamid = id;
+            playerId = 0;
+            hunger = 100;
+            thirst = 100;
+            fatigue = 100;
+            juice = 0;
+            lastmovement = 0;
+            dead = false;
+            entity = null;
             loaded = false;
         }
 
         public PlayerData() {
-            thirst = 100;
+            playerId = 0;
             hunger = 100;
+            thirst = 100;
             fatigue = 100;
+            juice = 0;
             lastmovement = 0;
+            dead = false;
             entity = null;
             loaded = false;
         }

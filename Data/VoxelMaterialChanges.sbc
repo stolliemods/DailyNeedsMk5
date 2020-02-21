@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Definition xsi:type="MyObjectBuilder_VoxelMaterialModifierDefinition">
+		<Id Type="MyObjectBuilder_VoxelMaterialModifierDefinition" Subtype="Mars" />
+		<Options>
+			<!-- Daily Needs -->
+			<Option Chance="0.25">
+				<Change From="Stone" To="MarsRocks" />
+				<Change From="Iron_01" To="Carbon_01" />
+				<Change From="Iron_02" To="Carbon_01" />
+			</Option>
+			<Option Chance="0.25">
+				<Change From="Stone" To="MarsRocks" />
+				<Change From="Iron_01" To="Potassium_01" />
+				<Change From="Iron_02" To="Potassium_01" />
+			</Option>
+			<Option Chance="0.25">
+				<Change From="Stone" To="MarsRocks" />
+				<Change From="Iron_01" To="Phosphorus_01" />
+				<Change From="Iron_02" To="Phosphorus_01" />
+			</Option>
+		</Options>
+	</Definition>
+</Definitions>

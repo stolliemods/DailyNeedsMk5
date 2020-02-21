@@ -77,6 +77,7 @@ namespace Rek.FoodSystem
         // Automatic block re-coloring
         public bool get_AUTOMATIC_BLOCK_COLOR() { return mConfigData.AUTOMATIC_BLOCK_COLOR; }
         public bool get_CREATIVETOOLS_NODECAY() { return mConfigData.CREATIVETOOLS_NODECAY; }
+        public bool get_EATING_AND_DRINKING_REQUIRES_PRESSURISATION() { return mConfigData.EATING_AND_DRINKING_REQUIRES_PRESSURISATION; }
 
         public void Save()
         {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Definition>
+	<Id>
+		<SubtypeId>K_Imperial_Ingot_SynthFuel_Small</SubtypeId>
+	</Id>
+	<Icon>Textures\Icons\K_Imperial_Ingot_SynthFuel.dds</Icon>
+	<CubeSize>Small</CubeSize>
+	<BlockTopology>TriangleMesh</BlockTopology>
+	<Size x="1" y="1" z="1" />
+	<ModelOffset x="0" y="0" z="0" />
+	<Model>..\AppData\Roaming\SpaceEngineers\Mods\DailyNeeds\Models\Physical_Items\K_Imperial_Ingot_SynthFuel_Small.mwm</Model>
+	<BlockPairName>K_Imperial_Ingot_SynthFuel</BlockPairName>
+</Definition>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<BlueprintClasses>
+		<Class>
+			<Id>                   
+				<TypeId>BlueprintClassDefinition</TypeId>
+				<SubtypeId>Hydroponics</SubtypeId>
+			</Id>
+			<DisplayName>Hydroponics</DisplayName>
+			<Icon>Textures\GUI\Icons\food.dds</Icon>
+			<HighlightIcon>Textures\GUI\Icons\food_highlight.dds</HighlightIcon>
+		</Class>
+		<Class>
+			<Id>                   
+				<TypeId>BlueprintClassDefinition</TypeId>
+				<SubtypeId>BacterialOxygen</SubtypeId>
+			</Id>
+			<DisplayName>Bacterial To Oxygen</DisplayName>
+			<Icon>Textures\GUI\Icons\food.dds</Icon>
+			<HighlightIcon>Textures\GUI\Icons\food_highlight.dds</HighlightIcon>
+		</Class>	
+		
+	</BlueprintClasses>
+	<BlueprintClassEntries>
+		<Entry Class="LargeBlocks" BlueprintSubtypeId="Refinery/LargeHydroponics" />
+		<Entry Class="LargeBlocks" BlueprintSubtypeId="OxygenGenerator/LargeOpenHydroponics" />
+		<Entry Class="SmallBlocks" BlueprintSubtypeId="Refinery/SmallHydroponics" />
+		<Entry Class="SmallBlocks" BlueprintSubtypeId="Refinery/MiniHydroponics" />
+		
+		<Entry Class="Hydroponics" BlueprintSubtypeId="OrganicRefinement" />
+		<Entry Class="BacterialOxygen" BlueprintSubtypeId="CyanobacteriaToOxygen" />
+		
+	</BlueprintClassEntries>
+</Definitions>
