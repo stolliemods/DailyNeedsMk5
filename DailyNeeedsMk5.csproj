@@ -181,9 +181,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
     <Content Include="Audio\drinking.wav" />
     <Content Include="Audio\eating.wav" />
     <Content Include="Data\Scripts\FoodSystem\HUDElements\HUDUpdate.txt" />
+    <Content Include="DNSK COPYRIGHT STATEMENT.txt" />
+    <Content Include="metadata.mod" />
     <Content Include="Textures\GUI\Icons\Cubes\DailyNeeds_BlankLCD_Icon.dds" />
     <Content Include="Textures\GUI\Icons\Cubes\EmergencyRations.dds" />
     <Content Include="Textures\GUI\Icons\Cubes\EnclosedHydroponics.dds" />
@@ -325,6 +329,7 @@
     <Content Include="Textures\Voxels\Potassium_01_ForAxisXZ_ng.dds" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DailyNeeds.csproj.DotSettings" />
     <None Include="Data\Audio.sbc" />
     <None Include="Data\BlueprintClasses.sbc" />
     <None Include="Data\Blueprints.sbc" />
@@ -496,9 +501,7 @@
     <None Include="Models\Physical_Items\Canister_Water_InnerCylinder_Small.mwm" />
     <None Include="Models\Physical_Items\Canister_Water_Small.mwm" />
     <None Include="Models\Physical_Items\DailyNeeds_Meat_Small.mwm" />
-    <None Include="obj\x64\Debug\DailyNeeds.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\x64\Debug\DailyNeeds.csprojAssemblyReference.cache" />
-    <None Include="obj\x64\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="modinfo.sbmi" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Scripts\FoodSystem\AnimationsAndLighting\Canisters.cs" />
@@ -524,14 +527,8 @@
     <Compile Include="Data\Scripts\FoodSystem\StopWatch.cs" />
     <Compile Include="Data\Scripts\FoodSystem\Utils.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\x64\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\x64\Debug\" />
-    <Folder Include="obj\x64\Debug\TempPE\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
