@@ -612,7 +612,7 @@ namespace Rek.FoodSystem
                     {
                         // We update every second - at default values this is 100 / 120 / 60 * 1 = 0.0138 thirst per second
                         // Config value / Default Day Length / Sixty Seconds * Multiplier = Thirst per second
-                        playerData.thirst -= mThirstPerMinute / 60 * CurrentModifier; 
+                        playerData.thirst -= mThirstPerMinute / 10 * CurrentModifier; 
                         playerData.thirst = Math.Max(playerData.thirst, MIN_NEEDS_VALUE);
                     }
 
@@ -621,7 +621,7 @@ namespace Rek.FoodSystem
                     {
                         // We update every second - at default values this is 50 / 120 / 60 * 1 = 0.0069 hunger per second 
                         // Config value / Default Day Length / Sixty Seconds * Multiplier = Hunger per second
-                        playerData.hunger -= mHungerPerMinute / 60 * CurrentModifier;
+                        playerData.hunger -= mHungerPerMinute / 12 * CurrentModifier;
                         playerData.hunger = Math.Max(playerData.hunger, MIN_NEEDS_VALUE);
                     }
 
