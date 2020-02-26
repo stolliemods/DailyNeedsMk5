@@ -779,13 +779,12 @@ namespace Rek.FoodSystem
                         if (playerData.fatigue <= (FATIGUE_LEVEL_NOHEALING * MIN_NEEDS_VALUE))
                         {
                             var destroyable = controlledEnt as IMyDestroyableObject;
-                            //destroyable.DoDamage(0.001f, MyStringHash.GetOrCompute("Fatigue"), true); // starting to hurt
+                            destroyable.DoDamage(1.0f, MyStringHash.GetOrCompute("Fatigue"), true); // starting to hurt
+                            
                             if (IsAutohealingOn) // fatigued? no autohealing, either.
                             {
-                                //const float HealthTick = 100f / 240f * FOOD_LOGIC_SKIP_TICKS / 60f;
-                                //destroyable.DoDamage(0.0f, MyStringHash.GetOrCompute("Testing"), false);
+                                destroyable.DoDamage(1.0f, MyStringHash.GetOrCompute("Testing"), false);
                             }
-
                         }
 
                         // Default Values: 0.999f * -100f = -99.9
