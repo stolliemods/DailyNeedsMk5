@@ -26,11 +26,11 @@ namespace Rek.FoodSystem
         public float get_HUNGER_PER_DAY() { return mConfigData.HUNGER_PER_DAY;}
         public float get_DAMAGE_SPEED_HUNGER() { return mConfigData.DAMAGE_SPEED_HUNGER;}
         public float get_DAMAGE_SPEED_THIRST() { return mConfigData.DAMAGE_SPEED_THIRST;}
-        public float get_DEFAULT_MODIFIER() { return mConfigData.DEFAULT_MODIFIER;}
-        public float get_FLYING_MODIFIER() { return mConfigData.FLYING_MODIFIER;}
-        public float get_RUNNING_MODIFIER() { return mConfigData.RUNNING_MODIFIER;}
-        public float get_SPRINTING_MODIFIER() { return mConfigData.SPRINTING_MODIFIER;}
-        public float get_NO_MODIFIER() { return mConfigData.NO_MODIFIER;}
+        public float get_DEFAULT_MODIFIER() { return mConfigData.FATIGUE_DEFAULT_MULTIPLIER;}
+        public float get_FLYING_MODIFIER() { return mConfigData.FATIGUE_FLYING_MULTIPLIER;}
+        public float get_RUNNING_MODIFIER() { return mConfigData.FATIGUE_RUNNING_MULTIPLIER;}
+        public float get_SPRINTING_MODIFIER() { return mConfigData.FATIGUE_SPRINTING_MODIFIER;}
+        public float get_NO_MODIFIER() { return mConfigData.FATIGUE_NO_MODIFIER;}
         public float get_CRAP_AMOUNT() { return mConfigData.CRAP_AMOUNT;}
         public float get_CROSS_CRAP_AMOUNT() { return mConfigData.CROSS_CRAP_AMOUNT;}
         public float get_DEATH_RECOVERY() { return mConfigData.DEATH_RECOVERY;}

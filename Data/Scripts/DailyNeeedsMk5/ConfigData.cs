@@ -28,11 +28,11 @@ namespace Rek.FoodSystem {
 		public float HUNGER_PER_DAY;
 		public float DAMAGE_SPEED_HUNGER;
 		public float DAMAGE_SPEED_THIRST;
-		public float DEFAULT_MODIFIER;
-		public float FLYING_MODIFIER;
-		public float RUNNING_MODIFIER;
-		public float SPRINTING_MODIFIER;
-		public float NO_MODIFIER;
+		public float FATIGUE_DEFAULT_MULTIPLIER;
+		public float FATIGUE_FLYING_MULTIPLIER;
+		public float FATIGUE_RUNNING_MULTIPLIER;
+		public float FATIGUE_SPRINTING_MODIFIER;
+		public float FATIGUE_NO_MODIFIER;
 		public float CRAP_AMOUNT;
 		public float CROSS_CRAP_AMOUNT;
 		public float DEATH_RECOVERY;
@@ -92,11 +92,11 @@ namespace Rek.FoodSystem {
 		    DAMAGE_SPEED_HUNGER = -0.2f; // 2; // if negative, scale to minvalue for damage. if positive, do this much damage every tick.
 		    DAMAGE_SPEED_THIRST = -0.6f; //5; // if negative, scale to minvalue for damage.  if positive, do this much damage every tick.
 
-            DEFAULT_MODIFIER = 1f;
-		    FLYING_MODIFIER = 1f;
-		    RUNNING_MODIFIER = 1.5f;
-		    SPRINTING_MODIFIER = 3f;
-		    NO_MODIFIER = 1f;
+            FATIGUE_DEFAULT_MULTIPLIER = 1f;
+		    FATIGUE_FLYING_MULTIPLIER = 1f;
+		    FATIGUE_RUNNING_MULTIPLIER = 1.5f;
+		    FATIGUE_SPRINTING_MODIFIER = 3f;
+		    FATIGUE_NO_MODIFIER = 1f;
 
             CRAP_AMOUNT = 0.90f; // if zero, skip creating waste, otherwise, make GreyWater and Organic right after eating, and don't go into details
 		    CROSS_CRAP_AMOUNT = 0.0f; // does eating/drinking generate any amount of the "other" waste? formula is (1-crapamount)*this
