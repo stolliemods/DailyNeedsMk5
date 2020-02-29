@@ -83,7 +83,7 @@
 			<DisplayName>Water - (25pts Thirst)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\Water_Icon.dds</Icon>
 			<Prerequisites>
-				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Filtered" />
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Drinkable" />
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="Water_DNSK" />
 			<BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
@@ -97,7 +97,7 @@
 			<DisplayName>Coffee - (50pts Thirst/100pts Fatigue)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\Coffee_Icon.dds</Icon>
 			<Prerequisites>
-				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Filtered" />
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Drinkable" />
 				<Item Amount="10" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />				
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="Coffee_DNSK" />
@@ -112,7 +112,7 @@
 			<DisplayName>Hot Chocolate - (50pts Thirst/100pts Fatigue)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\HotChocolate_Icon.dds</Icon>
 			<Prerequisites>
-				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Filtered" />
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Drinkable" />
 				<Item Amount="10" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />
 				
 			</Prerequisites>
@@ -130,7 +130,7 @@
 			<DisplayName>Protein Shake - (25pts Thirst/25pts Hunger)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\ProteinShake_Icon.dds</Icon>
 			<Prerequisites>
-				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Filtered" />
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Drinkable" />
 				<Item Amount="10" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />				
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="ProteinShake_DNSK" />

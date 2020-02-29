@@ -143,9 +143,9 @@ namespace Rek.FoodSystem
             var allVoxelMaterials = MyDefinitionManager.Static.GetVoxelMaterialDefinitions();
             foreach (var def in allVoxelMaterials)
             {
-                if (def.Id.SubtypeName == "Ice")
+                if (def.Id.SubtypeName.Contains("Ice"))
                 {
-                    def.MinedOre = "DirtyIce";
+                    def.MinedOre = "Ice_Dirty";
                 }
             }
         }

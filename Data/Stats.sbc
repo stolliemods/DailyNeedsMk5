@@ -11,17 +11,5 @@
 			<DefaultValue>0</DefaultValue>
 			<MaxValue>100</MaxValue>
 		</Stat>
-		
-		<Stat xsi:type="MyObjectBuilder_EntityStatDefinition">
-			<Id>
-				<TypeId>MyObjectBuilder_EntityStat</TypeId>
-				<SubtypeId>Hunger</SubtypeId>
-			</Id>
-			<Name>Hunger</Name>
-			<MinValue>0</MinValue>
-			<DefaultValue>0</DefaultValue>
-			<MaxValue>100</MaxValue>
-		</Stat>
-		
 	</StatDefinitions>
 </Definitions>
