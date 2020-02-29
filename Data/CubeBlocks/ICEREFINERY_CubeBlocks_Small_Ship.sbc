@@ -8,7 +8,7 @@
 			</Id>
 			<DisplayName>Ice Refinery</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\IceRefinery.dds</Icon>
-			<Description>The Ice Refinery unit refines Ice into Gaseous and Liquid and Filtered Ice, it also recycles "waste" water. Gravel and trace organincs are a byproduct of this process. Note that the large Block versions are more efficient.</Description>
+			<Description>The Ice Refinery unit refines Dirty Ice into Gaseous and Drinkable Ice, it also recycles "waste" water. Note that the large Block versions are more efficient.</Description>
 			<CubeSize>Small</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="3" y="3" z="3" />
@@ -27,12 +27,12 @@
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0" />
 			<MountPoints>
-				<MountPoint Side="Front" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
-				<MountPoint Side="Back" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
-				<MountPoint Side="Left" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
-				<MountPoint Side="Right" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
-				<MountPoint Side="Bottom" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
-				<MountPoint Side="Top" StartX="0.00" StartY="0.00" EndX="1.00" EndY="1.00" />
+				<MountPoint Side="Top" StartX="0.25" StartY="0.25" EndX="2.75" EndY="2.75" />
+				<MountPoint Side="Bottom" StartX="0.25" StartY="0.25" EndX="2.75" EndY="2.75" />
+				<MountPoint Side="Right" StartX="0.25" StartY="0.25" EndX="2.75" EndY="2.75" />
+				<MountPoint Side="Left" StartX="0.25" StartY="0.25" EndX="2.75" EndY="2.75" />
+				<MountPoint Side="Back" StartX="0.25" StartY="0.25" EndX="2.75" EndY="2.75" />
+				<MountPoint Side="Front" StartX="0.25" StartY="0.25" EndX="2.75" EndY="2.75" />				
 			</MountPoints>
 			<BuildProgressModels>
 				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Small\IceRefinery_Small_Constr1.mwm" />

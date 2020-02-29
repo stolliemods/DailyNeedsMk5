@@ -45,9 +45,9 @@
 			<Prerequisites>
 				<Item Amount="2" TypeId="Ore" SubtypeId="DailyNeeds_Meat" />
 				<Item Amount="20" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />
-				<Item Amount="2" TypeId="Ingot" SubtypeId="Carbon" />
-				<Item Amount="2" TypeId="Ingot" SubtypeId="Phosphorus" />
-				<Item Amount="2" TypeId="Ingot" SubtypeId="Potassium" />
+				<Item Amount="2" TypeId="Ingot" SubtypeId="Carbon_Ingot" />
+				<Item Amount="2" TypeId="Ingot" SubtypeId="Phosphorus_Ingot" />
+				<Item Amount="2" TypeId="Ingot" SubtypeId="Potassium_Ingot" />
 				
 				
 			</Prerequisites>
@@ -65,9 +65,9 @@
 			<Prerequisites>
 				<Item Amount="3" TypeId="Ore" SubtypeId="DailyNeeds_Meat" />
 				<Item Amount="30" TypeId="Ingot" SubtypeId="PlantMatter_DNSK" />
-				<Item Amount="3" TypeId="Ingot" SubtypeId="Carbon" />
-				<Item Amount="3" TypeId="Ingot" SubtypeId="Phosphorus" />
-				<Item Amount="3" TypeId="Ingot" SubtypeId="Potassium" />
+				<Item Amount="3" TypeId="Ingot" SubtypeId="Carbon_Ingot" />
+				<Item Amount="3" TypeId="Ingot" SubtypeId="Phosphorus_Ingot" />
+				<Item Amount="3" TypeId="Ingot" SubtypeId="Potassium_Ingot" />
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="LuxuryMeal_DNSK" />
 			<BaseProductionTimeInSeconds>5</BaseProductionTimeInSeconds>

@@ -66,7 +66,7 @@
 			</Id>
 			<DisplayName>Organic Oxygen Generator</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\OrganicOxygen.dds</Icon>
-			<Description>Produces Oxygen and Hydrogen from Organic Material. Can also re-fill canisters (only while processing material).</Description>
+			<Description>Produces Oxygen and Hydrogen from Cyanobaceria (which is produced from Organic Material via Hydroponics). Can also re-fill canisters (only while processing Cyanobacteria).</Description>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="1" z="2" />

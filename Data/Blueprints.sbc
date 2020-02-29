@@ -4,6 +4,23 @@
 		<Blueprint>
 			<Id>
 				<TypeId>BlueprintDefinition</TypeId>
+				<SubtypeId>IceConversion</SubtypeId>
+			</Id>
+			<DisplayName>Refine Ice - Produces Gas and Drinkable Ice.</DisplayName>
+			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
+			<Prerequisites>
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Dirty" />
+			</Prerequisites>
+			<Results>
+				<Item Amount="25" TypeId="Ore" SubtypeId="Ice" />
+				<Item Amount="25" TypeId="Ore" SubtypeId="Ice_Drinkable" />
+			</Results>
+			<Priority>900</Priority>
+			<BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
+		</Blueprint>
+		<Blueprint>
+			<Id>
+				<TypeId>BlueprintDefinition</TypeId>
 				<SubtypeId>EmergencyWater_DNSK</SubtypeId>
 			</Id>
 			<DisplayName>Emergency Water - (25pts Thirst/Max 50% Thirst Fill)</DisplayName>
@@ -29,23 +46,7 @@
 			<BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
 			<Priority>800</Priority>
 		</Blueprint>
-		<Blueprint>
-			<Id>
-				<TypeId>BlueprintDefinition</TypeId>
-				<SubtypeId>IceConversion</SubtypeId>
-			</Id>
-			<DisplayName>Refine Ice - Produces Gas and Drinkable Ice.</DisplayName>
-			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
-			<Prerequisites>
-				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Dirty" />
-			</Prerequisites>
-			<Results>
-				<Item Amount="25" TypeId="Ore" SubtypeId="Ice" />
-				<Item Amount="25" TypeId="Ore" SubtypeId="Ice_Drinkable" />
-			</Results>
-			<Priority>900</Priority>
-			<BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
-		</Blueprint>
+		
 		
 	</Blueprints>
 </Definitions>

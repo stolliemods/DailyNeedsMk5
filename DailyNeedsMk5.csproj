@@ -155,36 +155,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Scripts\DailyNeeedsMk5\HUDElements\HUDUpdate.txt" />
+    <Content Include="Data\Scripts\DailyNeedsMk5\HUDElements\HUDUpdate.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\EmergencyRationsKit.bak" />
-    <None Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\SWCanisters.bak" />
-    <None Include="Data\Scripts\DailyNeeedsMk5\Config.bak" />
+    <None Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\EmergencyRationsKit.bak" />
+    <None Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\SWCanisters.bak" />
+    <None Include="Data\Scripts\DailyNeedsMk5\Config.bak" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Canisters.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Emissives.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\EnclosedHydroponics.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\IceRefinery.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Kitchen.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\Manufacturing.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\AnimationsAndLighting\OpenHydroponics.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\Client.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\Command.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\Config.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\ConfigData.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\ConfigDataStore.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\EasyInventoryApi.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\HudAPIv2.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\Logger.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\NeedsApi.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\PlayerData.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\PlayerDataStore.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\Server.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\SorterGroup.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\StopWatch.cs" />
-    <Compile Include="Data\Scripts\DailyNeeedsMk5\Utils.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\Canisters.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\Emissives.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\EnclosedHydroponics.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\IceRefinery.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\Kitchen.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\Manufacturing.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\OpenHydroponics.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Client.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Command.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Config.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\ConfigData.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\ConfigDataStore.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\EasyInventoryApi.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\HudAPIv2.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Logger.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\NeedsApi.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\PlayerData.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\PlayerDataStore.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Server.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\SorterGroup.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\StopWatch.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Utils.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />

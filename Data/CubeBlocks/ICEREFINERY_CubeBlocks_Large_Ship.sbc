@@ -8,7 +8,7 @@
 			</Id>
 			<DisplayName>Ice Refinery</DisplayName>
 			<Icon>Textures\GUI\Icons\Cubes\IceRefinery.dds</Icon>
-			<Description>The Ice Refinery unit refines Ice into Gaseous and Liquid and Filtered Ice, it also recycles "waste" water. Gravel and trace organincs are a byproduct of this process. Note that the large Block versions are more efficient.</Description>
+			<Description>The Ice Refinery unit refines Dirty Ice into Gaseous and Drinkable Ice, it also recycles "waste" water.</Description>
 			<CubeSize>Large</CubeSize>
 			<BlockTopology>TriangleMesh</BlockTopology>
 			<Size x="1" y="1" z="1" />
