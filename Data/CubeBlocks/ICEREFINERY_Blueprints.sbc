@@ -11,11 +11,11 @@
 			<DisplayName>Refine Ice</DisplayName>
 			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
 			<Prerequisites>
-				<Item Amount="1" TypeId="Ore" SubtypeId="DirtyIce" />
+				<Item Amount="1" TypeId="Ore" SubtypeId="Ice_Dirty" />
 			</Prerequisites>
 			<Results>
 				<Item Amount="0.8" TypeId="Ore" SubtypeId="Ice" />
-				<Item Amount="0.2" TypeId="Ore" SubtypeId="Ice_Filtered" />
+				<Item Amount="0.2" TypeId="Ore" SubtypeId="Ice_Drinkable" />
 			</Results>
 			<Priority>900</Priority>
 			<!-- Needs to be fast enough to keep up with H2/O2 Generator Gas conversion rate -->

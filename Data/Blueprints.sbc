@@ -24,7 +24,7 @@
 			<DisplayName>Emergency Water - (25pts Thirst/Max 50% Thirst Fill)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\EmergencyWater_Icon.dds</Icon>
 			<Prerequisites>
-				<Item Amount="90" TypeId="Ore" SubtypeId="Ice_Filtered" />
+				<Item Amount="90" TypeId="Ore" SubtypeId="Ice_Drinkable" />
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="EmergencyWater_DNSK" />
 			<BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>
@@ -49,14 +49,14 @@
 				<TypeId>BlueprintDefinition</TypeId>
 				<SubtypeId>IceConversion</SubtypeId>
 			</Id>
-			<DisplayName>Refine Ice - Produces Gas, Liquid and Filtered Ice.</DisplayName>
+			<DisplayName>Refine Ice - Produces Gas and Drinkable Ice.</DisplayName>
 			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
 			<Prerequisites>
-				<Item Amount="100" TypeId="Ore" SubtypeId="DirtyIce" />
+				<Item Amount="100" TypeId="Ore" SubtypeId="Ice_Dirty" />
 			</Prerequisites>
 			<Results>
 				<Item Amount="25" TypeId="Ore" SubtypeId="Ice" />
-				<Item Amount="25" TypeId="Ore" SubtypeId="Ice_Filtered" />
+				<Item Amount="25" TypeId="Ore" SubtypeId="Ice_Drinkable" />
 			</Results>
 			<Priority>900</Priority>
 			<BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>

@@ -65,55 +65,5 @@
 			<NormalGlossXZnY>Textures\Voxels\Phosphorus_01_ForAxisXZ_ng.dds</NormalGlossXZnY>
 			<ExtXZnY>Textures\Voxels\Phosphorus_01_ForAxisXZ_add.dds</ExtXZnY>
 		</VoxelMaterial>
-		
-		<!-- DirtyIce -->
-		<VoxelMaterial xsi:type="MyObjectBuilder_Dx11VoxelMaterialDefinition">
-			<Id>
-				<TypeId>VoxelMaterialDefinition</TypeId>
-				<SubtypeId>DirtyIce_01</SubtypeId>
-			</Id>
-			<MaterialTypeName>DirtyIce</MaterialTypeName>
-			<MinedOre>DirtyIce</MinedOre>
-			<MinedOreRatio>5</MinedOreRatio>
-			<CanBeHarvested>true</CanBeHarvested>
-			<IsRare>true</IsRare>
-			<SpawnsInAsteroids>false</SpawnsInAsteroids>
-			<AsteroidGeneratorSpawnProbabilityMultiplier>5</AsteroidGeneratorSpawnProbabilityMultiplier>
-			
-			<MinVersion>1</MinVersion>
-			
-			<VoxelHandPreview>Textures\Voxels\Ice_01_Thumbnail.dds</VoxelHandPreview>
-			<ColorMetalXZnY>Textures\Voxels\Ice_01_ForAxisXZ_cm.dds</ColorMetalXZnY>   
-			<NormalGlossXZnY>Textures\Voxels\Ice_01_ForAxisXZ_ng.dds</NormalGlossXZnY>
-			<ExtXZnY>Textures\Voxels\Ice_01_ForAxisXZ_add.dds</ExtXZnY>
-			
-			<ExtDetailScale>0.005</ExtDetailScale>
-			<Scale>2</Scale>
-			<InitialDistance>4</InitialDistance>
-			<InitialScale>4</InitialScale>
-			<ScaleMultiplier>4</ScaleMultiplier>
-			<DistanceMultiplier>4</DistanceMultiplier>
-			
-			<Far3Distance>50000</Far3Distance>
-			<Far3Color>
-				<X>0.045</X>
-				<Y>0.08</Y>
-				<Z>0.09</Z>
-				<W>1.0</W>
-			</Far3Color>
-			
-			
-			<ColorMetalXZnYFar1>Textures\Voxels\Ice_01_ForAxisXZ_far_cm.dds</ColorMetalXZnYFar1>   
-			<NormalGlossXZnYFar1>Textures\Voxels\Ice_01_ForAxisXZ_far_ng.dds</NormalGlossXZnYFar1>
-			
-			
-			<ColorMetalXZnYFar2>Textures\Voxels\Ice_01_ForAxisXZ_far_cm.dds</ColorMetalXZnYFar2>   
-			<NormalGlossXZnYFar2>Textures\Voxels\Ice_01_ForAxisXZ_far_ng.dds</NormalGlossXZnYFar2>
-			
-			<Friction>0.15</Friction>
-			<Restitution>0.9</Restitution>
-			<ColorKey Hex="#DD9B28"/>
-			<LandingEffect>Landing_Jet_Ground_Snow</LandingEffect>
-		</VoxelMaterial>
 	</VoxelMaterials>
 </Definitions>
