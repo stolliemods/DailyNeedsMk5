@@ -12,7 +12,7 @@
 			<Prerequisites>
 				<Item Amount="1" TypeId="Ore" SubtypeId="Carbon" />
 			</Prerequisites>
-			<Result Amount="0.07" TypeId="Ingot" SubtypeId="Carbon" />
+			<Result Amount="0.07" TypeId="Ingot" SubtypeId="Carbon_Ingot" />
 			<BaseProductionTimeInSeconds>4</BaseProductionTimeInSeconds>
 		</Blueprint>
 		<Blueprint>
@@ -25,7 +25,7 @@
 			<Prerequisites>
 				<Item Amount="1" TypeId="Ore" SubtypeId="Potassium" />
 			</Prerequisites>
-			<Result Amount="0.007" TypeId="Ingot" SubtypeId="Potassium" />
+			<Result Amount="0.007" TypeId="Ingot" SubtypeId="Potassium_Ingot" />
 			<BaseProductionTimeInSeconds>2</BaseProductionTimeInSeconds>
 		</Blueprint>
 		<Blueprint>
@@ -38,7 +38,7 @@
 			<Prerequisites>
 				<Item Amount="1" TypeId="Ore" SubtypeId="Phosphorus" />
 			</Prerequisites>
-			<Result Amount="0.007" TypeId="Ingot" SubtypeId="Phosphorus" />
+			<Result Amount="0.007" TypeId="Ingot" SubtypeId="Phosphorus_Ingot" />
 			<BaseProductionTimeInSeconds>4</BaseProductionTimeInSeconds>
 		</Blueprint>
 	</Blueprints>

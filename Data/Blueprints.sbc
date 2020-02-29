@@ -1,21 +1,6 @@
 <?xml version="1.0"?>
 <Definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<Blueprints>
-		<!--
-		<Blueprint>
-			<Id>
-				<TypeId>BlueprintDefinition</TypeId>
-				<SubtypeId>IceToOxygen</SubtypeId>
-			</Id>
-			<DisplayName>DisplayName_Item_Oxygen</DisplayName>
-			<Icon>Textures\GUI\Icons\ingot\gravel_ingot.dds</Icon>
-			<Prerequisites>
-				<Item Amount="1" TypeId="Ore" SubtypeId="Ice" />
-			</Prerequisites>
-			<Result Amount="0.9" TypeId="Ingot" SubtypeId="Stone" />
-			<BaseProductionTimeInSeconds>0.1</BaseProductionTimeInSeconds>
-		</Blueprint>
-		-->
+	<Blueprints>		
 		<Blueprint>
 			<Id>
 				<TypeId>BlueprintDefinition</TypeId>

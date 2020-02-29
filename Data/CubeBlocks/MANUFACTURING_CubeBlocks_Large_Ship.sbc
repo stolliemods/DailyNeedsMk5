@@ -27,9 +27,9 @@
 			</Components>
 			<CriticalComponent Subtype="Computer" Index="0" />
 			<BuildProgressModels>
-				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\Manufacturing_Large_Constr1.mwm" />
-				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\Manufacturing_Large_Constr2.mwm" />
-				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\Manufacturing_Large_Constr3.mwm" />
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Large\CargoContainerSmallConstruction_1.mwm" />
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Large\CargoContainerSmallConstruction_2.mwm" />
+				<Model BuildPercentUpperBound="1.00" File="Models\Cubes\Large\CargoContainerSmallConstruction_3.mwm" />
 			</BuildProgressModels>
 			<BlockPairName>Manufacturing</BlockPairName>
 			<EdgeType>Light</EdgeType>

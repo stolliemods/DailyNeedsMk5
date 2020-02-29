@@ -535,6 +535,8 @@
 			<IconSymbol>IconSymbol_Organic</IconSymbol>
             <MinimalPricePerUnit>50</MinimalPricePerUnit>
 		</PhysicalItem>
+		
+		<!-- ***** Ores ***** -->
 		<PhysicalItem>
 			<Id>
 				<TypeId>Ore</TypeId>
@@ -597,7 +599,7 @@
 		<PhysicalItem>
 			<Id>
 				<TypeId>Ingot</TypeId>
-				<SubtypeId>Carbon</SubtypeId>
+				<SubtypeId>Carbon_Ingot</SubtypeId>
 			</Id>
 			<DisplayName>Carbon Ingot</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\Carbon_Ingot_Icon.dds</Icon>
@@ -616,7 +618,7 @@
 		<PhysicalItem>
 			<Id>
 				<TypeId>Ingot</TypeId>
-				<SubtypeId>Potassium Ingot</SubtypeId>
+				<SubtypeId>Potassium_Ingot</SubtypeId>
 			</Id>
 			<DisplayName>Potassium Ingot</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\Potassium_Ingot_Icon.dds</Icon>
@@ -628,14 +630,14 @@
 			<Mass>0.85</Mass>
 			<Volume>1</Volume>
 			<Model>Models\Ingots\potassium_ingot.mwm</Model>
-			<PhysicalMaterial>Metal</PhysicalMaterial>
+			<PhysicalMaterial>Stone</PhysicalMaterial>
 			<IconSymbol>K</IconSymbol>
 			<MinimalPricePerUnit>100</MinimalPricePerUnit>
 		</PhysicalItem>
 		<PhysicalItem>
 			<Id>
 				<TypeId>Ingot</TypeId>
-				<SubtypeId>Phosphorus Ingot</SubtypeId>
+				<SubtypeId>Phosphorus_Ingot</SubtypeId>
 			</Id>
 			<DisplayName>Phosphorus Ingot</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\Phosphorus_Ingot_Icon.dds</Icon>
@@ -647,30 +649,9 @@
 			<Mass>1.83</Mass>
 			<Volume>1</Volume>
 			<Model>Models\Ingots\generic_ingot.mwm</Model>
-			<PhysicalMaterial>Metal</PhysicalMaterial>
+			<PhysicalMaterial>Stone</PhysicalMaterial>
 			<IconSymbol>P</IconSymbol>
 			<MinimalPricePerUnit>100</MinimalPricePerUnit>
-		</PhysicalItem>
-		<PhysicalItem>
-			<Id>
-				<TypeId>Ingot</TypeId>
-				<SubtypeId>Fertilizer</SubtypeId>
-			</Id>
-			<DisplayName>Fertilizer Ingot</DisplayName>
-			<Icon>Textures\GUI\Icons\Physical_Items\Fertilizer_Icon.dds</Icon>
-			<Size>
-				<X>0.048</X>
-				<Y>0.048</Y>
-				<Z>0.1</Z>
-			</Size>
-			<Mass>1</Mass>
-			<Volume>1</Volume>
-			<Model>Models\Physical_Items\Canister_Fertilizer_Small.mwm</Model>
-			<PhysicalMaterial>Metal</PhysicalMaterial>
-            <MinimalPricePerUnit>50</MinimalPricePerUnit>
-			<MinimumOfferAmount>1000</MinimumOfferAmount>
-            <MaximumOfferAmount>10000</MaximumOfferAmount>
-			<CanPlayerOrder>true</CanPlayerOrder>
 		</PhysicalItem>
 	</PhysicalItems>
 </Definitions>
