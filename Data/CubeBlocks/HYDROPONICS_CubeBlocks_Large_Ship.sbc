@@ -40,7 +40,7 @@
 				<Y>1</Y>
 				<Z>1</Z>
 			</InventorySize>
-			<StandbyPowerConsumption>0.125</StandbyPowerConsumption>
+			<StandbyPowerConsumption>0.001</StandbyPowerConsumption>
 			<OperationalPowerConsumption>0.250</OperationalPowerConsumption>
 			<BlueprintClasses>
 				<Class>Hydroponics</Class>
