@@ -1253,13 +1253,26 @@ namespace Rek.FoodSystem
             MyAPIGateway.Entities.OnEntityAdd -= EntityAdded;
             MyAPIGateway.Entities.OnEntityRemove -= EntityRemoved;
 
-            mPlayers.Clear();
-            mFoodTypes.Clear();
-            mBeverageTypes.Clear();
-            mPlayerDataStore.clear();
-            mConfigDataStore.clear();
-            Logging.Instance.Close();
-            EasyAPI.Close();
+            if (mPlayers != null)
+                mPlayers.Clear();
+
+            if (mFoodTypes != null)
+                mFoodTypes.Clear();
+
+            if (mBeverageTypes != null)
+                mBeverageTypes.Clear();
+
+            if (mPlayerDataStore != null)
+                mPlayerDataStore.clear();
+
+            if (mConfigDataStore != null)
+                mConfigDataStore.clear();
+
+            if (Logging.Instance != null)
+                Logging.Instance.Close();
+
+            if (EasyAPI != null)
+                EasyAPI.Close();
         }
     }
 }
