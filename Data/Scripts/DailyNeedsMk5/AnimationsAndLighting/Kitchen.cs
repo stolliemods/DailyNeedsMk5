@@ -148,7 +148,7 @@ namespace Stollie.DailyNeeds
             }
             catch (Exception e)
             {
-                MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
+                // MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
             }
         }
         
@@ -203,7 +203,7 @@ namespace Stollie.DailyNeeds
             }
             catch (Exception e)
             {
-                MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
+                // MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");                
             }
         }
 
@@ -226,7 +226,7 @@ namespace Stollie.DailyNeeds
             }
             catch (Exception e)
             {
-                MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
+                // MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
             }
         }
 
@@ -253,7 +253,7 @@ namespace Stollie.DailyNeeds
             }
             catch (Exception e)
             {
-                MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
+                // MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
             }
         }
 
