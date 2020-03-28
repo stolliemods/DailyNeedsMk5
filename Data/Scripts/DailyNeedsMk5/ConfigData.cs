@@ -85,8 +85,8 @@ namespace Rek.FoodSystem {
             MAX_NEEDS_VALUE = 100f;
 		    MIN_NEEDS_VALUE = -100f; // if less than zero, a severely starved character will have to consume more
             MIN_STAMINA_VALUE = 0f; // if less than zero, a severely starved character will have to consume more
-            HUNGRY_WHEN = 0.5f; // if need is this much of maxval, consume
-		    THIRSTY_WHEN = 0.5f; // if need is this much of maxval, consume
+            HUNGRY_WHEN = 0.4f; // if need is this much of maxval, consume
+		    THIRSTY_WHEN = 0.4f; // if need is this much of maxval, consume
 		    THIRST_PER_DAY = 100f;
 		    HUNGER_PER_DAY = 50f;
 		    DAMAGE_SPEED_HUNGER = -0.2f; // 2; // if negative, scale to minvalue for damage. if positive, do this much damage every tick.
