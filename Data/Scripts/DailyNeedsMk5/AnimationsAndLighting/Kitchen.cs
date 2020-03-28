@@ -41,9 +41,14 @@ namespace Stollie.DailyNeeds
 
         private static ConfigDataStore mConfigDataStore = new ConfigDataStore();
         private bool AUTOMATIC_BLOCK_COLOR;
+        private bool _subPartsAssigned;
 
         MyObjectBuilder_EntityBase objectBuilder = null;
         IMyCubeBlock foodProteinResequencer = null;
+
+        private MyEntitySubpart subpart_LeftArm = null;
+        private MyEntitySubpart subpart_RightArm = null;
+        private MyEntitySubpart subpart_Grinder = null;
 
         private int _errorTick = 0;
 
@@ -98,8 +103,33 @@ namespace Stollie.DailyNeeds
                     foodProteinResequencer.CubeGrid.ColorBlocks(foodProteinResequencer.Min, foodProteinResequencer.Max, new Color(new Vector3(1.0f, 1.0f, 1.0f)).ColorToHSVDX11());
                 }
 
-                subparts = (foodProteinResequencer as MyEntity).Subparts;
-                
+                if (!_subPartsAssigned)
+                {
+                    subparts = (foodProteinResequencer as MyEntity).Subparts;
+                    foreach (var subpart in subparts)
+                    {
+                        if (subpart.Key.Contains("LeftArm"))
+                        {
+                            subpart_LeftArm = subpart.Value;
+                        }
+                        if (subpart.Key.Contains("RightArm"))
+                        {
+                            subpart_RightArm = subpart.Value;
+                        }
+                        if (subpart.Key.Contains("RightArm"))
+                        {
+                            var rightArmSubparts = subpart.Value.Subparts;
+                            foreach (var rightArmSubpart in rightArmSubparts)
+                            {
+                                if (rightArmSubpart.Key.Contains("Grinder"))
+                                    subpart_Grinder = rightArmSubpart.Value;
+                            }
+                        }
+                    }
+                    _subPartsAssigned = true;
+                }
+
+
                 if (foodProteinResequencer.IsWorking)
                 {
                     var lightColorRed = Color.YellowGreen.R;
@@ -194,15 +224,6 @@ namespace Stollie.DailyNeeds
         {
             try
             {
-                MyEntitySubpart subpart_LeftArm = null;
-                foreach (var subpart in subparts)
-                {
-                    if (subpart.Key.Contains("LeftArm"))
-                    {
-                        subpart_LeftArm = subpart.Value;
-                    }
-                }
-
                 if (subpart_LeftArm == null)
                     return;
 
@@ -230,15 +251,6 @@ namespace Stollie.DailyNeeds
         {
             try
             {
-                MyEntitySubpart subpart_RightArm = null;
-                foreach (var subpart in subparts)
-                {
-                    if (subpart.Key.Contains("RightArm"))
-                    {
-                        subpart_RightArm = subpart.Value;
-                    }
-                }
-
                 if (subpart_RightArm == null)
                     return;
 
@@ -264,20 +276,6 @@ namespace Stollie.DailyNeeds
         {
             try
             {
-                MyEntitySubpart subpart_Grinder = null;
-                foreach (var subpart in subparts)
-                {
-                    if (subpart.Key.Contains("RightArm"))
-                    {
-                        var rightArmSubparts = subpart.Value.Subparts;
-                        foreach (var rightArmSubpart in rightArmSubparts)
-                        {
-                            if (rightArmSubpart.Key.Contains("Grinder"))
-                                subpart_Grinder = rightArmSubpart.Value;
-                        }
-                    }
-                }
-
                 if (subpart_Grinder == null)
                     return;
 
