@@ -251,7 +251,7 @@ namespace Rek.FoodSystem
         private void Init_RegisterConsumableItems()
         {
             NeedsApi needsApi = new NeedsApi();
-            
+
             // TODO un-hardcode these - move to an xml file maybe?
             // Any negative means that it will only refill to 50% of the MAX_NEEDS_VALUE as defined in the config file.
             // *** REGISTERING DRINKS ITEM ***
@@ -342,408 +342,225 @@ namespace Rek.FoodSystem
         }
 
         /// <summary>
-            /// Run the major needs logic components.
-            /// Called everytime FOOD_LOGIC_SKIP_TICKS is processed in UpdateAfterSimulation() and after the playerlist is updated by UpdatePlayerList().
-            /// </summary>
+        /// Run the major needs logic components.
+        /// Called everytime FOOD_LOGIC_SKIP_TICKS is processed in UpdateAfterSimulation() and after the playerlist is updated by UpdatePlayerList().
+        /// </summary>
         private void UpdateNeedsLogic()
         {
-            
-            stopwatch.Start("Needs Logic");
-            foreach (IMyPlayer player in mPlayers)
+            try
             {
-                if (player.Controller != null && player.Controller.ControlledEntity != null &&
-                    player.Controller.ControlledEntity.Entity != null &&
-                    player.Controller.ControlledEntity.Entity.DisplayName != "")
+                stopwatch.Start("Needs Logic");
+                foreach (IMyPlayer player in mPlayers)
                 {
-                    PlayerData playerData = mPlayerDataStore.get(player);
-                    //Logging.Instance.WriteLine(playerData.ToString() + " Loaded to Server");
-                    //MyAPIGateway.Utilities.ShowMessage("DEBUG", "Character: " + controlledEntity.DisplayName); // gets players name
-
-                    bool FatigueBonus = false;
-                    bool HungerBonus = false;
-                    bool ThirstBonus = false;
-                    bool ChangedStance = false;
-
-                    // Sanity checks - make sure playerStore values dont exceed max config values.
-                    if (HungerBonus)
-                {
-                    if (playerData.hunger > MAX_NEEDS_VALUE * FOOD_BONUS)
-                        playerData.hunger = MAX_NEEDS_VALUE * FOOD_BONUS;
-                }
-                    else
+                    if (player.Controller != null && player.Controller.ControlledEntity != null &&
+                        player.Controller.ControlledEntity.Entity != null &&
+                        player.Controller.ControlledEntity.Entity.DisplayName != "")
                     {
-                        if (playerData.hunger > MAX_NEEDS_VALUE)
-                            playerData.hunger = MAX_NEEDS_VALUE;
-                    }
+                        PlayerData playerData = mPlayerDataStore.get(player);
+                        Logging.Instance.WriteLine(playerData.ToString() + " Loaded to Server");
+                        //MyAPIGateway.Utilities.ShowMessage("DEBUG", "Character: " + controlledEntity.DisplayName); // gets players name
 
-                    if (ThirstBonus)
-                    {
-                        if (playerData.thirst > MAX_NEEDS_VALUE * DRINK_BONUS)
-                            playerData.thirst = MAX_NEEDS_VALUE * DRINK_BONUS;
-                    }
-                    else
-                    {
-                        if (playerData.thirst > MAX_NEEDS_VALUE)
-                            playerData.thirst = MAX_NEEDS_VALUE;
-                    }
+                        bool FatigueBonus = false;
+                        bool HungerBonus = false;
+                        bool ThirstBonus = false;
+                        bool ChangedStance = false;
 
-                    // Check if Creative Tools no decay enabled in config and enable/disable behaviour.
-                    if (CREATIVETOOLS_NODECAY)
-                    {
-                        if (MyAPIGateway.Session.EnableCopyPaste)
+                        // Sanity checks - make sure playerStore values dont exceed max config values.
+                        if (HungerBonus)
                         {
-                            decayEnabled = false;
+                            if (playerData.hunger > MAX_NEEDS_VALUE * FOOD_BONUS)
+                                playerData.hunger = MAX_NEEDS_VALUE * FOOD_BONUS;
                         }
                         else
                         {
-                            decayEnabled = true;
+                            if (playerData.hunger > MAX_NEEDS_VALUE)
+                                playerData.hunger = MAX_NEEDS_VALUE;
                         }
-                    }
 
-                    // Check if player is under the effects of a bonus, keep it until they no longer are.
-                    if (playerData.fatigue > MAX_NEEDS_VALUE) FatigueBonus = true;
-                    if (playerData.thirst > MAX_NEEDS_VALUE) ThirstBonus = true;
-                    if (playerData.hunger > MAX_NEEDS_VALUE) HungerBonus = true;
-
-                    IMyEntity controlledEnt = player.Controller.ControlledEntity.Entity;
-                    controlledEnt = GetCharacterEntity(controlledEnt);
-
-                    // Checks for a datastore for the player and sets initial needs.
-                    if (controlledEnt is IMyCharacter)
-                    {
-                        MyObjectBuilder_Character character = controlledEnt.GetObjectBuilder(false) as MyObjectBuilder_Character;
-                        //MyAPIGateway.Utilities.ShowMessage("DEBUG", "State: " + character.MovementState); //Check Character state
-                        
-                        if (playerData.entity == null || playerData.entity.Closed || playerData.entity.EntityId != controlledEnt.EntityId)
+                        if (ThirstBonus)
                         {
-                            bool newPlayerOrNeedsReset = false;
-                            // Checks if player data was loaded on gameload, see playerDataStore.cs
-                            if (!playerData.loaded)
-                            {
-                                newPlayerOrNeedsReset = true;
-                                playerData.loaded = true;
-                            }
-                            // If player data was loaded but the entities aren't matching, rest the datastore.
-                            else if ((playerData.entity != null) && (playerData.entity != controlledEnt))
-                            {
-                                newPlayerOrNeedsReset = true;
-                            }
+                            if (playerData.thirst > MAX_NEEDS_VALUE * DRINK_BONUS)
+                                playerData.thirst = MAX_NEEDS_VALUE * DRINK_BONUS;
+                        }
+                        else
+                        {
+                            if (playerData.thirst > MAX_NEEDS_VALUE)
+                                playerData.thirst = MAX_NEEDS_VALUE;
+                        }
 
-                            // Determines what values you start a new game / playerDataStore with.
-                            if (newPlayerOrNeedsReset)
+                        // Check if Creative Tools no decay enabled in config and enable/disable behaviour.
+                        if (CREATIVETOOLS_NODECAY)
+                        {
+                            if (MyAPIGateway.Session.EnableCopyPaste)
                             {
-                                playerData.hunger = STARTING_HUNGER;
-                                playerData.thirst = STARTING_THIRST;
-                                playerData.fatigue = STARTING_FATIGUE;
-                                playerData.entity = controlledEnt;
+                                decayEnabled = false;
+                            }
+                            else
+                            {
+                                decayEnabled = true;
                             }
                         }
 
-                        // Reset death bool and set clone sickness respawn values if the player was dead.
-                        if (playerData.dead)
+                        // Check if player is under the effects of a bonus, keep it until they no longer are.
+                        if (playerData.fatigue > MAX_NEEDS_VALUE) FatigueBonus = true;
+                        if (playerData.thirst > MAX_NEEDS_VALUE) ThirstBonus = true;
+                        if (playerData.hunger > MAX_NEEDS_VALUE) HungerBonus = true;
+
+                        IMyEntity controlledEnt = player.Controller.ControlledEntity.Entity;
+                        controlledEnt = GetCharacterEntity(controlledEnt);
+
+                        // Checks for a datastore for the player and sets initial needs.
+                        if (controlledEnt is IMyCharacter)
                         {
+                            MyObjectBuilder_Character character =
+                                controlledEnt.GetObjectBuilder(false) as MyObjectBuilder_Character;
+                            //MyAPIGateway.Utilities.ShowMessage("DEBUG", "State: " + character.MovementState); //Check Character state
+
+                            if (playerData.entity == null || playerData.entity.Closed ||
+                                playerData.entity.EntityId != controlledEnt.EntityId)
+                            {
+                                bool newPlayerOrNeedsReset = false;
+                                // Checks if player data was loaded on gameload, see playerDataStore.cs
+                                if (!playerData.loaded)
+                                {
+                                    newPlayerOrNeedsReset = true;
+                                    playerData.loaded = true;
+                                }
+                                // If player data was loaded but the entities aren't matching, rest the datastore.
+                                else if ((playerData.entity != null) && (playerData.entity != controlledEnt))
+                                {
+                                    newPlayerOrNeedsReset = true;
+                                }
+
+                                // Determines what values you start a new game / playerDataStore with.
+                                if (newPlayerOrNeedsReset)
+                                {
+                                    playerData.hunger = STARTING_HUNGER;
+                                    playerData.thirst = STARTING_THIRST;
+                                    playerData.fatigue = STARTING_FATIGUE;
+                                    playerData.entity = controlledEnt;
+                                }
+                            }
+
+                            // Reset death bool and set clone sickness respawn values if the player was dead.
+                            if (playerData.dead)
+                            {
                                 playerData.hunger = RESPAWN_HUNGER;
                                 playerData.thirst = RESPAWN_THIRST;
                                 playerData.fatigue = RESPAWN_FATIGUE;
                                 playerData.dead = false;
-                        }
-                    }
-                    else if (playerData.entity != null || !playerData.entity.Closed)
-                        controlledEnt = playerData.entity;
-
-                    #region Movement State Effects
-                    float CurrentModifier = 1f;
-                    float FatigueRate = 0f;
-                    float RecycleBonus = 1f;
-                    bool ForceEating = false;
-                    MyCharacterMovementEnum currentMovementState = MyCharacterMovementEnum.Sitting;
-                    if (controlledEnt is IMyCharacter)
-                    {
-                        MyObjectBuilder_Character character = controlledEnt.GetObjectBuilder(false) as MyObjectBuilder_Character;
-                        ChangedStance = playerData.lastmovement != character.MovementState;
-                        currentMovementState = character.MovementState;
-                        switch (character.MovementState)
-                        {
-
-                            // Check if player is 'sitting'.
-                            case MyCharacterMovementEnum.Sitting:
-                                IMyCubeBlock cb = player.Controller.ControlledEntity.Entity as IMyCubeBlock;
-
-                                CurrentModifier = DEFAULT_MODIFIER;
-                                FatigueRate = FATIGUE_SITTING;
-
-                                // Case-Switch: Check if interacting with a bed, a lunchroom seat or a treadmill.
-                                // cb.DisplayNameText is name of individual block.
-                                // cb.DefinitionDisplayNameText is name of block type.
-
-                                String seatBlockName = cb.DisplayNameText.ToLower();
-                                String seatBlockType = cb.DefinitionDisplayNameText.ToLower();
-
-                                if (seatBlockType.Contains("cryo")) // Checks if player is in a Cryopod - practically freezes stats.
-                                {
-                                    CurrentModifier = 0.0000125f;
-                                    FatigueRate = 0.0000125f;
-                                }
-
-                                else if (seatBlockType.Contains("treadmill"))
-                                {
-                                    CurrentModifier = RUNNING_MODIFIER; // jog...
-                                    FatigueRate = FATIGUE_RUNNING / 2.5f; // but pace yourself
-                                }
-
-                                else if (seatBlockType.Contains("bed") || seatBlockType.Contains("bunk") || seatBlockType.Contains("stateroom"))
-                                {
-                                    CurrentModifier = DEFAULT_MODIFIER / 2f; // nap time! Needs are reduced.
-                                    FatigueRate = FATIGUE_SITTING * 3f; //  nap time! Rest is greatly sped up.
-                                    FatigueBonus |= !ChangedStance; // longer nap? OK, allow for extra resting
-                                }
-
-                                else if (seatBlockType.Contains("toilet") && ChangedStance)
-                                {
-                                    ForceEating = true; // also forces crapping, so this makes sense. but use changedstance to do it only once.
-                                    RecycleBonus = 1.5f;
-                                }
-
-                                else if (seatBlockType.Contains("bathroom") && ChangedStance)
-                                {
-                                    ForceEating = true; // also forces crapping, so this makes sense. but use changedstance to do it only once.
-                                    RecycleBonus = 1.5f;
-                                }
-
-                                else if (seatBlockName.Contains("noms"))
-                                {
-                                    ForceEating = true; // also forces crapping, fortunately the suit takes care of it. Eat continuously while sitting.
-                                    HungerBonus |= playerData.hunger > MAX_NEEDS_VALUE * 0.99; // get to 100% first, then apply bonus.
-                                    ThirstBonus |= playerData.thirst > MAX_NEEDS_VALUE * 0.99; // get to 100% first, then apply bonus.
-                                }
-
-                                break;
-
-                            case MyCharacterMovementEnum.Flying:
-                                CurrentModifier = FLYING_MODIFIER;
-                                FatigueRate = FATIGUE_FLYING; // operating a jetpack is surprisingly hard
-                                break;
-
-                            case MyCharacterMovementEnum.Falling:
-                                CurrentModifier = FLYING_MODIFIER;
-                                FatigueRate = FATIGUE_WALKING; // change nothing for the first iteration (prevents jump exploit)
-                                if (!ChangedStance)
-                                    FatigueRate = FATIGUE_STANDING; // freefall is actually relaxing when you are used to it. A professional space engineer would be.
-                                break;
-
-                            case MyCharacterMovementEnum.Crouching:
-                            case MyCharacterMovementEnum.CrouchRotatingLeft:
-                            case MyCharacterMovementEnum.CrouchRotatingRight:
-                                CurrentModifier = DEFAULT_MODIFIER;
-                                FatigueRate = FATIGUE_CROUCHING;
-                                break;
-
-                            case MyCharacterMovementEnum.Standing:
-                            case MyCharacterMovementEnum.RotatingLeft:
-                            case MyCharacterMovementEnum.RotatingRight:
-                                CurrentModifier = DEFAULT_MODIFIER;
-                                FatigueRate = FATIGUE_STANDING;
-                                break;
-
-                            case MyCharacterMovementEnum.CrouchWalking:
-                            case MyCharacterMovementEnum.CrouchBackWalking:
-                            case MyCharacterMovementEnum.CrouchStrafingLeft:
-                            case MyCharacterMovementEnum.CrouchStrafingRight:
-                            case MyCharacterMovementEnum.CrouchWalkingRightFront:
-                            case MyCharacterMovementEnum.CrouchWalkingRightBack:
-                            case MyCharacterMovementEnum.CrouchWalkingLeftFront:
-                            case MyCharacterMovementEnum.CrouchWalkingLeftBack:
-                                CurrentModifier = RUNNING_MODIFIER;
-                                FatigueRate = FATIGUE_RUNNING; // doing the duckwalk is more tiring than walking: try it if you don't believe me
-                                break;
-
-                            case MyCharacterMovementEnum.Walking:
-                            case MyCharacterMovementEnum.BackWalking:
-                            case MyCharacterMovementEnum.WalkStrafingLeft:
-                            case MyCharacterMovementEnum.WalkStrafingRight:
-                            case MyCharacterMovementEnum.WalkingRightFront:
-                            case MyCharacterMovementEnum.WalkingRightBack:
-                            case MyCharacterMovementEnum.WalkingLeftFront:
-                            case MyCharacterMovementEnum.WalkingLeftBack:
-                                CurrentModifier = DEFAULT_MODIFIER;
-                                FatigueRate = FATIGUE_WALKING;
-                                break;
-
-                            case MyCharacterMovementEnum.LadderUp:
-                                CurrentModifier = RUNNING_MODIFIER;
-                                FatigueRate = FATIGUE_RUNNING;
-                                break;
-
-                            case MyCharacterMovementEnum.LadderDown:
-                                CurrentModifier = DEFAULT_MODIFIER;
-                                FatigueRate = FATIGUE_WALKING;
-                                break;
-
-                            case MyCharacterMovementEnum.Running:
-                            case MyCharacterMovementEnum.Backrunning:
-                            case MyCharacterMovementEnum.RunStrafingLeft:
-                            case MyCharacterMovementEnum.RunStrafingRight:
-                            case MyCharacterMovementEnum.RunningRightFront:
-                            case MyCharacterMovementEnum.RunningRightBack:
-                            case MyCharacterMovementEnum.RunningLeftBack:
-                            case MyCharacterMovementEnum.RunningLeftFront:
-                                CurrentModifier = RUNNING_MODIFIER;
-                                FatigueRate = FATIGUE_RUNNING;
-                                break;
-
-                            case MyCharacterMovementEnum.Sprinting:
-                            case MyCharacterMovementEnum.Jump:
-                                CurrentModifier = SPRINTING_MODIFIER;
-                                FatigueRate = FATIGUE_SPRINTING;
-                                break;
-
-                            case MyCharacterMovementEnum.Died:
-                                CurrentModifier = DEFAULT_MODIFIER; // unused, but let's have them
-                                FatigueRate = FATIGUE_STANDING; // unused, but let's have them
-                                playerData.dead = true; // for death recovery logic
-                                break;
-
-                        }
-                        playerData.lastmovement = character.MovementState; // track delta
-                    }
-                    #endregion
-
-                    #region Process Fatigue Needs
-                    if (FATIGUE_ENABLED && decayEnabled)
-                    {
-                        // Calculate players current gravity.
-                        double currentPlayerGravity = Math.Round(player.Character.Physics.Gravity.Length() / 20.0f * 1.02f, 2) * 1.05f;
-                        var gravityModifier = currentPlayerGravity * 1.05;
-                        if (currentPlayerGravity > CurrentModifier)
-                        {
-                            gravityModifier = CurrentModifier;
-                        }
-
-                        bool currentHelmetStatus = player.Character.EnabledHelmet;
-                        float helmetModifier = 1.0f;
-                        if (currentHelmetStatus)
-                        {
-                            helmetModifier = 1.05f;
-                        }
-
-                        MyCharacterWeaponPositionComponent equippedItem = player?.Character?.Components?.Get<MyCharacterWeaponPositionComponent>();
-                        IMyEntity equippedTool = player?.Character?.EquippedTool;
-
-                        var toolModifier = 1.0f;
-                        if (equippedTool != null && (equippedTool is IMyAngleGrinder || equippedTool is IMyWelder || equippedTool is IMyHandDrill))
-                        {
-                            var welder = equippedTool as IMyWelder;
-                            if (welder != null)
-                            {
-                                if (welder.IsShooting)
-                                    toolModifier = 1.05f;
-                            }
-
-                            var grinder = equippedTool as IMyAngleGrinder;
-                            if (grinder != null)
-                            {
-                                if (grinder.IsShooting)
-                                    toolModifier = 1.05f;
-                            }
-
-                            var drill = equippedTool as IMyHandDrill;
-                            if (drill != null)
-                            {
-                                if (drill.IsShooting)
-                                    toolModifier = 1.05f;
                             }
                         }
+                        else if (playerData.entity != null || !playerData.entity.Closed)
+                            controlledEnt = playerData.entity;
 
-                        /*
-                        var fatigueCalcValues = string.Format("FR: {0}, G: {1}, C: {2}, H: {3}, T: {4}, Final: {5}", FatigueRate, gravityModifier, CurrentModifier,
-                            helmetModifier, toolModifier, (FatigueRate * Math.Max(((float)gravityModifier * CurrentModifier), CurrentModifier) * helmetModifier * FOOD_LOGIC_SKIP_TICKS / 60 * 20));
-                        MyVisualScriptLogicProvider.SendChatMessage(fatigueCalcValues);
-                        */
+                        #region Movement State Effects
 
-                        var fatigueChange = FatigueRate * Math.Max(((float)gravityModifier * CurrentModifier), CurrentModifier) * helmetModifier * toolModifier * FOOD_LOGIC_SKIP_TICKS / 60 * 20;
-                        playerData.fatigue += fatigueChange;
-                        playerData.fatigue = Math.Max(playerData.fatigue, MIN_NEEDS_VALUE);
-
-                        if (FatigueBonus)
-                            playerData.fatigue = Math.Min(playerData.fatigue, MAX_NEEDS_VALUE * REST_BONUS);
-                        else
-                            playerData.fatigue = Math.Min(playerData.fatigue, MAX_NEEDS_VALUE);
-                    }
-                    else
-                        playerData.fatigue = 9001f;
-
-                    // Assign sounds emitter and play relevant heartbeat sounds based on fatigue.
-                    soundEmitter.Entity = (MyEntity)controlledEnt;
-                    if (playerData.fatigue < (MAX_NEEDS_VALUE / 4) && playerData.fatigue > 0.0f &&
-                        playerData.fatigue-- > playerData.fatigue)
-                    {
-                        if (!fatigueRecoverySoundPlayed)
+                        float CurrentModifier = 1f;
+                        float FatigueRate = 0f;
+                        float RecycleBonus = 1f;
+                        bool ForceEating = false;
+                        MyCharacterMovementEnum currentMovementState = MyCharacterMovementEnum.Sitting;
+                        if (controlledEnt is IMyCharacter)
                         {
-                            soundEmitter.PlaySound(FASTHEARTWITHBEEP_SOUND_FADEOUT);
-                            fatigueRecoverySoundPlayed = true;
-                        }
-                    }
-                    else if (playerData.fatigue <= 0.0f)
-                    {
-                        fatigueRecoverySoundPlayed = false;
-                        //soundEmitter.VolumeMultiplier = Math.Max(1.0f, Math.Abs(playerData.fatigue / 100));
-                        soundEmitter.PlaySound(FASTHEARTWITHBEEP_SOUND);
-
-                    }
-                    #endregion
-
-                    #region Fatigue Consequences
-                    // Fatigue consequences
-                    string controlStringShift = MyAPIGateway.Input.GetControl(MyKeys.Shift).GetGameControlEnum().String;
-                    if (playerData.fatigue <= 0)
-                    {
-                        // at 0, start causing extra thirst
-                        // at specified, force walk instead of run (unless overriding by sprinting)
-                        // at specified, force crouch, and do damage flashes
-                        // at specified, breathing reflex / mess with helmet, and do a bit of actual damage (just in case thirst isn't already causing it)
-                        // at specified, cause heart attack
-                        if (playerData.fatigue <= (0.0f * MIN_NEEDS_VALUE))
-                        {
-                            if (EXTRA_THIRST_FROM_FATIGUE > 0)
+                            MyObjectBuilder_Character character =
+                                controlledEnt.GetObjectBuilder(false) as MyObjectBuilder_Character;
+                            ChangedStance = playerData.lastmovement != character.MovementState;
+                            currentMovementState = character.MovementState;
+                            switch (character.MovementState)
                             {
-                                // positive: pile on to thirst, per second
-                                playerData.thirst -= (EXTRA_THIRST_FROM_FATIGUE * FOOD_LOGIC_SKIP_TICKS / 60);
 
-                            }
-                            else
-                            { // negative: multiply modifier
-                                CurrentModifier *= -EXTRA_THIRST_FROM_FATIGUE;
-                            }
-                        }
+                                // Check if player is 'sitting'.
+                                case MyCharacterMovementEnum.Sitting:
+                                    IMyCubeBlock cb = player.Controller.ControlledEntity.Entity as IMyCubeBlock;
 
-                        // Default Values: 0.5f * -100f = -20f
-                        if (playerData.fatigue <= (FATIGUE_LEVEL_FORCEWALK * MIN_NEEDS_VALUE))
-                        { // Force player to walk if they were running and disable shift.
-                            switch (currentMovementState)
-                            {
-                                case MyCharacterMovementEnum.Sprinting:
-                                case MyCharacterMovementEnum.Running:
-                                case MyCharacterMovementEnum.Backrunning:
-                                case MyCharacterMovementEnum.RunStrafingLeft:
-                                case MyCharacterMovementEnum.RunStrafingRight:
-                                case MyCharacterMovementEnum.RunningRightFront:
-                                case MyCharacterMovementEnum.RunningRightBack:
-                                case MyCharacterMovementEnum.RunningLeftBack:
-                                case MyCharacterMovementEnum.RunningLeftFront:
+                                    CurrentModifier = DEFAULT_MODIFIER;
+                                    FatigueRate = FATIGUE_SITTING;
 
-                                    MyVisualScriptLogicProvider.SetPlayerInputBlacklistState(controlStringShift, player.IdentityId, false);
-                                    (controlledEnt as VRage.Game.ModAPI.Interfaces.IMyControllableEntity).SwitchWalk();
+                                    // Case-Switch: Check if interacting with a bed, a lunchroom seat or a treadmill.
+                                    // cb.DisplayNameText is name of individual block.
+                                    // cb.DefinitionDisplayNameText is name of block type.
+
+                                    String seatBlockName = cb.DisplayNameText.ToLower();
+                                    String seatBlockType = cb.DefinitionDisplayNameText.ToLower();
+
+                                    if (seatBlockType.Contains("cryo")
+                                    ) // Checks if player is in a Cryopod - practically freezes stats.
+                                    {
+                                        CurrentModifier = 0.0000125f;
+                                        FatigueRate = 0.0000125f;
+                                    }
+
+                                    else if (seatBlockType.Contains("treadmill"))
+                                    {
+                                        CurrentModifier = RUNNING_MODIFIER; // jog...
+                                        FatigueRate = FATIGUE_RUNNING / 2.5f; // but pace yourself
+                                    }
+
+                                    else if (seatBlockType.Contains("bed") || seatBlockType.Contains("bunk") ||
+                                             seatBlockType.Contains("stateroom"))
+                                    {
+                                        CurrentModifier = DEFAULT_MODIFIER / 2f; // nap time! Needs are reduced.
+                                        FatigueRate = FATIGUE_SITTING * 3f; //  nap time! Rest is greatly sped up.
+                                        FatigueBonus |= !ChangedStance; // longer nap? OK, allow for extra resting
+                                    }
+
+                                    else if (seatBlockType.Contains("toilet") && ChangedStance)
+                                    {
+                                        ForceEating =
+                                            true; // also forces crapping, so this makes sense. but use changedstance to do it only once.
+                                        RecycleBonus = 1.5f;
+                                    }
+
+                                    else if (seatBlockType.Contains("bathroom") && ChangedStance)
+                                    {
+                                        ForceEating =
+                                            true; // also forces crapping, so this makes sense. but use changedstance to do it only once.
+                                        RecycleBonus = 1.5f;
+                                    }
+
+                                    else if (seatBlockName.Contains("noms"))
+                                    {
+                                        ForceEating =
+                                            true; // also forces crapping, fortunately the suit takes care of it. Eat continuously while sitting.
+                                        HungerBonus |=
+                                            playerData.hunger >
+                                            MAX_NEEDS_VALUE * 0.99; // get to 100% first, then apply bonus.
+                                        ThirstBonus |=
+                                            playerData.thirst >
+                                            MAX_NEEDS_VALUE * 0.99; // get to 100% first, then apply bonus.
+                                    }
+
                                     break;
-                            }
-                        }
 
-                        // Default Values: 0.5f * -100f = -50f
-                        if (playerData.fatigue <= (FATIGUE_LEVEL_FORCECROUCH * MIN_NEEDS_VALUE))
-                        {
-                            bool iscrouching = false;
-                            switch (currentMovementState)
-                            {
+                                case MyCharacterMovementEnum.Flying:
+                                    CurrentModifier = FLYING_MODIFIER;
+                                    FatigueRate = FATIGUE_FLYING; // operating a jetpack is surprisingly hard
+                                    break;
+
+                                case MyCharacterMovementEnum.Falling:
+                                    CurrentModifier = FLYING_MODIFIER;
+                                    FatigueRate =
+                                        FATIGUE_WALKING; // change nothing for the first iteration (prevents jump exploit)
+                                    if (!ChangedStance)
+                                        FatigueRate =
+                                            FATIGUE_STANDING; // freefall is actually relaxing when you are used to it. A professional space engineer would be.
+                                    break;
+
                                 case MyCharacterMovementEnum.Crouching:
+                                case MyCharacterMovementEnum.CrouchRotatingLeft:
+                                case MyCharacterMovementEnum.CrouchRotatingRight:
+                                    CurrentModifier = DEFAULT_MODIFIER;
+                                    FatigueRate = FATIGUE_CROUCHING;
+                                    break;
+
+                                case MyCharacterMovementEnum.Standing:
+                                case MyCharacterMovementEnum.RotatingLeft:
+                                case MyCharacterMovementEnum.RotatingRight:
+                                    CurrentModifier = DEFAULT_MODIFIER;
+                                    FatigueRate = FATIGUE_STANDING;
+                                    break;
+
                                 case MyCharacterMovementEnum.CrouchWalking:
                                 case MyCharacterMovementEnum.CrouchBackWalking:
                                 case MyCharacterMovementEnum.CrouchStrafingLeft:
@@ -752,144 +569,393 @@ namespace Rek.FoodSystem
                                 case MyCharacterMovementEnum.CrouchWalkingRightBack:
                                 case MyCharacterMovementEnum.CrouchWalkingLeftFront:
                                 case MyCharacterMovementEnum.CrouchWalkingLeftBack:
-                                    iscrouching = true;
+                                    CurrentModifier = RUNNING_MODIFIER;
+                                    FatigueRate =
+                                        FATIGUE_RUNNING; // doing the duckwalk is more tiring than walking: try it if you don't believe me
                                     break;
+
+                                case MyCharacterMovementEnum.Walking:
+                                case MyCharacterMovementEnum.BackWalking:
+                                case MyCharacterMovementEnum.WalkStrafingLeft:
+                                case MyCharacterMovementEnum.WalkStrafingRight:
+                                case MyCharacterMovementEnum.WalkingRightFront:
+                                case MyCharacterMovementEnum.WalkingRightBack:
+                                case MyCharacterMovementEnum.WalkingLeftFront:
+                                case MyCharacterMovementEnum.WalkingLeftBack:
+                                    CurrentModifier = DEFAULT_MODIFIER;
+                                    FatigueRate = FATIGUE_WALKING;
+                                    break;
+
+                                case MyCharacterMovementEnum.LadderUp:
+                                    CurrentModifier = RUNNING_MODIFIER;
+                                    FatigueRate = FATIGUE_RUNNING;
+                                    break;
+
+                                case MyCharacterMovementEnum.LadderDown:
+                                    CurrentModifier = DEFAULT_MODIFIER;
+                                    FatigueRate = FATIGUE_WALKING;
+                                    break;
+
+                                case MyCharacterMovementEnum.Running:
+                                case MyCharacterMovementEnum.Backrunning:
+                                case MyCharacterMovementEnum.RunStrafingLeft:
+                                case MyCharacterMovementEnum.RunStrafingRight:
+                                case MyCharacterMovementEnum.RunningRightFront:
+                                case MyCharacterMovementEnum.RunningRightBack:
+                                case MyCharacterMovementEnum.RunningLeftBack:
+                                case MyCharacterMovementEnum.RunningLeftFront:
+                                    CurrentModifier = RUNNING_MODIFIER;
+                                    FatigueRate = FATIGUE_RUNNING;
+                                    break;
+
+                                case MyCharacterMovementEnum.Sprinting:
+                                case MyCharacterMovementEnum.Jump:
+                                    CurrentModifier = SPRINTING_MODIFIER;
+                                    FatigueRate = FATIGUE_SPRINTING;
+                                    break;
+
+                                case MyCharacterMovementEnum.Died:
+                                    CurrentModifier = DEFAULT_MODIFIER; // unused, but let's have them
+                                    FatigueRate = FATIGUE_STANDING; // unused, but let's have them
+                                    playerData.dead = true; // for death recovery logic
+                                    break;
+
                             }
-                            if (!iscrouching)
+
+                            playerData.lastmovement = character.MovementState; // track delta
+                        }
+
+                        #endregion
+
+                        #region Process Fatigue Needs
+
+                        if (FATIGUE_ENABLED && decayEnabled)
+                        {
+                            // Calculate players current gravity.
+                            double currentPlayerGravity =
+                                Math.Round(player.Character.Physics.Gravity.Length() / 20.0f * 1.02f, 2) * 1.05f;
+                            var gravityModifier = currentPlayerGravity * 1.05;
+                            if (currentPlayerGravity > CurrentModifier)
                             {
-                                VRage.Game.ModAPI.Interfaces.IMyControllableEntity ce = player.Controller.ControlledEntity.Entity as VRage.Game.ModAPI.Interfaces.IMyControllableEntity;
-                                ce.Crouch(); // force player to crouch
+                                gravityModifier = CurrentModifier;
                             }
-                        }
 
-                        // Helmet switch
-                        // Default Values: 0.70f * -100f = -85f
-                        if (playerData.fatigue <= (FATIGUE_LEVEL_HELMET * MIN_NEEDS_VALUE))
-                        {
-
-                            VRage.Game.ModAPI.Interfaces.IMyControllableEntity ce = player.Controller.ControlledEntity.Entity as VRage.Game.ModAPI.Interfaces.IMyControllableEntity;
-                            ce.SwitchHelmet(); // force player to switch helmet, panic reaction from trying to catch breath
-
-                            var destroyable = controlledEnt as IMyDestroyableObject;
-                            //destroyable.DoDamage(0.001f, MyStringHash.GetOrCompute("Fatigue"), true); // starting to hurt
-                        }
-
-                        // No Autohealing & cause pain. Default Values: 0.01f * -100f = -1f 
-                        if (playerData.fatigue <= (FATIGUE_LEVEL_NOHEALING * MIN_NEEDS_VALUE))
-                        {
-                            var destroyable = controlledEnt as IMyDestroyableObject;
-                            destroyable.DoDamage(1.0f, MyStringHash.GetOrCompute("Fatigue"), true); // starting to hurt
-                            
-                            if (IsAutohealingOn) // fatigued? no autohealing, either.
+                            bool currentHelmetStatus = player.Character.EnabledHelmet;
+                            float helmetModifier = 1.0f;
+                            if (currentHelmetStatus)
                             {
-                                destroyable.DoDamage(1.0f, MyStringHash.GetOrCompute("Testing"), false);
+                                helmetModifier = 1.05f;
                             }
+
+                            MyCharacterWeaponPositionComponent equippedItem =
+                                player?.Character?.Components?.Get<MyCharacterWeaponPositionComponent>();
+                            IMyEntity equippedTool = player?.Character?.EquippedTool;
+
+                            var toolModifier = 1.0f;
+                            if (equippedTool != null &&
+                                (equippedTool is IMyAngleGrinder || equippedTool is IMyWelder ||
+                                 equippedTool is IMyHandDrill))
+                            {
+                                var welder = equippedTool as IMyWelder;
+                                if (welder != null)
+                                {
+                                    if (welder.IsShooting)
+                                        toolModifier = 1.05f;
+                                }
+
+                                var grinder = equippedTool as IMyAngleGrinder;
+                                if (grinder != null)
+                                {
+                                    if (grinder.IsShooting)
+                                        toolModifier = 1.05f;
+                                }
+
+                                var drill = equippedTool as IMyHandDrill;
+                                if (drill != null)
+                                {
+                                    if (drill.IsShooting)
+                                        toolModifier = 1.05f;
+                                }
+                            }
+
+                            /*
+                            var fatigueCalcValues = string.Format("FR: {0}, G: {1}, C: {2}, H: {3}, T: {4}, Final: {5}", FatigueRate, gravityModifier, CurrentModifier,
+                                helmetModifier, toolModifier, (FatigueRate * Math.Max(((float)gravityModifier * CurrentModifier), CurrentModifier) * helmetModifier * FOOD_LOGIC_SKIP_TICKS / 60 * 20));
+                            MyVisualScriptLogicProvider.SendChatMessage(fatigueCalcValues);
+                            */
+
+                            var fatigueChange = FatigueRate *
+                                Math.Max(((float) gravityModifier * CurrentModifier), CurrentModifier) *
+                                helmetModifier * toolModifier * FOOD_LOGIC_SKIP_TICKS / 60 * 20;
+                            playerData.fatigue += fatigueChange;
+                            playerData.fatigue = Math.Max(playerData.fatigue, MIN_NEEDS_VALUE);
+
+                            if (FatigueBonus)
+                                playerData.fatigue = Math.Min(playerData.fatigue, MAX_NEEDS_VALUE * REST_BONUS);
+                            else
+                                playerData.fatigue = Math.Min(playerData.fatigue, MAX_NEEDS_VALUE);
                         }
-
-                        // Default Values: 0.999f * -100f = -99.9
-                        if (playerData.fatigue <= (FATIGUE_LEVEL_HEARTATTACK * MIN_NEEDS_VALUE))
-                        {
-                            var destroyable = controlledEnt as IMyDestroyableObject;
-
-                            destroyable.DoDamage(1000f, MyStringHash.GetOrCompute("Fatigue"), true); // sudden, but very avoidable, heart attack ;)
-                        }
-                    }
-                    else
-                    {
-                        MyVisualScriptLogicProvider.SetPlayerInputBlacklistState(controlStringShift, player.IdentityId, true);
-                    }
-                    #endregion
-                    
-                    // Process hunger need reduction.
-                    if (playerData.hunger > MIN_NEEDS_VALUE && decayEnabled)
-                    {
-                        // We update every second - at default values this is 50 / 120 / 60 * 1 = 0.0069 hunger per second 
-                        // Config value / Default Day Length / Sixty Seconds * Multiplier = Hunger per second
-                        playerData.hunger -= mHungerPerMinute / 60 * CurrentModifier;
-                        playerData.hunger = Math.Max(playerData.hunger, MIN_NEEDS_VALUE);
-                    }
-
-                    // Process thirst need reduction.
-                    if (playerData.thirst > MIN_NEEDS_VALUE && decayEnabled)
-                    {
-                        // We update every second - at default values this is 100 / 120 / 60 * 1 = 0.0138 thirst per second
-                        // Config value / Default Day Length / Sixty Seconds * Multiplier = Thirst per second
-                        playerData.thirst -= mThirstPerMinute / 60 * CurrentModifier;
-                        playerData.thirst = Math.Max(playerData.thirst, MIN_NEEDS_VALUE);
-                    }
-
-                    // Check for consumable food item and process consumption.
-                    if (playerData.hunger < (MAX_NEEDS_VALUE * HUNGRY_WHEN) || ForceEating)
-                        PlayerEatSomething(controlledEnt, playerData, (HungerBonus ? MAX_NEEDS_VALUE * 1.25f : MAX_NEEDS_VALUE), RecycleBonus);
-
-                    // Check for consumable drink item and process consumption.
-                    if (playerData.thirst < (MAX_NEEDS_VALUE * THIRSTY_WHEN) || ForceEating)
-                        PlayerDrinkSomething(controlledEnt, playerData, ThirstBonus ? MAX_NEEDS_VALUE * 1.25f : MAX_NEEDS_VALUE, RecycleBonus);
-
-                    
-
-                    MyEntityStat juiceStat = null;
-                    var stats = player.Character.Components.Get<MyEntityStatComponent>() as MyCharacterStatComponent;
-                    if (stats != null)
-                    {
-                        MyStringHash JuiceId = MyStringHash.GetOrCompute("Juice");
-                        var statsDict = stats.TryGetStat(JuiceId, out juiceStat);
-                    }
-
-                    // Cause damage if needs are unmet
-                    if (playerData.thirst <= 0)
-                {
-                    var destroyable = controlledEnt as IMyDestroyableObject;
-                    if (DAMAGE_SPEED_THIRST > 0)
-                        destroyable.DoDamage((IsAutohealingOn ? (DAMAGE_SPEED_THIRST + 1f) : DAMAGE_SPEED_THIRST), MyStringHash.GetOrCompute("Thirst"), true);
-                    else
-                        destroyable.DoDamage(((IsAutohealingOn ? (-DAMAGE_SPEED_THIRST + 1f) : -DAMAGE_SPEED_THIRST) + DAMAGE_SPEED_THIRST * playerData.thirst), MyStringHash.GetOrCompute("Thirst"), true);
-                }
-                    if (playerData.hunger <= 0)
-                    {
-                        var destroyable = controlledEnt as IMyDestroyableObject;
-                        if (DAMAGE_SPEED_HUNGER > 0)
-                            destroyable.DoDamage((IsAutohealingOn ? (DAMAGE_SPEED_HUNGER + 1f) : DAMAGE_SPEED_HUNGER), MyStringHash.GetOrCompute("Hunger"), true);
                         else
-                            destroyable.DoDamage(((IsAutohealingOn ? (-DAMAGE_SPEED_HUNGER + 1f) : -DAMAGE_SPEED_HUNGER) + DAMAGE_SPEED_HUNGER * playerData.hunger), MyStringHash.GetOrCompute("Hunger"), true);
-                    }
+                            playerData.fatigue = 9001f;
 
-                    // Check if player has taken Juice.
-                    if (juiceStat != null && juiceStat.Value > 0)
-                    {
-                        //MyVisualScriptLogicProvider.SendChatMessage("Juiced: " + juiceStat.Value.ToString());
-                        playerData.juice = juiceStat.Value;
-                        juicedPilots.Add(player.Character);
-                        PlayerUsingDrug(controlledEnt, player, juiceStat);
-                    }
-                    else
-                    {
-                        if (juicedPilots.Contains(player.Character)) juicedPilots.Remove(player.Character);
-                        playerData.juice = 0;
-                    }
+                        // Assign sounds emitter and play relevant heartbeat sounds based on fatigue.
+                        soundEmitter.Entity = (MyEntity) controlledEnt;
+                        if (playerData.fatigue < (MAX_NEEDS_VALUE / 4) && playerData.fatigue > 0.0f &&
+                            playerData.fatigue-- > playerData.fatigue)
+                        {
+                            if (!fatigueRecoverySoundPlayed)
+                            {
+                                soundEmitter.PlaySound(FASTHEARTWITHBEEP_SOUND_FADEOUT);
+                                fatigueRecoverySoundPlayed = true;
+                            }
+                        }
+                        else if (playerData.fatigue <= 0.0f)
+                        {
+                            fatigueRecoverySoundPlayed = false;
+                            //soundEmitter.VolumeMultiplier = Math.Max(1.0f, Math.Abs(playerData.fatigue / 100));
+                            soundEmitter.PlaySound(FASTHEARTWITHBEEP_SOUND);
 
-                    if (playerData.dead && DEATH_RECOVERY > 0.0)
-                    {
-                        MyInventoryBase inventory = ((MyEntity)controlledEnt).GetInventoryBase();
-                        if (playerData.hunger > 0)
-                            inventory.AddItems((MyFixedPoint)((1f / MAX_NEEDS_VALUE) * DEATH_RECOVERY * (playerData.hunger)), new MyObjectBuilder_Ore() { SubtypeName = "Organic" });
-                        if (playerData.thirst > 0)
-                            inventory.AddItems((MyFixedPoint)((1f / MAX_NEEDS_VALUE) * DEATH_RECOVERY * (playerData.thirst)), new MyObjectBuilder_Ingot() { SubtypeName = "GreyWater" });
-                        playerData.dead = true;
-                    }
+                        }
 
-                    //Sends PlayerData from Server.cs to Client.cs to run HUD.
-                    string message = MyAPIGateway.Utilities.SerializeToXML<PlayerData>(playerData);
-                    //Logging.Instance.WriteLine(("Message sent from Server.cs to Client.cs: " + message));
-                    MyAPIGateway.Multiplayer.SendMessageTo(
-                        1337,
-                        Encoding.Unicode.GetBytes(message),
-                        player.SteamUserId
-                    );
+                        #endregion
+
+                        #region Fatigue Consequences
+
+                        // Fatigue consequences
+                        string controlStringShift =
+                            MyAPIGateway.Input.GetControl(MyKeys.Shift).GetGameControlEnum().String;
+                        if (playerData.fatigue <= 0)
+                        {
+                            // at 0, start causing extra thirst
+                            // at specified, force walk instead of run (unless overriding by sprinting)
+                            // at specified, force crouch, and do damage flashes
+                            // at specified, breathing reflex / mess with helmet, and do a bit of actual damage (just in case thirst isn't already causing it)
+                            // at specified, cause heart attack
+                            if (playerData.fatigue <= (0.0f * MIN_NEEDS_VALUE))
+                            {
+                                if (EXTRA_THIRST_FROM_FATIGUE > 0)
+                                {
+                                    // positive: pile on to thirst, per second
+                                    playerData.thirst -= (EXTRA_THIRST_FROM_FATIGUE * FOOD_LOGIC_SKIP_TICKS / 60);
+
+                                }
+                                else
+                                {
+                                    // negative: multiply modifier
+                                    CurrentModifier *= -EXTRA_THIRST_FROM_FATIGUE;
+                                }
+                            }
+
+                            // Default Values: 0.5f * -100f = -20f
+                            if (playerData.fatigue <= (FATIGUE_LEVEL_FORCEWALK * MIN_NEEDS_VALUE))
+                            {
+                                // Force player to walk if they were running and disable shift.
+                                switch (currentMovementState)
+                                {
+                                    case MyCharacterMovementEnum.Sprinting:
+                                    case MyCharacterMovementEnum.Running:
+                                    case MyCharacterMovementEnum.Backrunning:
+                                    case MyCharacterMovementEnum.RunStrafingLeft:
+                                    case MyCharacterMovementEnum.RunStrafingRight:
+                                    case MyCharacterMovementEnum.RunningRightFront:
+                                    case MyCharacterMovementEnum.RunningRightBack:
+                                    case MyCharacterMovementEnum.RunningLeftBack:
+                                    case MyCharacterMovementEnum.RunningLeftFront:
+
+                                        MyVisualScriptLogicProvider.SetPlayerInputBlacklistState(controlStringShift,
+                                            player.IdentityId, false);
+                                        (controlledEnt as VRage.Game.ModAPI.Interfaces.IMyControllableEntity)
+                                            .SwitchWalk();
+                                        break;
+                                }
+                            }
+
+                            // Default Values: 0.5f * -100f = -50f
+                            if (playerData.fatigue <= (FATIGUE_LEVEL_FORCECROUCH * MIN_NEEDS_VALUE))
+                            {
+                                bool iscrouching = false;
+                                switch (currentMovementState)
+                                {
+                                    case MyCharacterMovementEnum.Crouching:
+                                    case MyCharacterMovementEnum.CrouchWalking:
+                                    case MyCharacterMovementEnum.CrouchBackWalking:
+                                    case MyCharacterMovementEnum.CrouchStrafingLeft:
+                                    case MyCharacterMovementEnum.CrouchStrafingRight:
+                                    case MyCharacterMovementEnum.CrouchWalkingRightFront:
+                                    case MyCharacterMovementEnum.CrouchWalkingRightBack:
+                                    case MyCharacterMovementEnum.CrouchWalkingLeftFront:
+                                    case MyCharacterMovementEnum.CrouchWalkingLeftBack:
+                                        iscrouching = true;
+                                        break;
+                                }
+
+                                if (!iscrouching)
+                                {
+                                    VRage.Game.ModAPI.Interfaces.IMyControllableEntity ce =
+                                        player.Controller.ControlledEntity.Entity as
+                                            VRage.Game.ModAPI.Interfaces.IMyControllableEntity;
+                                    ce.Crouch(); // force player to crouch
+                                }
+                            }
+
+                            // Helmet switch
+                            // Default Values: 0.70f * -100f = -85f
+                            if (playerData.fatigue <= (FATIGUE_LEVEL_HELMET * MIN_NEEDS_VALUE))
+                            {
+
+                                VRage.Game.ModAPI.Interfaces.IMyControllableEntity ce =
+                                    player.Controller.ControlledEntity.Entity as
+                                        VRage.Game.ModAPI.Interfaces.IMyControllableEntity;
+                                ce.SwitchHelmet(); // force player to switch helmet, panic reaction from trying to catch breath
+
+                                var destroyable = controlledEnt as IMyDestroyableObject;
+                                //destroyable.DoDamage(0.001f, MyStringHash.GetOrCompute("Fatigue"), true); // starting to hurt
+                            }
+
+                            // No Autohealing & cause pain. Default Values: 0.01f * -100f = -1f 
+                            if (playerData.fatigue <= (FATIGUE_LEVEL_NOHEALING * MIN_NEEDS_VALUE))
+                            {
+                                var destroyable = controlledEnt as IMyDestroyableObject;
+                                destroyable.DoDamage(1.0f, MyStringHash.GetOrCompute("Fatigue"),
+                                    true); // starting to hurt
+
+                                if (IsAutohealingOn) // fatigued? no autohealing, either.
+                                {
+                                    destroyable.DoDamage(1.0f, MyStringHash.GetOrCompute("Testing"), false);
+                                }
+                            }
+
+                            // Default Values: 0.999f * -100f = -99.9
+                            if (playerData.fatigue <= (FATIGUE_LEVEL_HEARTATTACK * MIN_NEEDS_VALUE))
+                            {
+                                var destroyable = controlledEnt as IMyDestroyableObject;
+
+                                destroyable.DoDamage(1000f, MyStringHash.GetOrCompute("Fatigue"),
+                                    true); // sudden, but very avoidable, heart attack ;)
+                            }
+                        }
+                        else
+                        {
+                            MyVisualScriptLogicProvider.SetPlayerInputBlacklistState(controlStringShift,
+                                player.IdentityId, true);
+                        }
+
+                        #endregion
+
+                        // Process hunger need reduction.
+                        if (playerData.hunger > MIN_NEEDS_VALUE && decayEnabled)
+                        {
+                            // We update every second - at default values this is 50 / 120 / 60 * 1 = 0.0069 hunger per second 
+                            // Config value / Default Day Length / Sixty Seconds * Multiplier = Hunger per second
+                            playerData.hunger -= mHungerPerMinute / 60 * CurrentModifier;
+                            playerData.hunger = Math.Max(playerData.hunger, MIN_NEEDS_VALUE);
+                        }
+
+                        // Process thirst need reduction.
+                        if (playerData.thirst > MIN_NEEDS_VALUE && decayEnabled)
+                        {
+                            // We update every second - at default values this is 100 / 120 / 60 * 1 = 0.0138 thirst per second
+                            // Config value / Default Day Length / Sixty Seconds * Multiplier = Thirst per second
+                            playerData.thirst -= mThirstPerMinute / 60 * CurrentModifier;
+                            playerData.thirst = Math.Max(playerData.thirst, MIN_NEEDS_VALUE);
+                        }
+
+                        // Check for consumable food item and process consumption.
+                        if (playerData.hunger < (MAX_NEEDS_VALUE * HUNGRY_WHEN) || ForceEating)
+                            PlayerEatSomething(controlledEnt, playerData,
+                                (HungerBonus ? MAX_NEEDS_VALUE * 1.25f : MAX_NEEDS_VALUE), RecycleBonus);
+
+                        // Check for consumable drink item and process consumption.
+                        if (playerData.thirst < (MAX_NEEDS_VALUE * THIRSTY_WHEN) || ForceEating)
+                            PlayerDrinkSomething(controlledEnt, playerData,
+                                ThirstBonus ? MAX_NEEDS_VALUE * 1.25f : MAX_NEEDS_VALUE, RecycleBonus);
+
+
+
+                        MyEntityStat juiceStat = null;
+                        var stats =
+                            player.Character.Components.Get<MyEntityStatComponent>() as MyCharacterStatComponent;
+                        if (stats != null)
+                        {
+                            MyStringHash JuiceId = MyStringHash.GetOrCompute("Juice");
+                            var statsDict = stats.TryGetStat(JuiceId, out juiceStat);
+                        }
+
+                        // Cause damage if needs are unmet
+                        if (playerData.thirst <= 0)
+                        {
+                            var destroyable = controlledEnt as IMyDestroyableObject;
+                            if (DAMAGE_SPEED_THIRST > 0)
+                                destroyable.DoDamage(
+                                    (IsAutohealingOn ? (DAMAGE_SPEED_THIRST + 1f) : DAMAGE_SPEED_THIRST),
+                                    MyStringHash.GetOrCompute("Thirst"), true);
+                            else
+                                destroyable.DoDamage(
+                                    ((IsAutohealingOn ? (-DAMAGE_SPEED_THIRST + 1f) : -DAMAGE_SPEED_THIRST) +
+                                     DAMAGE_SPEED_THIRST * playerData.thirst), MyStringHash.GetOrCompute("Thirst"),
+                                    true);
+                        }
+
+                        if (playerData.hunger <= 0)
+                        {
+                            var destroyable = controlledEnt as IMyDestroyableObject;
+                            if (DAMAGE_SPEED_HUNGER > 0)
+                                destroyable.DoDamage(
+                                    (IsAutohealingOn ? (DAMAGE_SPEED_HUNGER + 1f) : DAMAGE_SPEED_HUNGER),
+                                    MyStringHash.GetOrCompute("Hunger"), true);
+                            else
+                                destroyable.DoDamage(
+                                    ((IsAutohealingOn ? (-DAMAGE_SPEED_HUNGER + 1f) : -DAMAGE_SPEED_HUNGER) +
+                                     DAMAGE_SPEED_HUNGER * playerData.hunger), MyStringHash.GetOrCompute("Hunger"),
+                                    true);
+                        }
+
+                        // Check if player has taken Juice.
+                        if (juiceStat != null && juiceStat.Value > 0)
+                        {
+                            //MyVisualScriptLogicProvider.SendChatMessage("Juiced: " + juiceStat.Value.ToString());
+                            playerData.juice = juiceStat.Value;
+                            juicedPilots.Add(player.Character);
+                            PlayerUsingDrug(controlledEnt, player, juiceStat);
+                        }
+                        else
+                        {
+                            if (juicedPilots.Contains(player.Character)) juicedPilots.Remove(player.Character);
+                            playerData.juice = 0;
+                        }
+
+                        if (playerData.dead && DEATH_RECOVERY > 0.0)
+                        {
+                            MyInventoryBase inventory = ((MyEntity) controlledEnt).GetInventoryBase();
+                            if (playerData.hunger > 0)
+                                inventory.AddItems(
+                                    (MyFixedPoint) ((1f / MAX_NEEDS_VALUE) * DEATH_RECOVERY * (playerData.hunger)),
+                                    new MyObjectBuilder_Ore() {SubtypeName = "Organic"});
+                            if (playerData.thirst > 0)
+                                inventory.AddItems(
+                                    (MyFixedPoint) ((1f / MAX_NEEDS_VALUE) * DEATH_RECOVERY * (playerData.thirst)),
+                                    new MyObjectBuilder_Ingot() {SubtypeName = "GreyWater"});
+                            playerData.dead = true;
+                        }
+
+                        //Sends PlayerData from Server.cs to Client.cs to run HUD.
+                        string message = MyAPIGateway.Utilities.SerializeToXML<PlayerData>(playerData);
+                        //Logging.Instance.WriteLine(("Message sent from Server.cs to Client.cs: " + message));
+                        MyAPIGateway.Multiplayer.SendMessageTo(
+                            1337,
+                            Encoding.Unicode.GetBytes(message),
+                            player.SteamUserId
+                        );
+                    }
                 }
-            }
 
-            stopwatch.Complete(true);
+                stopwatch.Complete(true);
+            }
+            catch (Exception e)
+            {
+                Logging.Instance.WriteLine(("(FoodSystem) Server UpdateNeeds Error: " + e.Message + "\n" + e.StackTrace));
+            }
+            
         }
 
         private static void PlayerEatSomething(IMyEntity controlledEntity, PlayerData playerData, float maxval_cap, float crapbonus)
@@ -1253,13 +1319,26 @@ namespace Rek.FoodSystem
             MyAPIGateway.Entities.OnEntityAdd -= EntityAdded;
             MyAPIGateway.Entities.OnEntityRemove -= EntityRemoved;
 
-            mPlayers.Clear();
-            mFoodTypes.Clear();
-            mBeverageTypes.Clear();
-            mPlayerDataStore.clear();
-            mConfigDataStore.clear();
-            Logging.Instance.Close();
-            EasyAPI.Close();
+            if (mPlayers != null)
+                mPlayers.Clear();
+
+            if (mFoodTypes != null)
+                mFoodTypes.Clear();
+
+            if (mBeverageTypes != null)
+                mBeverageTypes.Clear();
+
+            if (mPlayerDataStore != null)
+                mPlayerDataStore.clear();
+
+            if (mConfigDataStore != null)
+                mConfigDataStore.clear();
+
+            if (Logging.Instance != null)
+                Logging.Instance.Close();
+
+            if (EasyAPI != null)
+                EasyAPI.Close();
         }
     }
 }

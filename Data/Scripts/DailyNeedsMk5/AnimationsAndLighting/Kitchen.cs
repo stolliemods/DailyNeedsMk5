@@ -41,9 +41,16 @@ namespace Stollie.DailyNeeds
 
         private static ConfigDataStore mConfigDataStore = new ConfigDataStore();
         private bool AUTOMATIC_BLOCK_COLOR;
+        private bool _subPartsAssigned;
 
         MyObjectBuilder_EntityBase objectBuilder = null;
         IMyCubeBlock foodProteinResequencer = null;
+
+        private MyEntitySubpart subpart_LeftArm = null;
+        private MyEntitySubpart subpart_RightArm = null;
+        private MyEntitySubpart subpart_Grinder = null;
+
+        private int _errorTick = 0;
 
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
@@ -66,6 +73,7 @@ namespace Stollie.DailyNeeds
             catch (Exception e)
             {
                 MyVisualScriptLogicProvider.ShowNotificationToAll("Init Error" + e, 10000, "Red");
+
             }
         }
 
@@ -95,7 +103,33 @@ namespace Stollie.DailyNeeds
                     foodProteinResequencer.CubeGrid.ColorBlocks(foodProteinResequencer.Min, foodProteinResequencer.Max, new Color(new Vector3(1.0f, 1.0f, 1.0f)).ColorToHSVDX11());
                 }
 
-                subparts = (foodProteinResequencer as MyEntity).Subparts;
+                if (!_subPartsAssigned)
+                {
+                    subparts = (foodProteinResequencer as MyEntity).Subparts;
+                    foreach (var subpart in subparts)
+                    {
+                        if (subpart.Key.Contains("LeftArm"))
+                        {
+                            subpart_LeftArm = subpart.Value;
+                        }
+                        if (subpart.Key.Contains("RightArm"))
+                        {
+                            subpart_RightArm = subpart.Value;
+                        }
+                        if (subpart.Key.Contains("RightArm"))
+                        {
+                            var rightArmSubparts = subpart.Value.Subparts;
+                            foreach (var rightArmSubpart in rightArmSubparts)
+                            {
+                                if (rightArmSubpart.Key.Contains("Grinder"))
+                                    subpart_Grinder = rightArmSubpart.Value;
+                            }
+                        }
+                    }
+                    _subPartsAssigned = true;
+                }
+
+
                 if (foodProteinResequencer.IsWorking)
                 {
                     var lightColorRed = Color.YellowGreen.R;
@@ -127,7 +161,7 @@ namespace Stollie.DailyNeeds
 
                     MoveLeftArm();
                     MoveRightArm();
-                    RotateCutter();
+                    RotateGrinder();
                 }
                 else
                 {
@@ -136,7 +170,7 @@ namespace Stollie.DailyNeeds
                         _light.LightOn = false;
                         _light.UpdateLight();
                     }
-                    
+
                     if (subparts != null)
                     {
                         foreach (var subpart in subparts)
@@ -148,10 +182,14 @@ namespace Stollie.DailyNeeds
             }
             catch (Exception e)
             {
-                // MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
+                if (_errorTick % 200 == 0)
+                {
+                    MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
+                }
+                _errorTick++;
             }
         }
-        
+
         public void CreateLight(MyEntity entity, Color color)
         {
             //These control the light settings on spawn.
@@ -181,14 +219,16 @@ namespace Stollie.DailyNeeds
                 _light.UpdateLight(); //Ignore - tells the game to update the light.
             }
         }
-       
+
         public void MoveLeftArm()
         {
             try
             {
-                var subpart = Entity.GetSubpart("KitchenDNSK_LeftArm");
+                if (subpart_LeftArm == null)
+                    return;
+
                 //double rotation = 0.002f;
-                var initialMatrix = subpart.PositionComp.LocalMatrix;
+                var initialMatrix = subpart_LeftArm.PositionComp.LocalMatrix;
                 double rotationX = 0.001f;
                 double rotationY = 0.001f;
 
@@ -198,7 +238,7 @@ namespace Stollie.DailyNeeds
 
                 var rotationMatrix = MatrixD.CreateRotationX(rotationX * TranslationTimeLeftArm) * MatrixD.CreateRotationY(rotationY * TranslationTimeLeftArm);
                 var matrix = rotationMatrix * initialMatrix;
-                subpart.PositionComp.LocalMatrix = matrix;
+                subpart_LeftArm.PositionComp.LocalMatrix = matrix;
                 AnimationLoopLeftArm++;
             }
             catch (Exception e)
@@ -211,9 +251,11 @@ namespace Stollie.DailyNeeds
         {
             try
             {
-                var subpart = Entity.GetSubpart("KitchenDNSK_RightArm");
+                if (subpart_RightArm == null)
+                    return;
+
                 var rotation = -0.001f;
-                var initialMatrix = subpart.PositionComp.LocalMatrix;
+                var initialMatrix = subpart_RightArm.PositionComp.LocalMatrix;
 
                 if (AnimationLoopRightArm == 500) AnimationLoopRightArm = 0;
                 if (AnimationLoopRightArm == 0) TranslationTimeRightArm = -1;
@@ -221,7 +263,7 @@ namespace Stollie.DailyNeeds
 
                 var rotationMatrix = MatrixD.CreateRotationY(rotation * TranslationTimeRightArm);
                 var matrix = rotationMatrix * initialMatrix;
-                subpart.PositionComp.LocalMatrix = matrix;
+                subpart_RightArm.PositionComp.LocalMatrix = matrix;
                 AnimationLoopRightArm++;
             }
             catch (Exception e)
@@ -230,13 +272,14 @@ namespace Stollie.DailyNeeds
             }
         }
 
-        public void RotateCutter()
+        public void RotateGrinder()
         {
             try
             {
-                MyEntitySubpart subpart = Entity.GetSubpart("KitchenDNSK_RightArm");
-                var cutterSubpart = subpart.GetSubpart("KitchenDNSK_Grinder");
-                var initialMatrix = cutterSubpart.PositionComp.LocalMatrix;
+                if (subpart_Grinder == null)
+                    return;
+
+                var initialMatrix = subpart_Grinder.PositionComp.LocalMatrix;
 
                 double rotationX = 0.0f;
                 double rotationY = 0.0f;
@@ -248,7 +291,7 @@ namespace Stollie.DailyNeeds
 
                 var rotationMatrix = MatrixD.CreateRotationX(rotationX) * MatrixD.CreateRotationY(rotationY) * MatrixD.CreateRotationZ(rotationZ);
                 var matrix = rotationMatrix * initialMatrix;
-                cutterSubpart.PositionComp.LocalMatrix = matrix;
+                subpart_Grinder.PositionComp.LocalMatrix = matrix;
                 AnimationLoopCutter++;
             }
             catch (Exception e)
