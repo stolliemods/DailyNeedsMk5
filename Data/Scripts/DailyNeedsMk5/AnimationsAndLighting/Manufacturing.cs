@@ -191,7 +191,7 @@ namespace Stollie.DailyNeeds //Just change this to something for yourself like '
                         {
                             MyParticlesManager.TryCreateParticleEffect("Canister_Gas", ref dummyMatrix, ref dummyPosition, uint.MaxValue, out _gasEffect);
                             _gasEffect.UserScale = 0.5f;
-                            _gasEffect.Loop = true;
+                            //_gasEffect.Loop = true;                            
                             gasParticleEffects.Add(dummy.Value, _gasEffect);
                         }
                         else
@@ -210,12 +210,12 @@ namespace Stollie.DailyNeeds //Just change this to something for yourself like '
                 {
                     MyParticlesManager.TryCreateParticleEffect("CanisterContactPoint", ref weldingEffectMatrix, ref weldingEffectPosition, uint.MaxValue, out _weldingEffect);
                     _weldingEffect.UserScale = 0.3f;
-                    _weldingEffect.Loop = true;
+                    //_weldingEffect.Loop = true;
                     
                 }
                 else
                 {
-                    _weldingEffect.Enabled = true;
+                    //_weldingEffect.Enabled = true;
                 }
 
                 foreach (var subpart in subpart_Ring1.Subparts)
@@ -253,7 +253,7 @@ namespace Stollie.DailyNeeds //Just change this to something for yourself like '
                     {
                         MyParticlesManager.TryCreateParticleEffect("LazerPulse", ref dummyMatrix, ref dummyPosition, uint.MaxValue, out _lazerParticle);
                         _lazerParticle.UserScale = 0.3f;
-                        _lazerParticle.Loop = true;
+                        //_lazerParticle.Loop = true;
                         lazerParticleEffects.Add(subpart, _lazerParticle);
                     }
                     else
