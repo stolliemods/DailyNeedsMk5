@@ -56,7 +56,7 @@ namespace Rek.FoodSystem
 
         public float get_FOOD_BONUS() { return mConfigData.FOOD_BONUS; }
         public float get_DRINK_BONUS() { return mConfigData.DRINK_BONUS; }
-        public float get_REST_BONUS() { return mConfigData.REST_BONUS; }
+        public float get_FATIGUE_BONUS() { return mConfigData.FATIGUE_BONUS; }
 
         public float get_STARTING_HUNGER() { return mConfigData.STARTING_HUNGER; }
         public float get_STARTING_THIRST() { return mConfigData.STARTING_THIRST; }

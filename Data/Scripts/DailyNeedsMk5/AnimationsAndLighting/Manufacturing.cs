@@ -252,8 +252,6 @@ namespace Stollie.DailyNeeds //Just change this to something for yourself like '
                     if (!lazerParticleEffects.ContainsKey(subpart))
                     {
                         MyParticlesManager.TryCreateParticleEffect("LazerPulse", ref dummyMatrix, ref dummyPosition, uint.MaxValue, out _lazerParticle);
-                        _lazerParticle.UserScale = 0.3f;
-                        //_lazerParticle.Loop = true;
                         lazerParticleEffects.Add(subpart, _lazerParticle);
                     }
                     else

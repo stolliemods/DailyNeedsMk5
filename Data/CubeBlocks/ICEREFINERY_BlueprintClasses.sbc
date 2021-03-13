@@ -8,7 +8,10 @@
 			</Id>
 			<DisplayName>LiquidConversion</DisplayName>
 			<Icon>Textures\GUI\Icons\food.dds</Icon>
-			<HighlightIcon>Textures\GUI\Icons\food_highlight.dds</HighlightIcon>
+			<HighlightIcon>Textures\GUI\Icons\filter_ice_refinery_input.dds</HighlightIcon>
+			<FocusIcon>Textures\GUI\Icons\Filters\filter_ice_refinery_input.dds</FocusIcon>
+            <InputConstraintIcon>Textures\GUI\Icons\Filters\filter_ice_refinery_input.dds</InputConstraintIcon>
+            <OutputConstraintIcon>Textures\GUI\Icons\Filters\filter_ice_refinery_output.dds</OutputConstraintIcon>
 		</Class>
 	</BlueprintClasses>
 	<BlueprintClassEntries>

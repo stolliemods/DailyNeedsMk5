@@ -50,10 +50,9 @@
 			<OreAmountPerPullRequest>2000</OreAmountPerPullRequest>
 			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
 			<Center x="0" y="0" z="0" />
-			<DamagedSound>ParticleHeavyMech</DamagedSound>
-			<PrimarySound>BlockRafinery</PrimarySound>
-			<ActionSound>BlockRafineryProcess</ActionSound>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
+			<DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
 			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
 			<DestroySound>WepSmallWarheadExpl</DestroySound>
 			<PCU>20</PCU>

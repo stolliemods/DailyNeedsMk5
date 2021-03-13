@@ -58,7 +58,7 @@ namespace Rek.FoodSystem {
 
         public float FOOD_BONUS;
         public float DRINK_BONUS;
-        public float REST_BONUS;
+        public float FATIGUE_BONUS;
 
         public float STARTING_HUNGER;
         public float STARTING_THIRST;
@@ -124,7 +124,7 @@ namespace Rek.FoodSystem {
             //Determines bonus values.
             FOOD_BONUS = 1.25f;
             DRINK_BONUS = 1.25f;
-            REST_BONUS = 1.25f;
+            FATIGUE_BONUS = 1.25f;
 
             //Determines starting values for new game/charecter.
             STARTING_HUNGER = 125f;

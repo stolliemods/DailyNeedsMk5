@@ -249,7 +249,7 @@
 				<SubtypeId>Water_DNSK</SubtypeId>
 			</Id>
 			<DisplayName>Water - (25pts Thirst)</DisplayName>
-			<ExtraInventoryTooltipLine>Produced in Water Recycler. Requires Ice Water which is refined from Ice Ore.</ExtraInventoryTooltipLine>
+			<ExtraInventoryTooltipLine>Produced in Ice Refinery. Requires Dirty Ice which is refined from Dirty Ice Ore.</ExtraInventoryTooltipLine>
 			<Icon>Textures\GUI\Icons\Physical_Items\Water_Icon.dds</Icon>
 			<Size>
 				<X>0.14</X>
@@ -270,7 +270,7 @@
 				<TypeId>Ingot</TypeId>
 				<SubtypeId>Coffee_DNSK</SubtypeId>
 			</Id>
-			<DisplayName>Coffee - (50pts Thirst/100pts Fatigue)</DisplayName>
+			<DisplayName>Coffee - (50pts Thirst/50pts Fatigue)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\Coffee_Icon.dds</Icon>
 			<Size>
 				<X>0.14</X>

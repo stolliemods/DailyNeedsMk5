@@ -7,8 +7,12 @@
 				<SubtypeId>Hydroponics</SubtypeId>
 			</Id>
 			<DisplayName>Hydroponics</DisplayName>
+			<Description>Converts Water, Organics and Gravel into Plant Matter and Cyanobacteria</Description>
 			<Icon>Textures\GUI\Icons\food.dds</Icon>
-			<HighlightIcon>Textures\GUI\Icons\food_highlight.dds</HighlightIcon>
+			<HighlightIcon>Textures\GUI\Icons\Filters\filter_hydoponics_input.dds</HighlightIcon>
+			<FocusIcon>Textures\GUI\Icons\Filters\filter_hydoponics_input.dds</FocusIcon>
+            <InputConstraintIcon>Textures\GUI\Icons\Filters\filter_hydoponics_input.dds</InputConstraintIcon>
+            <OutputConstraintIcon>Textures\GUI\Icons\Filters\filter_hydoponics_output.dds</OutputConstraintIcon>
 		</Class>
 		<Class>
 			<Id>                   
@@ -16,8 +20,8 @@
 				<SubtypeId>BacterialOxygen</SubtypeId>
 			</Id>
 			<DisplayName>Bacterial To Oxygen</DisplayName>
-			<Icon>Textures\GUI\Icons\food.dds</Icon>
-			<HighlightIcon>Textures\GUI\Icons\food_highlight.dds</HighlightIcon>
+			<Description>Converts Cyanobacteria to Oxygen</Description>
+			<Icon>Textures\GUI\Icons\ore_H2O_ice.dds</Icon>
 		</Class>	
 		
 	</BlueprintClasses>

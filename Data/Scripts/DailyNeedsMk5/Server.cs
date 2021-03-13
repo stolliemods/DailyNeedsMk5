@@ -71,7 +71,7 @@ namespace Rek.FoodSystem
         // Determines bonus values.
         private static float FOOD_BONUS;
         private static float DRINK_BONUS;
-        private static float REST_BONUS;
+        private static float FATIGUE_BONUS;
 
         // Determines starting values for new game/charecter.
         private static float STARTING_HUNGER;
@@ -191,9 +191,9 @@ namespace Rek.FoodSystem
             STIMULANT_STRING = mConfigDataStore.get_STIMULANT_STRING();
             CHICKEN_SOUP_STRING = mConfigDataStore.get_CHICKEN_SOUP_STRING();
 
-            FOOD_BONUS = mConfigDataStore.get_CRAP_AMOUNT();
-            DRINK_BONUS = mConfigDataStore.get_CRAP_AMOUNT();
-            REST_BONUS = mConfigDataStore.get_CRAP_AMOUNT();
+            FOOD_BONUS = mConfigDataStore.get_FOOD_BONUS();
+            DRINK_BONUS = mConfigDataStore.get_DRINK_BONUS();
+            FATIGUE_BONUS = mConfigDataStore.get_FATIGUE_BONUS();
 
             STARTING_HUNGER = mConfigDataStore.get_STARTING_HUNGER();
             STARTING_THIRST = mConfigDataStore.get_STARTING_THIRST();
@@ -359,11 +359,17 @@ namespace Rek.FoodSystem
                         PlayerData playerData = mPlayerDataStore.get(player);
                         Logging.Instance.WriteLine(playerData.ToString() + " Loaded to Server");
                         //MyAPIGateway.Utilities.ShowMessage("DEBUG", "Character: " + controlledEntity.DisplayName); // gets players name
-
-                        bool FatigueBonus = false;
+                        
+                        
                         bool HungerBonus = false;
                         bool ThirstBonus = false;
+                        bool FatigueBonus = false;
                         bool ChangedStance = false;
+
+                        // Check if player is under the effects of a bonus, keep it until they no longer are.
+                        if (playerData.hunger > MAX_NEEDS_VALUE) HungerBonus = true;
+                        if (playerData.thirst > MAX_NEEDS_VALUE) ThirstBonus = true;
+                        if (playerData.fatigue > MAX_NEEDS_VALUE) FatigueBonus = true;
 
                         // Sanity checks - make sure playerStore values dont exceed max config values.
                         if (HungerBonus)
@@ -388,6 +394,17 @@ namespace Rek.FoodSystem
                                 playerData.thirst = MAX_NEEDS_VALUE;
                         }
 
+                        if (FatigueBonus)
+                        {
+                            if (playerData.fatigue > MAX_NEEDS_VALUE * FATIGUE_BONUS)
+                                playerData.fatigue = MAX_NEEDS_VALUE * FATIGUE_BONUS;
+                        }
+                        else
+                        {
+                            if (playerData.fatigue > MAX_NEEDS_VALUE)
+                                playerData.fatigue = MAX_NEEDS_VALUE;
+                        }
+
                         // Check if Creative Tools no decay enabled in config and enable/disable behaviour.
                         if (CREATIVETOOLS_NODECAY)
                         {
@@ -400,11 +417,6 @@ namespace Rek.FoodSystem
                                 decayEnabled = true;
                             }
                         }
-
-                        // Check if player is under the effects of a bonus, keep it until they no longer are.
-                        if (playerData.fatigue > MAX_NEEDS_VALUE) FatigueBonus = true;
-                        if (playerData.thirst > MAX_NEEDS_VALUE) ThirstBonus = true;
-                        if (playerData.hunger > MAX_NEEDS_VALUE) HungerBonus = true;
 
                         IMyEntity controlledEnt = player.Controller.ControlledEntity.Entity;
                         controlledEnt = GetCharacterEntity(controlledEnt);
@@ -455,7 +467,6 @@ namespace Rek.FoodSystem
                             controlledEnt = playerData.entity;
 
                         #region Movement State Effects
-
                         float CurrentModifier = 1f;
                         float FatigueRate = 0f;
                         float RecycleBonus = 1f;
@@ -469,7 +480,6 @@ namespace Rek.FoodSystem
                             currentMovementState = character.MovementState;
                             switch (character.MovementState)
                             {
-
                                 // Check if player is 'sitting'.
                                 case MyCharacterMovementEnum.Sitting:
                                     IMyCubeBlock cb = player.Controller.ControlledEntity.Entity as IMyCubeBlock;
@@ -533,6 +543,7 @@ namespace Rek.FoodSystem
 
                                     break;
 
+                                
                                 case MyCharacterMovementEnum.Flying:
                                     CurrentModifier = FLYING_MODIFIER;
                                     FatigueRate = FATIGUE_FLYING; // operating a jetpack is surprisingly hard
@@ -628,7 +639,6 @@ namespace Rek.FoodSystem
                         #endregion
 
                         #region Process Fatigue Needs
-
                         if (FATIGUE_ENABLED && decayEnabled)
                         {
                             // Calculate players current gravity.
@@ -678,30 +688,29 @@ namespace Rek.FoodSystem
                                 }
                             }
 
-                            /*
-                            var fatigueCalcValues = string.Format("FR: {0}, G: {1}, C: {2}, H: {3}, T: {4}, Final: {5}", FatigueRate, gravityModifier, CurrentModifier,
+                            var fatigueCalcValues = string.Format("FR: {0}, Grav: {1}, CMod: {2}, HMod: {3}, TMod: {4}, Final: {5}", FatigueRate, gravityModifier, CurrentModifier,
                                 helmetModifier, toolModifier, (FatigueRate * Math.Max(((float)gravityModifier * CurrentModifier), CurrentModifier) * helmetModifier * FOOD_LOGIC_SKIP_TICKS / 60 * 20));
                             MyVisualScriptLogicProvider.SendChatMessage(fatigueCalcValues);
-                            */
-
+                            
                             var fatigueChange = FatigueRate *
                                 Math.Max(((float) gravityModifier * CurrentModifier), CurrentModifier) *
                                 helmetModifier * toolModifier * FOOD_LOGIC_SKIP_TICKS / 60 * 20;
+
                             playerData.fatigue += fatigueChange;
                             playerData.fatigue = Math.Max(playerData.fatigue, MIN_NEEDS_VALUE);
 
                             if (FatigueBonus)
-                                playerData.fatigue = Math.Min(playerData.fatigue, MAX_NEEDS_VALUE * REST_BONUS);
+                                playerData.fatigue = Math.Min(playerData.fatigue, MAX_NEEDS_VALUE * FATIGUE_BONUS);
                             else
                                 playerData.fatigue = Math.Min(playerData.fatigue, MAX_NEEDS_VALUE);
                         }
                         else
-                            playerData.fatigue = 9001f;
+                            playerData.fatigue = MAX_NEEDS_VALUE * FATIGUE_BONUS;
 
                         // Assign sounds emitter and play relevant heartbeat sounds based on fatigue.
                         soundEmitter.Entity = (MyEntity) controlledEnt;
                         if (playerData.fatigue < (MAX_NEEDS_VALUE / 4) && playerData.fatigue > 0.0f &&
-                            playerData.fatigue-- > playerData.fatigue)
+                            (playerData.fatigue - 1) > playerData.fatigue)
                         {
                             if (!fatigueRecoverySoundPlayed)
                             {
@@ -720,7 +729,6 @@ namespace Rek.FoodSystem
                         #endregion
 
                         #region Fatigue Consequences
-
                         // Fatigue consequences
                         string controlStringShift =
                             MyAPIGateway.Input.GetControl(MyKeys.Shift).GetGameControlEnum().String;
@@ -1014,7 +1022,7 @@ namespace Rek.FoodSystem
                         }
 
                         // Waste management line
-                        if (CRAP_AMOUNT > 0.0)
+                        if (CRAP_AMOUNT > 0.0 && canConsumeNum > 1.0)
                         {
                             playerInventory.AddItems((MyFixedPoint)(canConsumeNum * CRAP_AMOUNT * crapbonus), new MyObjectBuilder_Ore() { SubtypeName = "Organic" });
                             if (CROSS_CRAP_AMOUNT > 0.0)
@@ -1079,8 +1087,17 @@ namespace Rek.FoodSystem
 
                         playerData.thirst += result * (float)canConsumeNum;
 
-                        if (inventoryItem.Content.SubtypeName.Contains("Coffee") || inventoryItem.Content.SubtypeName.Contains("HotChocolate")) // TODO parametrize this
-                            playerData.fatigue += 25.0f; // TODO parametrize this
+                        if (inventoryItem.Content.SubtypeName.Contains("Coffee") || inventoryItem.Content.SubtypeName.Contains("HotChocolate")) {
+                            // TODO parametrize this
+                            if ((playerData.fatigue + 50.0f) > (MAX_NEEDS_VALUE * FATIGUE_BONUS))
+                            {
+                                playerData.fatigue = MAX_NEEDS_VALUE * FATIGUE_BONUS;
+                            }
+                            else
+                            {
+                                playerData.fatigue += 50.0f;
+                            }
+                        }
 
                         else if (inventoryItem.Content.SubtypeName.Contains(STIMULANT_STRING)) // TODO parametrize this
                             playerData.fatigue = MAX_NEEDS_VALUE; // TODO parametrize this
@@ -1092,7 +1109,7 @@ namespace Rek.FoodSystem
                             playerData.hunger += Math.Max(0f, Math.Min(result * (float)canConsumeNum, maxval_cap - playerData.hunger)); // TODO parametrize this
 
                         // waste management line
-                        if (CRAP_AMOUNT > 0.0)
+                        if (CRAP_AMOUNT > 0.0 && canConsumeNum > 1.0)
                         {
                             inventory.AddItems((MyFixedPoint)(canConsumeNum * CRAP_AMOUNT * crapbonus), new MyObjectBuilder_Ingot() { SubtypeName = "GreyWater_DNSK" });
                             if (CROSS_CRAP_AMOUNT > 0.0)

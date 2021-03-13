@@ -48,14 +48,13 @@
 			<RefineSpeed>1.0</RefineSpeed>
 			<MaterialEfficiency>1.0</MaterialEfficiency>
 			<OreAmountPerPullRequest>2000</OreAmountPerPullRequest>
-			<DamageEffectName>Damage_HeavyMech_Damaged</DamageEffectName>
 			<Center x="0" y="0" z="0" />
-			<DamagedSound>ParticleHeavyMech</DamagedSound>
-			<PrimarySound>BlockRafinery</PrimarySound>
-			<ActionSound>BlockRafineryProcess</ActionSound>
 			<EmissiveColorPreset>Default</EmissiveColorPreset>
-			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
-			<DestroySound>WepSmallWarheadExpl</DestroySound>
+            <DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+            <EmissiveColorPreset>Default</EmissiveColorPreset>
+            <DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+            <DestroySound>WepSmallWarheadExpl</DestroySound>
 			<PCU>20</PCU>
 		</Definition>
 		
@@ -137,25 +136,6 @@
 			<MirroringX>Y</MirroringX>
 			<MirroringY>Z</MirroringY>
 			<MirroringZ>Y</MirroringZ>
-			
-			<!--<Effects>
-				<Effect Name="Damage" ParameterMin="0.5">
-				<ParticleEffects>
-				<ParticleEffect Origin="Damage_02" Name="SmokeWhite" Loop="true" Duration="3" SpawnTimeMin="2" SpawnTimeMax="5" />
-				<ParticleEffect Origin="Damage_04" Name="SmokeWhite" Loop="true" Duration="3" SpawnTimeMin="2" SpawnTimeMax="5" />
-				</ParticleEffects>
-				</Effect>
-				
-				
-				<Effect Name="Damage" ParameterMin="0" ParameterMax="0.5">
-				<ParticleEffects>
-				<ParticleEffect Origin="Damage_01" Name="SmokeBlack" Loop="true" Delay="2" />
-				<ParticleEffect Origin="Damage_02" Name="SmokeWhite" Loop="true" />
-				<ParticleEffect Origin="Damage_03" Name="SmokeBlack" Loop="true" Delay="4" />
-				<ParticleEffect Origin="Damage_04" Name="SmokeWhite" Loop="true" />
-				</ParticleEffects>
-				</Effect>
-			</Effects> -->
 			<PCU>50</PCU>
 		</Definition>
 		

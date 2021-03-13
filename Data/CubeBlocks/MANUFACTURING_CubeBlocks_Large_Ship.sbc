@@ -46,8 +46,10 @@
 				<Class>Manufacturing</Class>				
 			</BlueprintClasses>
 			<ResourceSinkGroup>Factory</ResourceSinkGroup>
-			<DamageEffectId>212</DamageEffectId>
-			<DamagedSound>ParticleHeavyMech</DamagedSound>
+			<DamageEffectName>Damage_WeapExpl_Damaged</DamageEffectName>
+            <DamagedSound>ParticleWeapExpl</DamagedSound>
+			<DestroyEffect>BlockDestroyedExplosion_Large</DestroyEffect>
+			<DestroySound>WepSmallWarheadExpl</DestroySound>
 			<PCU>10</PCU>
 		</Definition>
 	</CubeBlocks>

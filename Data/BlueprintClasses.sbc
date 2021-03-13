@@ -9,6 +9,7 @@
 			<DisplayName>Ice Refinement</DisplayName>
 			<Icon>Textures\GUI\Icons\food.dds</Icon>
 			<HighlightIcon>Textures\GUI\Icons\food_highlight.dds</HighlightIcon>
+			
 		</Class>		
 	</BlueprintClasses>	
 	
