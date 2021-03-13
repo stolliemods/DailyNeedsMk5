@@ -688,9 +688,10 @@ namespace Rek.FoodSystem
                                 }
                             }
 
-                            var fatigueCalcValues = string.Format("FR: {0}, Grav: {1}, CMod: {2}, HMod: {3}, TMod: {4}, Final: {5}", FatigueRate, gravityModifier, CurrentModifier,
-                                helmetModifier, toolModifier, (FatigueRate * Math.Max(((float)gravityModifier * CurrentModifier), CurrentModifier) * helmetModifier * FOOD_LOGIC_SKIP_TICKS / 60 * 20));
-                            MyVisualScriptLogicProvider.SendChatMessage(fatigueCalcValues);
+                            // Debug for fatigue calculation
+                            //var fatigueCalcValues = string.Format("FR: {0}, Grav: {1}, CMod: {2}, HMod: {3}, TMod: {4}, Final: {5}", FatigueRate, gravityModifier, CurrentModifier,
+                            //    helmetModifier, toolModifier, (FatigueRate * Math.Max(((float)gravityModifier * CurrentModifier), CurrentModifier) * helmetModifier * FOOD_LOGIC_SKIP_TICKS / 60 * 20));
+                            //MyVisualScriptLogicProvider.SendChatMessage(fatigueCalcValues);
                             
                             var fatigueChange = FatigueRate *
                                 Math.Max(((float) gravityModifier * CurrentModifier), CurrentModifier) *
