@@ -38,7 +38,7 @@ namespace Rek.FoodSystem
                 writer.Close();
             } catch (Exception e)
             {
-                //MyAPIGateway.Utilities.ShowMessage("ERROR", "Error: " + e.Message + "\n" + e.StackTrace);
+                Logging.Instance.WriteLine("Error: " + e.Message + "\n" + e.StackTrace);
             }
         }
 

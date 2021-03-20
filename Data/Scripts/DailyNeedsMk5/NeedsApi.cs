@@ -32,13 +32,16 @@ namespace Rek.FoodSystem
         }
         
         public class RegisterDrinkableItemEvent {
-            public RegisterDrinkableItemEvent(string szItemName,  float value) {
-                this.item = szItemName;
-                this.value = value;
-            }
-        
             public string item;
-            public float value;
+            public float hungerRestoreValue;
+            public float thirstRestoreValue;
+            public float fatigueRestoreValue;
+            public RegisterDrinkableItemEvent(string szItemName, float hungerRestoreValue, float thirstRestoreValue, float fatigueRestoreValue) {
+                this.item = szItemName;
+                this.hungerRestoreValue = hungerRestoreValue;
+                this.thirstRestoreValue = thirstRestoreValue;
+                this.fatigueRestoreValue = fatigueRestoreValue;
+            }
         }
 
         public class RegisterDrugItemEvent
@@ -66,11 +69,11 @@ namespace Rek.FoodSystem
             MyAPIGateway.Utilities.SendModMessage(1339, message);
         }
         
-        public void RegisterDrinkableItem(string szItemName, float value)
+        public void RegisterDrinkableItem(string szItemName, float hungerRestoreValue, float thirstRestoreValue, float fatigueRestoreValue)
         {
             Event message = new Event();
             message.type = Event.Type.RegisterDrinkableItem;
-            message.payload = new RegisterDrinkableItemEvent(szItemName, value);
+            message.payload = new RegisterDrinkableItemEvent(szItemName, hungerRestoreValue, thirstRestoreValue, fatigueRestoreValue);
             
             MyAPIGateway.Utilities.SendModMessage(1339, message);
         }

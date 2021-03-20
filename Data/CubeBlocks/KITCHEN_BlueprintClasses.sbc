@@ -26,14 +26,19 @@
 		<Entry Class="SmallBlocks" BlueprintSubtypeId="Assembler/SmallKitchen_DNSK" />
 		<Entry Class="SmallBlocks" BlueprintSubtypeId="Assembler/MiniKitchen_DNSK" />
 		<!-- *** Foods *** -->
+		<Entry Class="Food" BlueprintSubtypeId="EmergencyFood_DNSK" />
 		<Entry Class="Food" BlueprintSubtypeId="SpaceBar_DNSK" />
 		<Entry Class="Food" BlueprintSubtypeId="SimpleMeal_DNSK_50" />
 		<Entry Class="Food" BlueprintSubtypeId="FineMeal_DNSK" />
 		<Entry Class="Food" BlueprintSubtypeId="LuxuryMeal_DNSK" />
+		
+		
 		<!-- *** Liquids *** -->
+		<Entry Class="Liquids" BlueprintSubtypeId="EmergencyWater_DNSK" />
 		<Entry Class="Liquids" BlueprintSubtypeId="Water_DNSK" />
 		<Entry Class="Liquids" BlueprintSubtypeId="Coffee_DNSK" />
 		<Entry Class="Liquids" BlueprintSubtypeId="HotChocolate_DNSK" />
+		
 		<!-- *** Dual Liquid/Food *** -->
 		<Entry Class="Liquids" BlueprintSubtypeId="ProteinShake_DNSK" />
 		

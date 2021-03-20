@@ -122,9 +122,9 @@ namespace Rek.FoodSystem {
             STIMULANT_STRING = "StimulantString"; // effectively disabled
 
             //Determines bonus values.
-            FOOD_BONUS = 1.25f;
-            DRINK_BONUS = 1.25f;
-            FATIGUE_BONUS = 1.25f;
+            FOOD_BONUS = 1.50f;
+            DRINK_BONUS = 1.50f;
+            FATIGUE_BONUS = 1.50f;
 
             //Determines starting values for new game/charecter.
             STARTING_HUNGER = 125f;

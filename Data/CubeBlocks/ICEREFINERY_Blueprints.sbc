@@ -14,7 +14,7 @@
 				<Item Amount="1" TypeId="Ore" SubtypeId="Ice_Dirty" />
 			</Prerequisites>
 			<Results>
-				<Item Amount="0.8" TypeId="Ore" SubtypeId="Ice" />
+				<Item Amount="0.6" TypeId="Ore" SubtypeId="Ice" />
 				<Item Amount="0.2" TypeId="Ore" SubtypeId="Ice_Drinkable" />
 			</Results>
 			<Priority>900</Priority>
@@ -34,10 +34,10 @@
 				<Item Amount="0.35" TypeId="Ingot" SubtypeId="GreyWater_DNSK" />
 			</Prerequisites>
 			<Results>
-				<Item Amount="0.09" TypeId="Ingot" SubtypeId="Water_DNSK" />
+				<Item Amount="0.09" TypeId="Ore" SubtypeId="Ice_Drinkable" />
 				<Item Amount="0.001" TypeId="Ore" SubtypeId="Organic" />
 			</Results>
-			<BaseProductionTimeInSeconds>10</BaseProductionTimeInSeconds>
+			<BaseProductionTimeInSeconds>1</BaseProductionTimeInSeconds>
 		</Blueprint>
 		
 		<!-- 

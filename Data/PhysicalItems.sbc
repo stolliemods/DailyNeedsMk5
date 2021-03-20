@@ -218,7 +218,7 @@
 			</Size>
 			<Mass>1</Mass>
 			<Volume>1</Volume>
-			<Model>Models\Physical_Items\K_Imperial_Ingot_SynthFuel_Small.mwm</Model>
+			<Model>Models\Physical_Items\Canister_EmergencyWater_Small.mwm</Model>
 			<PhysicalMaterial>Metal</PhysicalMaterial>
             <MinimalPricePerUnit>50</MinimalPricePerUnit>
 			<MinimumOfferAmount>1000</MinimumOfferAmount>

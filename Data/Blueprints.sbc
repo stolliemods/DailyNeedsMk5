@@ -26,7 +26,7 @@
 			<DisplayName>Emergency Water - (25pts Thirst/Max 50% Thirst Fill)</DisplayName>
 			<Icon>Textures\GUI\Icons\Physical_Items\EmergencyWater_Icon.dds</Icon>
 			<Prerequisites>
-				<Item Amount="90" TypeId="Ore" SubtypeId="Ice_Drinkable" />
+				<Item Amount="1000" TypeId="Ore" SubtypeId="Ice_Dirty" />
 			</Prerequisites>
 			<Result Amount="1" TypeId="Ingot" SubtypeId="EmergencyWater_DNSK" />
 			<BaseProductionTimeInSeconds>3</BaseProductionTimeInSeconds>

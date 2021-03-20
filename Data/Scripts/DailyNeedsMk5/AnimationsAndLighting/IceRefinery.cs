@@ -17,15 +17,14 @@ using VRage.Game.Entity;
 using Sandbox.Game.Lights;
 using Sandbox.Game.EntityComponents;
 using Rek.FoodSystem;
+using Sandbox.ModAPI.Interfaces.Terminal;
+using VRage.Utils;
 
 namespace Stollie.DailyNeeds
 {
     [MyEntityComponentDescriptor(typeof(MyObjectBuilder_Refinery), false, "LargeIceRefinery", "SmallIceRefinery", "MiniIceRefinery")]
     public class IceRefinery : MyGameLogicComponent
     {
-        private int RotationTimeWRS = 0;
-        private int AnimationLoopWRS = 0;
-        private bool playAnimation = true;
         private MyLight _light;
         public Dictionary<string, MyEntitySubpart> subparts;
         private static Guid ColorCheckStorageGUID = new Guid("0A9A3146-F8D1-40FD-A664-D0B9D071B0AC");
@@ -35,7 +34,9 @@ namespace Stollie.DailyNeeds
 
         MyObjectBuilder_EntityBase objectBuilder = null;
         IMyCubeBlock waterRecyclingSystem = null;
-        
+        private static IMyTerminalControl ratioControl = null;
+        private int refineRatio;
+
         public override void Init(MyObjectBuilder_EntityBase objectBuilder)
         {
             try
@@ -44,6 +45,7 @@ namespace Stollie.DailyNeeds
                 base.Init(objectBuilder);
                 this.objectBuilder = objectBuilder;
                 waterRecyclingSystem = Entity as IMyCubeBlock;
+
                 if (waterRecyclingSystem.Storage == null)
                 {
                     waterRecyclingSystem.Storage = new MyModStorageComponent();
@@ -52,15 +54,27 @@ namespace Stollie.DailyNeeds
                 mConfigDataStore.Load();
                 AUTOMATIC_BLOCK_COLOR = mConfigDataStore.get_AUTOMATIC_BLOCK_COLOR();
 
+                CreateTerminalControls();
+                MyAPIGateway.TerminalControls.CustomControlGetter += CustomControlGetter;
+
                 NeedsUpdate = MyEntityUpdateEnum.EACH_FRAME;
             }
             catch (Exception e)
             {
-                MyVisualScriptLogicProvider.ShowNotificationToAll("Init Error" + e, 10000, "Red");
+                MyVisualScriptLogicProvider.SendChatMessage("Init Error" + e);
+            }
+        }
+
+        private static void CustomControlGetter(IMyTerminalBlock block, List<IMyTerminalControl> controls)
+        {
+            if (block.BlockDefinition.SubtypeName.Contains("IceRefinery"))
+            {
+                controls.Add(ratioControl);
             }
         }
 
         public override MyObjectBuilder_EntityBase GetObjectBuilder(bool copy = false)
+        
         {
             return objectBuilder;
         }
@@ -85,7 +99,6 @@ namespace Stollie.DailyNeeds
                     waterRecyclingSystem.Storage[ColorCheckStorageGUID] = "ColorChanged";
                     waterRecyclingSystem.CubeGrid.ColorBlocks(waterRecyclingSystem.Min, waterRecyclingSystem.Max,
                         new Color(new Vector3(0.1f, 0.3f, 0.45f)).ColorToHSVDX11());
-                    
                 }
 
                 subparts = (waterRecyclingSystem as MyEntity).Subparts;
@@ -139,11 +152,70 @@ namespace Stollie.DailyNeeds
                         }
                     }
                 }
+                
+                // Adjust RefineIce blueprint
+                MyBlueprintDefinitionBase iceRefineryBlueprint = MyDefinitionManager.Static.GetBlueprintDefinition(
+                        new MyDefinitionId(typeof(MyObjectBuilder_BlueprintDefinition), "RefineIce"));
+                var outputs = iceRefineryBlueprint.Results;
+                // TODO: Pull original values and store them so this isnt hard coded. 
+                var refineRatioCalc = (refineRatio + 100) / 200f;
+                var iceGasOutput = (MyFixedPoint)MathHelper.Lerp(0.8f, 0f, MathHelper.Clamp(refineRatioCalc, 0, 1));
+                var iceDrinkOutput = (MyFixedPoint)MathHelper.Lerp(0f, 0.8f, MathHelper.Clamp(refineRatioCalc, 0, 1));
+
+                for (var i = 0; i < outputs.Length; i++)
+                {
+                    // This is the Ice Gas (Vanilla Ice) output
+                    if (i == 0)
+                    {
+                        outputs[i].Amount = iceGasOutput;
+                    }
+                    // This is the Ice Drink ratio output
+                    if (i == 1)
+                    {
+                        // TODO: Pull original values and store them so this isnt hard coded.
+                        outputs[i].Amount = iceDrinkOutput;
+                    }
+                }
             }
             catch (Exception e)
             {
                 MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
             }
+        }
+
+        private void CreateTerminalControls()
+        {
+            List<IMyTerminalControl> controls;
+            
+            MyAPIGateway.TerminalControls.GetControls<IMyRefinery>(out controls);
+            
+            IMyTerminalControlSlider ratioSlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, IMyRefinery>("RefineRatio");
+            ratioSlider.SetLimits(-100, 100);
+            ratioSlider.Title = MyStringId.GetOrCompute("Ice to Liquid Ratio");
+            ratioSlider.Tooltip = MyStringId.GetOrCompute("Increase to produce more. Decrease to produce less.");
+            ratioSlider.SupportsMultipleBlocks = true;
+            
+            ratioSlider.Getter = block => 
+            {
+                var logic = block?.GameLogic?.GetAs<IceRefinery>();
+                return logic != null ? (int)logic.refineRatio : 0;
+            };
+
+            ratioSlider.Setter = (block, value) =>
+            {
+                var logic = block?.GameLogic?.GetAs<IceRefinery>();
+                if (logic != null) logic.refineRatio = (int)value;
+            };
+            
+            ratioSlider.Writer = (block, sb) =>
+            {
+                var logic = block?.GameLogic?.GetAs<IceRefinery>();
+                if (logic != null) sb.Append(logic.refineRatio.ToString() + "%");
+            };
+            
+            //MyAPIGateway.TerminalControls.AddControl<IMyRefinery>(ratioSlider);
+            ratioControl = ratioSlider;
+            //controls.Add(ratioSlider);
         }
 
         public void RotateTurbine()
@@ -161,7 +233,6 @@ namespace Stollie.DailyNeeds
                             var rotationMatrix = MatrixD.CreateRotationY(rotation);
                             var matrix = rotationMatrix * initialMatrix;
                             subpart.Value.PositionComp.LocalMatrix = matrix;
-                            AnimationLoopWRS++;
                         }
                     }
                 }
@@ -209,6 +280,7 @@ namespace Stollie.DailyNeeds
             if (_light != null)
             {
                 MyLights.RemoveLight(_light);
+                MyAPIGateway.TerminalControls.CustomControlGetter -= CustomControlGetter;
                 _light = null;
             }
         }

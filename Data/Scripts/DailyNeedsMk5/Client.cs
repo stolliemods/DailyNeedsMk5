@@ -112,6 +112,7 @@ namespace Rek.FoodSystem
             if (Utils.isDev())
 			{
 				MyAPIGateway.Utilities.ShowMessage("CLIENT", "INIT");
+                Logging.Instance.WriteLine("CLIENT: INIT");
 			}
 
 			MyAPIGateway.Utilities.MessageEntered += onMessageEntered;
@@ -375,7 +376,7 @@ namespace Rek.FoodSystem
                         #region HungerUpdate
                         //Hunger Text
                         hunger_Hud_StringBuilder.Clear();
-                        if (Math.Floor(mPlayerData.hunger) <= 125 && Math.Floor(mPlayerData.hunger) > 30)
+                        if (Math.Floor(mPlayerData.hunger) > 30)
                             hunger_Hud_StringBuilder.AppendFormat("<color=white>{0}", Math.Floor(mPlayerData.hunger));
 
                         if (Math.Floor(mPlayerData.hunger) <= 30 && Math.Floor(mPlayerData.hunger) > 5)
@@ -459,7 +460,7 @@ namespace Rek.FoodSystem
 
                         //Thirst Text
                         thirst_Hud_StringBuilder.Clear();
-                        if (Math.Floor(mPlayerData.thirst) <= 125 && Math.Floor(mPlayerData.thirst) > 30)
+                        if (Math.Floor(mPlayerData.thirst) > 30)
                             thirst_Hud_StringBuilder.AppendFormat("<color=white>{0}", Math.Floor(mPlayerData.thirst));
 
                         if (Math.Floor(mPlayerData.thirst) <= 30 && Math.Floor(mPlayerData.thirst) > 5)
@@ -541,7 +542,7 @@ namespace Rek.FoodSystem
                         #region FatigueUpdate
                         //Fatigue
                         fatigue_Hud_StringBuilder.Clear();
-                        if (Math.Floor(mPlayerData.fatigue) <= 125 && Math.Floor(mPlayerData.fatigue) > 30)
+                        if (Math.Floor(mPlayerData.fatigue) > 30)
                             fatigue_Hud_StringBuilder.AppendFormat("<color=white>{0}", Math.Floor(mPlayerData.fatigue));
 
                         if (Math.Floor(mPlayerData.fatigue) <= 30 && Math.Floor(mPlayerData.fatigue) > 5)

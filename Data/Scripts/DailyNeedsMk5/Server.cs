@@ -28,6 +28,7 @@ using Draygo.API;
 using VRage.ModAPI;
 using VRage.Profiler;
 using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
+using DailyNeedsMk5.Data.Scripts.DailyNeedsMk5;
 
 namespace Rek.FoodSystem
 {
@@ -97,7 +98,7 @@ namespace Rek.FoodSystem
 
         // Item Type Dictionaries
         private static Dictionary<string, float> mFoodTypes = new Dictionary<string, float>();
-        private static Dictionary<string, float> mBeverageTypes = new Dictionary<string, float>();
+        private static Dictionary<string, Drinkables_Struct> mBeverageTypes = new Dictionary<string, Drinkables_Struct>();
         private static Dictionary<string, float> mDrugTypes = new Dictionary<string, float>();
 
         // Sound Emitters
@@ -222,7 +223,10 @@ namespace Rek.FoodSystem
             */
 
             if (Utils.isDev())
+            {
                 MyAPIGateway.Utilities.ShowMessage("SERVER", "INIT");
+                Logging.Instance.WriteLine("SERVER: INIT");
+            }
 
             MyAPIGateway.Multiplayer.RegisterMessageHandler(1338, AdminCommandHandler);
             MyAPIGateway.Utilities.RegisterMessageHandler(1339, NeedsApiHandler);
@@ -255,13 +259,14 @@ namespace Rek.FoodSystem
             // TODO un-hardcode these - move to an xml file maybe?
             // Any negative means that it will only refill to 50% of the MAX_NEEDS_VALUE as defined in the config file.
             // *** REGISTERING DRINKS ITEM ***
-            needsApi.RegisterDrinkableItem("EmergencyWater_DNSK", -10f); // emergency ration, takes ages to make and only available in emergency rations block, reduces thirst by 25 but wont affect thirst levels above 50% of Max.
-            needsApi.RegisterDrinkableItem("Water_DNSK", 25f);
-            needsApi.RegisterDrinkableItem("Coffee_DNSK", 50f);
-            needsApi.RegisterDrinkableItem("HotChocolate_DNSK", 50f);
+            needsApi.RegisterDrinkableItem("EmergencyWater_DNSK", 0.0f, -5f, 0.0f);
+            needsApi.RegisterDrinkableItem("Water_DNSK", 0.0f, 20f, 0.0f);
+            needsApi.RegisterDrinkableItem("Coffee_DNSK", 5.0f, 20f, 50.0f);
+            needsApi.RegisterDrinkableItem("HotChocolate_DNSK", 5.0f, 25f, 50.0f);
+            needsApi.RegisterDrinkableItem("Vodka", -5.0f, 20f, 50.0f);
 
             // *** REGISTERING FOODS ITEMS ***
-            needsApi.RegisterEdibleItem("EmergencyFood_DNSK", -10f); // emergency ration, takes ages to make and only available in emergency rations block, reduces hunger by 10 but wont affect hunger levels above 50% of Max.
+            needsApi.RegisterEdibleItem("EmergencyFood_DNSK", -10f);
             needsApi.RegisterEdibleItem("SpaceBar_DNSK", 25f);
             needsApi.RegisterEdibleItem("SimpleMeal_DNSK_50", 50f);
             needsApi.RegisterEdibleItem("FineMeal_DNSK", 100f);
@@ -349,7 +354,7 @@ namespace Rek.FoodSystem
         {
             try
             {
-                stopwatch.Start("Needs Logic");
+                //stopwatch.Start("Needs Logic");
                 foreach (IMyPlayer player in mPlayers)
                 {
                     if (player.Controller != null && player.Controller.ControlledEntity != null &&
@@ -357,9 +362,8 @@ namespace Rek.FoodSystem
                         player.Controller.ControlledEntity.Entity.DisplayName != "")
                     {
                         PlayerData playerData = mPlayerDataStore.get(player);
-                        Logging.Instance.WriteLine(playerData.ToString() + " Loaded to Server");
+                        //Logging.Instance.WriteLine(playerData.ToString() + " Loaded to Server");
                         //MyAPIGateway.Utilities.ShowMessage("DEBUG", "Character: " + controlledEntity.DisplayName); // gets players name
-                        
                         
                         bool HungerBonus = false;
                         bool ThirstBonus = false;
@@ -958,7 +962,7 @@ namespace Rek.FoodSystem
                     }
                 }
 
-                stopwatch.Complete(true);
+                //stopwatch.Complete(true);
             }
             catch (Exception e)
             {
@@ -996,7 +1000,6 @@ namespace Rek.FoodSystem
                         canConsumeNum = Math.Min(((maxval_cap - playerData.hunger) / result), (float)inventoryItem.Amount);
                     }
 
-                    //MyAPIGateway.Utilities.ShowMessage("DEBUG", "canEat: " + canConsumeNum);
                     if (canConsumeNum > 0)
                     {
                         // Play eating sound
@@ -1005,7 +1008,15 @@ namespace Rek.FoodSystem
                         soundEmitter.PlaySound(EATING_SOUND);
 
                         playerInventory.Remove(inventoryItem, (MyFixedPoint)canConsumeNum);
-                        playerData.hunger += result * (float)canConsumeNum;
+
+                        if ((playerData.hunger + result) > (MAX_NEEDS_VALUE * FOOD_BONUS))
+                        {
+                            playerData.hunger = MAX_NEEDS_VALUE * FOOD_BONUS;
+                        }
+                        else
+                        {
+                            playerData.hunger += result;
+                        }
 
                         if (inventoryItem.Content.SubtypeName.Contains("Shake")) // TODO parametrize this
                             playerData.thirst += Math.Max(0f, Math.Min(result * (float)canConsumeNum, maxval_cap - playerData.thirst)); // TODO parametrize this
@@ -1048,36 +1059,26 @@ namespace Rek.FoodSystem
             var items = inventory.GetItems();
             foreach (IMyInventoryItem inventoryItem in items)
             {
-                float result;
+                Drinkables_Struct result;
 
                 if (inventoryItem.Content.TypeId != typeof(MyObjectBuilder_Ingot))
                     continue;
 
-                if (mBeverageTypes.TryGetValue(inventoryItem.Content.SubtypeName, out result))
+                if (mBeverageTypes.TryGetValue(inventoryItem.Content.SubtypeName, value: out result))
                 {
                     float canConsumeNum = 0f;
-
+                    var thirstRestoreValue = Math.Abs(result.thirstRestoreValue);
                     // if a drink is registered as negative, reduce the maximum value. Useful for low nutrition drinks.
-                    if (result < 0)
+                    if (thirstRestoreValue < 0)
                     {
-                        result = Math.Abs(result);
-                        canConsumeNum = Math.Min((((maxval_cap / 2f) - playerData.thirst) / result), (float)inventoryItem.Amount);
+                        
+                        canConsumeNum = Math.Min((((maxval_cap / 2f) - thirstRestoreValue) / thirstRestoreValue), (float)inventoryItem.Amount);
                     }
                     else
                     {
-                        canConsumeNum = Math.Min(((maxval_cap - playerData.thirst) / result), (float)inventoryItem.Amount);
+                        canConsumeNum = Math.Min(((maxval_cap - thirstRestoreValue) / thirstRestoreValue), (float)inventoryItem.Amount);
                     }
 
-                    // Debug check for values.
-                    /*
-                    var info1 = string.Format("Max: {0} -> Thirst: {1} -> Result: {2} -> ItemAmount: {3} -> CanConsumeNum: {4}", maxval_cap.ToString(),
-                        playerData.thirst.ToString(), result.ToString(), (float) item.Amount, canConsumeNum.ToString());
-                    MyVisualScriptLogicProvider.SendChatMessage(info1);
-                    MyVisualScriptLogicProvider.SendChatMessage("CanConsumNum: " + canConsumeNum.ToString());
-                    */
-
-
-                    //MyAPIGateway.Utilities.ShowMessage("DEBUG", "canDrink: " + canConsumeNum);
                     if (canConsumeNum > 0)
                     {
                         soundEmitter.Entity = (MyEntity)controlledEntity;
@@ -1086,29 +1087,30 @@ namespace Rek.FoodSystem
 
                         inventory.Remove(inventoryItem, (MyFixedPoint)canConsumeNum);
 
-                        playerData.thirst += result * (float)canConsumeNum;
-
-                        if (inventoryItem.Content.SubtypeName.Contains("Coffee") || inventoryItem.Content.SubtypeName.Contains("HotChocolate")) {
-                            // TODO parametrize this
-                            if ((playerData.fatigue + 50.0f) > (MAX_NEEDS_VALUE * FATIGUE_BONUS))
-                            {
-                                playerData.fatigue = MAX_NEEDS_VALUE * FATIGUE_BONUS;
-                            }
-                            else
-                            {
-                                playerData.fatigue += 50.0f;
-                            }
+                        if ((playerData.thirst + thirstRestoreValue) > (MAX_NEEDS_VALUE * DRINK_BONUS))
+                        {
+                            playerData.thirst = MAX_NEEDS_VALUE * DRINK_BONUS;
                         }
-
-                        else if (inventoryItem.Content.SubtypeName.Contains(STIMULANT_STRING)) // TODO parametrize this
-                            playerData.fatigue = MAX_NEEDS_VALUE; // TODO parametrize this
-
-                        if (inventoryItem.Content.SubtypeName.Contains("ouillon")) // TODO parametrize this
-                            playerData.hunger += Math.Max(0f, Math.Min(result * (float)canConsumeNum, maxval_cap - playerData.hunger)); // TODO parametrize this
-
-                        else if (inventoryItem.Content.SubtypeName.Contains(CHICKEN_SOUP_STRING)) // TODO parametrize this
-                            playerData.hunger += Math.Max(0f, Math.Min(result * (float)canConsumeNum, maxval_cap - playerData.hunger)); // TODO parametrize this
-
+                        else
+                        {
+                            playerData.thirst += thirstRestoreValue;
+                        }
+                        if ((playerData.hunger + result.hungerRestoreValue) > (MAX_NEEDS_VALUE * FOOD_BONUS))
+                        {
+                            playerData.hunger = MAX_NEEDS_VALUE * FOOD_BONUS;
+                        }
+                        else
+                        {
+                            playerData.hunger += result.hungerRestoreValue;
+                        }
+                        if ((playerData.fatigue + result.fatigueRestoreValue) > (MAX_NEEDS_VALUE * FATIGUE_BONUS))
+                        {
+                            playerData.fatigue = MAX_NEEDS_VALUE * FATIGUE_BONUS;
+                        }
+                        else
+                        {
+                            playerData.fatigue += result.fatigueRestoreValue;
+                        }
                         // waste management line
                         if (CRAP_AMOUNT > 0.0 && canConsumeNum > 1.0)
                         {
@@ -1312,7 +1314,7 @@ namespace Rek.FoodSystem
             {
                 NeedsApi.RegisterDrinkableItemEvent drinkableItemEvent = (NeedsApi.RegisterDrinkableItemEvent)e.payload;
                 //MyAPIGateway.Utilities.ShowMessage("DEBUG", "DrinkableItem " + drinkableItemEvent.item + "(" +  drinkableItemEvent.value + ") registered");
-                mBeverageTypes.Add(drinkableItemEvent.item, drinkableItemEvent.value);
+                mBeverageTypes.Add(drinkableItemEvent.item, new Drinkables_Struct(drinkableItemEvent.hungerRestoreValue, drinkableItemEvent.thirstRestoreValue, drinkableItemEvent.fatigueRestoreValue));
             }
             else if (e.type == NeedsApi.Event.Type.RegisterDrugItem)
             {
