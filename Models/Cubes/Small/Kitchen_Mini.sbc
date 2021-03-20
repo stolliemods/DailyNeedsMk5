@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<Definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CubeBlocks>
+		<Definition>
+			<Id>
+				<TypeId>CubeBlock</TypeId>
+				<SubtypeId>Kitchen_Mini</SubtypeId>
+			</Id>
+			<DisplayName>DisplayName_Kitchen_Mini</DisplayName>
+			<Description>Description_Kitchen_Mini</Description>
+			<Icon>Textures\GUI\Icons\AstronautBackpack.dds</Icon>
+			<CubeSize>Small</CubeSize>
+			<BlockTopology>TriangleMesh</BlockTopology>
+			<Size x="1" y="1" z="1"/>
+			<ModelOffset x="0" y="0" z="0"/>
+			<Model>Models\Cubes\Small\Kitchen_Mini.mwm</Model>
+			<Components>
+				<Component Count="10" Subtype="SteelPlate"/>
+			</Components>
+			<CriticalComponent Index="0" Subtype="SteelPlate"/>
+			<BuildProgressModels>
+				<Model BuildPercentUpperBound="0.33" File="Models\Cubes\Small\Kitchen_Mini_BS1.mwm"/>
+				<Model BuildPercentUpperBound="0.66" File="Models\Cubes\Small\Kitchen_Mini_BS2.mwm"/>
+				<Model BuildPercentUpperBound="1.0" File="Models\Cubes\Small\Kitchen_Mini_BS3.mwm"/>
+			</BuildProgressModels>
+			<BlockPairName>Kitchen_Mini</BlockPairName>
+		</Definition>
+	</CubeBlocks>
+</Definitions>

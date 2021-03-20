@@ -698,8 +698,8 @@ namespace Rek.FoodSystem
                             //MyVisualScriptLogicProvider.SendChatMessage(fatigueCalcValues);
                             
                             var fatigueChange = FatigueRate *
-                                Math.Max(((float) gravityModifier * CurrentModifier), CurrentModifier) *
-                                helmetModifier * toolModifier * FOOD_LOGIC_SKIP_TICKS / 60 * 20;
+                            Math.Max(((float)gravityModifier * CurrentModifier), CurrentModifier) *
+                            helmetModifier * toolModifier * FOOD_LOGIC_SKIP_TICKS / 60 * 20;
 
                             playerData.fatigue += fatigueChange;
                             playerData.fatigue = Math.Max(playerData.fatigue, MIN_NEEDS_VALUE);
@@ -882,8 +882,6 @@ namespace Rek.FoodSystem
                         if (playerData.thirst < (MAX_NEEDS_VALUE * THIRSTY_WHEN) || ForceEating)
                             PlayerDrinkSomething(controlledEnt, playerData,
                                 ThirstBonus ? MAX_NEEDS_VALUE * 1.25f : MAX_NEEDS_VALUE, RecycleBonus);
-
-
 
                         MyEntityStat juiceStat = null;
                         var stats =
