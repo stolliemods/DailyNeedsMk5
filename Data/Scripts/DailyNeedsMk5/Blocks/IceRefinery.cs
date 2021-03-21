@@ -31,8 +31,8 @@ namespace Stollie.DailyNeeds
         public const string CONTROLS_PREFIX = "IceRefinery.";
         private static Guid SETTINGS_GUID = new Guid("0A9A3146-F8D1-40FD-A664-D0B9D071B0AC");
         public const int SETTINGS_CHANGED_COUNTDOWN = (60 * 1) / 10; // div by 10 because it runs in update10
-        public const int RATIO_MIN = -100;
-        public const int RATIO_MAX = 100;
+        public const float RATIO_MIN = -100.0f;
+        public const float RATIO_MAX = 100.0f;
 
         private int syncCountdown;
         private MyLight _light;
@@ -44,15 +44,13 @@ namespace Stollie.DailyNeeds
         IMyCubeBlock block = null;
         private static IMyTerminalControl ratioControl = null;
         Server Mod => Server.Instance;
-        public int refineRatio
+        public float refineRatio
         {
             get { return Settings.refineRatio; }
             set
             {
-                Settings.refineRatio = MathHelper.Clamp(refineRatio, RATIO_MIN, RATIO_MAX);
-
+                Settings.refineRatio = MathHelper.Clamp(value, RATIO_MIN, RATIO_MAX);
                 SettingsChanged();
-
                 block?.Components?.Get<MyResourceSinkComponent>()?.Update();
             }
         }
@@ -84,7 +82,7 @@ namespace Stollie.DailyNeeds
                     new Color(new Vector3(0.1f, 0.3f, 0.45f)).ColorToHSVDX11());
             }
 
-            Settings.refineRatio = 0;
+            Settings.refineRatio = 0.0f;
             LoadSettings();
             SaveSettings();
         }
@@ -223,12 +221,15 @@ namespace Stollie.DailyNeeds
             ratioSlider.Getter = (b) =>
             {
                 var logic = b?.GameLogic?.GetAs<IceRefinery>();
-                return logic != null ? (int)logic.refineRatio : 0;
+                return logic == null ? 0 : logic.refineRatio;
             };
             ratioSlider.Setter = (b, v) =>
             {
                 var logic = b?.GameLogic?.GetAs<IceRefinery>();
-                if (logic != null) logic.refineRatio = (int)v;
+                if (logic != null)
+                {
+                    logic.refineRatio = (int)Math.Floor(v);
+                }
             };
             ratioSlider.Writer = (block, sb) =>
             {

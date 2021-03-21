@@ -6,7 +6,7 @@ namespace Stollie.DailyNeeds
     public class IceRefineryBlockSettings
     {
         [ProtoMember(1)]
-        public int refineRatio;
+        public float refineRatio;
         public bool colorChanged;
     }
 }
