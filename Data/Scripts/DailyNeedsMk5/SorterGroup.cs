@@ -10,6 +10,7 @@ using Sandbox.Game;
 using Sandbox.Definitions;
 using VRage.Game;
 using VRage.Collections;
+using Digi;
 
 namespace Stollie.DailyNeeds
 {
@@ -43,7 +44,7 @@ namespace Stollie.DailyNeeds
                 {
                     if (definition.Id.SubtypeName != null && definition.Id.SubtypeName.Contains("_DNSK"))
                     {
-                        //Logging.Instance.WriteLine(definition.Id.SubtypeName);
+                        //Log.Info(definition.Id.SubtypeName);
                         dailyNeedsItems.Add(definition.Id);
                     }
                 }

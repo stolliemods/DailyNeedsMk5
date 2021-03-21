@@ -3,8 +3,9 @@ using VRage.Game.ModAPI;
 using Sandbox.ModAPI;
 using System.IO;
 using System;
+using Digi;
 
-namespace Rek.FoodSystem
+namespace Stollie.DailyNeeds
 {
     public class ConfigDataStore
     {
@@ -89,7 +90,7 @@ namespace Rek.FoodSystem
                 writer.Close();
             } catch (Exception e)
             {
-                Logging.Instance.WriteLine(("(FoodSystem) Config Save Data Error: " + e.Message + "\n" + e.StackTrace));
+                Log.Error("Config Data Store Save Data Error: " + e.Message + "\n" + e.StackTrace);
             }
         }
 
@@ -119,7 +120,7 @@ namespace Rek.FoodSystem
         	return true;
         }
 
-        public void clear() {
+        public void Clear() {
                 mConfigData = new ConfigData();
         }
     }

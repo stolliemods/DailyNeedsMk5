@@ -1,8 +1,9 @@
 using System.Diagnostics;
+using Digi;
 
 /* Pulled from DarkStar weaponCore - all credit for code is his */
 
-namespace Rek.FoodSystem
+namespace Stollie.DailyNeeds
 {
     internal class StopWatch
     {
@@ -27,8 +28,8 @@ namespace Rek.FoodSystem
             var s = ms / 1000;
             Sw.Reset();
             var message = $"{_message} ms:{(float)ms} last-ms:{(float)_last} s:{(int)s}";
-            if (_time && display) Logging.Instance.WriteLine(message);
-            else if (display) Logging.Instance.WriteLine(message);
+            if (_time && display) Log.Info(message);
+            else if (display) Log.Info(message);
             _last = ms;
         }
     }

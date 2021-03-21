@@ -3,14 +3,12 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using Sandbox.ModAPI;
 
-namespace Rek.FoodSystem
+namespace Stollie.DailyNeeds
 {
     public class Config {
         private string mFilename;
         private ConfigData mConfigData;
-        
         public Config() {}
-        
         private Config(string filename, ConfigData data) {
             mFilename = filename;
             mConfigData = data;

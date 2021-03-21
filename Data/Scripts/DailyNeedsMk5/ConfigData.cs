@@ -14,7 +14,7 @@ using VRage.Game.Components;
 using VRage.Game.Entity;
 using VRage.Library.Utils;
 
-namespace Rek.FoodSystem {
+namespace Stollie.DailyNeeds {
     public class ConfigData
     {
 

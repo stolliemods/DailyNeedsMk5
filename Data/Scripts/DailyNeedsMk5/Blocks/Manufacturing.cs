@@ -14,7 +14,7 @@ using Sandbox.Game;
 using VRage.Game.ModAPI;
 using Sandbox.Game.Lights;
 using VRage.Game.Entity;
-using Rek.FoodSystem;
+using Stollie.DailyNeeds;
 using ProtoBuf;
 using Sandbox.Definitions;
 using Sandbox.Graphics.GUI;
