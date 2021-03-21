@@ -16,7 +16,7 @@ using VRage.Game.ModAPI;
 using VRage.Game.Entity;
 using Sandbox.Game.Lights;
 using Sandbox.Game.EntityComponents;
-using Rek.FoodSystem;
+using Stollie.DailyNeeds;
 
 namespace Stollie.DailyNeeds
 {

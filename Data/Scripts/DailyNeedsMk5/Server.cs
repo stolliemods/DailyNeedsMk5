@@ -28,13 +28,20 @@ using Draygo.API;
 using VRage.ModAPI;
 using VRage.Profiler;
 using IMySlimBlock = VRage.Game.ModAPI.IMySlimBlock;
-using DailyNeedsMk5.Data.Scripts.DailyNeedsMk5;
+using Stollie.DailyNeeds.Sync;
+using Digi;
 
-namespace Rek.FoodSystem
+namespace Stollie.DailyNeeds
 {
     [MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
     public class Server : MySessionComponentBase
     {
+        public static Server Instance;
+
+        public bool ControlsCreated = false;
+        public Networking Networking = new Networking(63258);
+        public PacketBlockSettings CachedPacketSettings;
+
         // Various consumption config file modifier settings
         private static float MAX_NEEDS_VALUE;
         private static float MIN_NEEDS_VALUE;
@@ -141,6 +148,10 @@ namespace Rek.FoodSystem
         /// </summary>
         public override void LoadData()
         {
+            Instance = this;
+            Networking.Register();
+            CachedPacketSettings = new PacketBlockSettings();
+
             var allVoxelMaterials = MyDefinitionManager.Static.GetVoxelMaterialDefinitions();
             foreach (var def in allVoxelMaterials)
             {
@@ -225,7 +236,7 @@ namespace Rek.FoodSystem
             if (Utils.isDev())
             {
                 MyAPIGateway.Utilities.ShowMessage("SERVER", "INIT");
-                Logging.Instance.WriteLine("SERVER: INIT");
+                Log.Info("SERVER: INIT");
             }
 
             MyAPIGateway.Multiplayer.RegisterMessageHandler(1338, AdminCommandHandler);
@@ -320,7 +331,7 @@ namespace Rek.FoodSystem
             {
                 //MyApiGateway.Utilities.ShowMessage("ERROR", "Logger error: " + e.Message + "\n" + e.StackTrace);
 
-                Logging.Instance.WriteLine(("(FoodSystem) Server UpdateSimulation Error: " + e.Message + "\n" + e.StackTrace));
+                Log.Error("Server UpdateSimulation Error: " + e.Message + "\n" + e.StackTrace);
             }
         }
 
@@ -362,7 +373,7 @@ namespace Rek.FoodSystem
                         player.Controller.ControlledEntity.Entity.DisplayName != "")
                     {
                         PlayerData playerData = mPlayerDataStore.get(player);
-                        //Logging.Instance.WriteLine(playerData.ToString() + " Loaded to Server");
+                        //Log.Info(playerData.ToString() + " Loaded to Server");
                         //MyAPIGateway.Utilities.ShowMessage("DEBUG", "Character: " + controlledEntity.DisplayName); // gets players name
                         
                         bool HungerBonus = false;
@@ -951,7 +962,7 @@ namespace Rek.FoodSystem
 
                         //Sends PlayerData from Server.cs to Client.cs to run HUD.
                         string message = MyAPIGateway.Utilities.SerializeToXML<PlayerData>(playerData);
-                        //Logging.Instance.WriteLine(("Message sent from Server.cs to Client.cs: " + message));
+                        //Log.Info("Message sent from Server.cs to Client.cs: " + message);
                         MyAPIGateway.Multiplayer.SendMessageTo(
                             1337,
                             Encoding.Unicode.GetBytes(message),
@@ -964,9 +975,8 @@ namespace Rek.FoodSystem
             }
             catch (Exception e)
             {
-                Logging.Instance.WriteLine(("(FoodSystem) Server UpdateNeeds Error: " + e.Message + "\n" + e.StackTrace));
+                Log.Error("Server UpdateNeeds Error: " + e.Message + "\n" + e.StackTrace);
             }
-            
         }
 
         private static void PlayerEatSomething(IMyEntity controlledEntity, PlayerData playerData, float maxval_cap, float crapbonus)
@@ -1332,10 +1342,17 @@ namespace Rek.FoodSystem
         protected override void UnloadData()
         {
             modStarted = false;
+
+            Instance = null;
+            Networking?.Unregister();
+            Networking = null;
+
             MyAPIGateway.Multiplayer.UnregisterMessageHandler(1338, AdminCommandHandler);
             MyAPIGateway.Utilities.UnregisterMessageHandler(1339, NeedsApiHandler);
             MyAPIGateway.Entities.OnEntityAdd -= EntityAdded;
             MyAPIGateway.Entities.OnEntityRemove -= EntityRemoved;
+
+            
 
             if (mPlayers != null)
                 mPlayers.Clear();
@@ -1350,10 +1367,7 @@ namespace Rek.FoodSystem
                 mPlayerDataStore.clear();
 
             if (mConfigDataStore != null)
-                mConfigDataStore.clear();
-
-            if (Logging.Instance != null)
-                Logging.Instance.Close();
+                mConfigDataStore.Clear();
 
             if (EasyAPI != null)
                 EasyAPI.Close();

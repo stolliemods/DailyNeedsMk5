@@ -9,7 +9,7 @@ Thanks to midspace for some code snippets:
 https://github.com/midspace/Space-Engineers-Admin-script-mod
 */
 
-namespace Rek.FoodSystem
+namespace Stollie.DailyNeeds
 {
     public static class Utils {
         private static ulong[] Developers = { 76561198006687351 };

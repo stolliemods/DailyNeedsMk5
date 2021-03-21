@@ -1,4 +1,4 @@
-namespace Rek.FoodSystem {
+namespace Stollie.DailyNeeds {
     public class Command
     {
         public ulong sender;

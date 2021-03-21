@@ -18,7 +18,7 @@ using VRage.Utils;
 using VRageMath;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
 using VRage.Game.ObjectBuilders.Definitions;
-using Rek.FoodSystem;
+using Stollie.DailyNeeds;
 using Draygo.API;
 
 namespace Stollie.DailyNeeds

@@ -401,8 +401,8 @@
     <None Include="Data\ModStorageComponentGUID.sbc" />
     <None Include="Data\Particle.sbc" />
     <None Include="Data\PhysicalItems.sbc" />
-    <None Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\EmergencyRationsKit.bak" />
-    <None Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\SWCanisters.bak" />
+    <None Include="Data\Scripts\DailyNeedsMk5\Blocks\EmergencyRationsKit.bak" />
+    <None Include="Data\Scripts\DailyNeedsMk5\Blocks\SWCanisters.bak" />
     <None Include="Data\Scripts\DailyNeedsMk5\Config.bak" />
     <None Include="Data\Stats.sbc" />
     <None Include="Data\TransparentMaterials.sbc" />
@@ -588,13 +588,13 @@
     <None Include="obj\x64\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\Canisters.cs" />
-    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\Emissives.cs" />
-    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\EnclosedHydroponics.cs" />
-    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\IceRefinery.cs" />
-    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\Kitchen.cs" />
-    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\Manufacturing.cs" />
-    <Compile Include="Data\Scripts\DailyNeedsMk5\AnimationsAndLighting\OpenHydroponics.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\Canisters.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\Emissives.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\EnclosedHydroponics.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\IceRefinery.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\Kitchen.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\Manufacturing.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\OpenHydroponics.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\Drinkables_Struct.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\Client.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\Command.cs" />
@@ -603,13 +603,17 @@
     <Compile Include="Data\Scripts\DailyNeedsMk5\ConfigDataStore.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\EasyInventoryApi.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\HudAPIv2.cs" />
-    <Compile Include="Data\Scripts\DailyNeedsMk5\Logger.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\IceRefineryBlockSettings.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Log.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\NeedsApi.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\PlayerData.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\PlayerDataStore.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\Server.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\SorterGroup.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\StopWatch.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Sync\Networking.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Sync\PacketBase.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Sync\PacketBlockSettings.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\Utils.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.cs" />
     <Compile Include="obj\Release\.NETFramework,Version=v4.0.AssemblyAttributes.cs" />

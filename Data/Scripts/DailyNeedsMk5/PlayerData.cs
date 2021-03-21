@@ -2,7 +2,7 @@ using VRage.ModAPI;
 using VRage.Game;
 using System.Xml.Serialization;
 
-namespace Rek.FoodSystem {
+namespace Stollie.DailyNeeds {
     public class PlayerData
     {
         public ulong steamid;

@@ -3,8 +3,9 @@ using VRage.Game.ModAPI;
 using Sandbox.ModAPI;
 using System.IO;
 using System;
+using Digi;
 
-namespace Rek.FoodSystem
+namespace Stollie.DailyNeeds
 {
     public class PlayerDataStore
     {
@@ -38,7 +39,7 @@ namespace Rek.FoodSystem
                 writer.Close();
             } catch (Exception e)
             {
-                Logging.Instance.WriteLine("Error: " + e.Message + "\n" + e.StackTrace);
+                Log.Error("Player Data Store Error: " + e.Message + "\n" + e.StackTrace);
             }
         }
 

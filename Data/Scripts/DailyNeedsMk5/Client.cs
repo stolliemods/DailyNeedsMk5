@@ -13,8 +13,9 @@ using VRageMath;
 using VRageRender;
 using VRage.Utils;
 using BlendTypeEnum = VRageRender.MyBillboard.BlendTypeEnum;
+using Digi;
 
-namespace Rek.FoodSystem
+namespace Stollie.DailyNeeds
 {
 	[MySessionComponentDescriptor(MyUpdateOrder.AfterSimulation)]
 	public class Client : MySessionComponentBase
@@ -112,7 +113,7 @@ namespace Rek.FoodSystem
             if (Utils.isDev())
 			{
 				MyAPIGateway.Utilities.ShowMessage("CLIENT", "INIT");
-                Logging.Instance.WriteLine("CLIENT: INIT");
+                Log.Info("CLIENT: INIT");
 			}
 
 			MyAPIGateway.Utilities.MessageEntered += onMessageEntered;
@@ -161,7 +162,7 @@ namespace Rek.FoodSystem
 
             catch (Exception e)
 	        {
-	            Logging.Instance.WriteLine(("(FoodSystem) UpdateSimulation Error: " + e.Message + "\n" + e.StackTrace));
+	            Log.Error("Client - Update Simulation Error: " + e.Message + "\n" + e.StackTrace);
 	        }
 	    }
 
@@ -186,7 +187,7 @@ namespace Rek.FoodSystem
 	        {
 	            //MyAPIGateway.Utilities.ShowMessage("Debug", "Heartbeat: " + mHud.Heartbeat);
 	            mPlayerData = MyAPIGateway.Utilities.SerializeFromXML<PlayerData>(Encoding.Unicode.GetString(data));
-	            //Logging.Instance.WriteLine(mPlayerData.ToString() + "Loaded to Client");
+	            //Log.Info(mPlayerData.ToString() + "Loaded to Client");
 
                 //MyAPIGateway.Utilities.ShowMessage("FoodSystem", "Hunger: " + Math.Floor(mPlayerData.hunger) + "% Thirst: " + Math.Floor(mPlayerData.thirst) + "%");
 
@@ -650,7 +651,7 @@ namespace Rek.FoodSystem
             }
 	        catch (Exception e)
 	        {
-	            Logging.Instance.WriteLine(("(FoodSystem) FoodUpdateMsg Error: " + e.Message + "\n" + e.StackTrace));
+	            Log.Error("Client FoodUpdateMsg Error: " + e.Message + "\n" + e.StackTrace);
             }
         }
 
@@ -751,20 +752,10 @@ namespace Rek.FoodSystem
 		        }
 
 		        ;
-			try
-			{
-			Logging.Instance.Close();
-			}
-			catch (Exception e)
-			{
-			MyAPIGateway.Utilities.ShowMessage("Error", e.Message + "\n" + e.StackTrace);
-			}
-
-			;
 		    }
 		    catch (Exception e)
 		    {
-		        Logging.Instance.WriteLine(("(FoodSystem) Client Unload Data Error: " + e.Message + "\n" + e.StackTrace));
+		        Log.Error("Client - Unload Data Error: " + e.Message + "\n" + e.StackTrace);
             };
 		}
 	}

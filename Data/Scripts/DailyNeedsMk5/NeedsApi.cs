@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using VRage.Game.ModAPI;
 
-namespace Rek.FoodSystem
+namespace Stollie.DailyNeeds
 {
     public class NeedsApi {
         public class Event {

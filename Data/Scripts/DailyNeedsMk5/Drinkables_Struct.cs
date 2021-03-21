@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DailyNeedsMk5.Data.Scripts.DailyNeedsMk5
+namespace Stollie.DailyNeeds
 {
     public struct Drinkables_Struct
     {
