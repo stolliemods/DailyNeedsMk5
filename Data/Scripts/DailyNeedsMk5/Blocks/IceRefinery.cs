@@ -28,7 +28,6 @@ namespace Stollie.DailyNeeds
     {
         public readonly IceRefineryBlockSettings Settings = new IceRefineryBlockSettings();
 
-        public const string CONTROLS_PREFIX = "IceRefinery.";
         private static Guid SETTINGS_GUID = new Guid("0A9A3146-F8D1-40FD-A664-D0B9D071B0AC");
         public const int SETTINGS_CHANGED_COUNTDOWN = (60 * 1) / 10; // div by 10 because it runs in update10
         public const float RATIO_MIN = -100.0f;
@@ -41,8 +40,7 @@ namespace Stollie.DailyNeeds
         private static ConfigDataStore mConfigDataStore = new ConfigDataStore();
         private bool AUTOMATIC_BLOCK_COLOR;
 
-        IMyCubeBlock block = null;
-        private static IMyTerminalControl ratioControl = null;
+        private static IMyCubeBlock block = null;
         Server Mod => Server.Instance;
         public float refineRatio
         {
@@ -63,6 +61,7 @@ namespace Stollie.DailyNeeds
         public override void UpdateOnceBeforeFrame()
         {
             SetupTerminalControls<IMyRefinery>();
+            
             block = (IMyRefinery)Entity;
 
             if (block.CubeGrid?.Physics == null)
@@ -171,33 +170,6 @@ namespace Stollie.DailyNeeds
                 MyVisualScriptLogicProvider.ShowNotificationToAll("Update Error" + e, 2500, "Red");
             }
         }
-        void SyncSettings()
-        {
-            if (syncCountdown > 0 && --syncCountdown <= 0)
-            {
-                SaveSettings();
-
-                Mod.CachedPacketSettings.Send(block.EntityId, Settings);
-            }
-        }
-
-        public override bool IsSerialized()
-        {
-            // called when the game iterates components to check if they should be serialized, before they're actually serialized.
-            // this does not only include saving but also streaming and blueprinting.
-            // NOTE for this to work reliably the MyModStorageComponent needs to already exist in this block with at least one element.
-
-            try
-            {
-                SaveSettings();
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-
-            return base.IsSerialized();
-        }
 
         static void SetupTerminalControls<T>()
         {
@@ -208,9 +180,9 @@ namespace Stollie.DailyNeeds
 
             mod.ControlsCreated = true;
 
-            var ratioSlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, T>(CONTROLS_PREFIX + "RefineRatio");
-            ratioSlider.Title = MyStringId.GetOrCompute("Refine Ratio");
-            ratioSlider.Tooltip = MyStringId.GetOrCompute("Refine Tooltip");
+            var ratioSlider = MyAPIGateway.TerminalControls.CreateControl<IMyTerminalControlSlider, T>("RefineRatio");
+            ratioSlider.Title = MyStringId.GetOrCompute("Gas to Liquid Ratio");
+            ratioSlider.Tooltip = MyStringId.GetOrCompute("Left makes more Gas, Right makes more Liquid");
             ratioSlider.Visible = (b) =>
             {
                 var logic = b?.GameLogic?.GetAs<IceRefinery>();
@@ -238,54 +210,7 @@ namespace Stollie.DailyNeeds
             };
             MyAPIGateway.TerminalControls.AddControl<T>(ratioSlider);
         }
-
-        void LoadSettings()
-        {
-            if (block.Storage == null)
-                return;
-
-            string rawData;
-            if (!block.Storage.TryGetValue(SETTINGS_GUID, out rawData))
-                return;
-
-            try
-            {
-                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<IceRefineryBlockSettings>(Convert.FromBase64String(rawData));
-
-                if (loadedSettings != null)
-                {
-                    Settings.refineRatio = loadedSettings.refineRatio;
-                    Settings.colorChanged = loadedSettings.colorChanged;
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Error loading settings!\n{e}");
-            }
-        }
-
-        void SaveSettings()
-        {
-            if (block == null)
-                return; // called too soon or after it was already closed, ignore
-
-            if (Settings == null)
-                throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; modInstance={Server.Instance != null}");
-
-            if (MyAPIGateway.Utilities == null)
-                throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId}; modInstance={Server.Instance != null}");
-
-            if (block.Storage == null)
-                block.Storage = new MyModStorageComponent();
-
-            block.Storage.SetValue(SETTINGS_GUID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
-        }
-
-        void SettingsChanged()
-        {
-            if (syncCountdown == 0)
-                syncCountdown = SETTINGS_CHANGED_COUNTDOWN;
-        }
+        
         void AdjustIceBlueprint()
         {
             // Adjust RefineIce blueprint
@@ -303,12 +228,14 @@ namespace Stollie.DailyNeeds
                 if (i == 0)
                 {
                     outputs[i].Amount = iceGasOutput;
+                    //Log.Info("Ice Gas Output: " + iceGasOutput.ToString());
                 }
                 // This is the Ice Drink ratio output
                 if (i == 1)
                 {
                     // TODO: Pull original values and store them so this isnt hard coded.
                     outputs[i].Amount = iceDrinkOutput;
+                    //Log.Info("Ice Drink Output: " + iceDrinkOutput.ToString());
                 }
             }
         }
@@ -368,6 +295,82 @@ namespace Stollie.DailyNeeds
                 _light.Position = entity.WorldMatrix.Translation + lightAdjustment; //Updates the lights position constantly. You'll need help if you want it somewhere else.
                 _light.UpdateLight(); //Ignore - tells the game to update the light.
             }
+        }
+        
+        public override bool IsSerialized()
+        {
+            // called when the game iterates components to check if they should be serialized, before they're actually serialized.
+            // this does not only include saving but also streaming and blueprinting.
+            // NOTE for this to work reliably the MyModStorageComponent needs to already exist in this block with at least one element.
+
+            try
+            {
+                SaveSettings();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+
+            return base.IsSerialized();
+        }
+        
+        void SyncSettings()
+        {
+            if (syncCountdown > 0 && --syncCountdown <= 0)
+            {
+                SaveSettings();
+
+                Mod.CachedPacketSettings.Send(block.EntityId, Settings);
+            }
+        }
+        
+        void LoadSettings()
+        {
+            if (block.Storage == null)
+                return;
+
+            string rawData;
+            if (!block.Storage.TryGetValue(SETTINGS_GUID, out rawData))
+                return;
+
+            try
+            {
+                var loadedSettings = MyAPIGateway.Utilities.SerializeFromBinary<IceRefineryBlockSettings>(Convert.FromBase64String(rawData));
+
+                if (loadedSettings != null)
+                {
+                    Settings.refineRatio = loadedSettings.refineRatio;
+                    Settings.colorChanged = loadedSettings.colorChanged;
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Error loading settings!\n{e}");
+            }
+        }
+
+        void SaveSettings()
+        {
+            if (block == null)
+                return; // called too soon or after it was already closed, ignore
+
+            if (Settings == null)
+                throw new NullReferenceException($"Settings == null on entId={Entity?.EntityId}; modInstance={Server.Instance != null}");
+
+            if (MyAPIGateway.Utilities == null)
+                throw new NullReferenceException($"MyAPIGateway.Utilities == null; entId={Entity?.EntityId}; modInstance={Server.Instance != null}");
+
+            if (block.Storage == null)
+                block.Storage = new MyModStorageComponent();
+
+            block.Storage.SetValue(SETTINGS_GUID, Convert.ToBase64String(MyAPIGateway.Utilities.SerializeToBinary(Settings)));
+        }
+
+        void SettingsChanged()
+        {
+            if (syncCountdown == 0)
+                syncCountdown = SETTINGS_CHANGED_COUNTDOWN;
         }
 
         public override void Close()

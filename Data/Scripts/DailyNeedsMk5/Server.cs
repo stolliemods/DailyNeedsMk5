@@ -109,7 +109,10 @@ namespace Stollie.DailyNeeds
         private static Dictionary<string, float> mDrugTypes = new Dictionary<string, float>();
 
         // Sound Emitters
-        private static MyEntity3DSoundEmitter soundEmitter = new MyEntity3DSoundEmitter(null, true, 1.0f);
+        private static MyEntity3DSoundEmitter soundEmitterFood = new MyEntity3DSoundEmitter(null, true, 1.0f);
+        private static MyEntity3DSoundEmitter soundEmitterDrink = new MyEntity3DSoundEmitter(null, true, 1.0f);
+        private static MyEntity3DSoundEmitter soundEmitterFatigue = new MyEntity3DSoundEmitter(null, true, 1.0f);
+
         private static MySoundPair EATING_SOUND = new MySoundPair("Eating");
         private static MySoundPair DRINKING_SOUND = new MySoundPair("Drinking");
         private static MySoundPair FASTHEARTWITHBEEP_SOUND_FADEOUT = new MySoundPair("FastHeartBeatWithBeep_Fadeout");
@@ -141,21 +144,17 @@ namespace Stollie.DailyNeeds
 
         private static StopWatch stopwatch = new StopWatch();
 
-        /// <summary>
-        /// Converts the Mined Ore param for all definitions containing subtypeId 'Ice'  to 'DirtyIce'.
-        /// <param name=""></param>
-        /// <returns></returns>
-        /// </summary>
         public override void LoadData()
         {
             Instance = this;
             Networking.Register();
             CachedPacketSettings = new PacketBlockSettings();
 
+            // Converts the Mined Ore param for all definitions containing subtypeId 'Ice' to 'DirtyIce'.
             var allVoxelMaterials = MyDefinitionManager.Static.GetVoxelMaterialDefinitions();
             foreach (var def in allVoxelMaterials)
             {
-                if (def.Id.SubtypeName.Contains("Ice"))
+                if (def.Id.SubtypeName.Contains("Ice") && !def.Id.SubtypeName.Equals("DrinkIce_01"))
                 {
                     def.MinedOre = "Ice_Dirty";
                 }
@@ -724,13 +723,13 @@ namespace Stollie.DailyNeeds
                             playerData.fatigue = MAX_NEEDS_VALUE * FATIGUE_BONUS;
 
                         // Assign sounds emitter and play relevant heartbeat sounds based on fatigue.
-                        soundEmitter.Entity = (MyEntity) controlledEnt;
+                        soundEmitterFatigue.Entity = (MyEntity) controlledEnt;
                         if (playerData.fatigue < (MAX_NEEDS_VALUE / 4) && playerData.fatigue > 0.0f &&
                             (playerData.fatigue - 1) > playerData.fatigue)
                         {
                             if (!fatigueRecoverySoundPlayed)
                             {
-                                soundEmitter.PlaySound(FASTHEARTWITHBEEP_SOUND_FADEOUT);
+                                soundEmitterFatigue.PlaySound(FASTHEARTWITHBEEP_SOUND_FADEOUT);
                                 fatigueRecoverySoundPlayed = true;
                             }
                         }
@@ -738,7 +737,7 @@ namespace Stollie.DailyNeeds
                         {
                             fatigueRecoverySoundPlayed = false;
                             //soundEmitter.VolumeMultiplier = Math.Max(1.0f, Math.Abs(playerData.fatigue / 100));
-                            soundEmitter.PlaySound(FASTHEARTWITHBEEP_SOUND);
+                            soundEmitterFatigue.PlaySound(FASTHEARTWITHBEEP_SOUND);
 
                         }
 
@@ -1012,8 +1011,8 @@ namespace Stollie.DailyNeeds
                     {
                         // Play eating sound
                         // MyVisualScriptLogicProvider.PlaySingleSoundAtPosition("Eating", playerData.controlledEntity.PositionComp.WorldAABB.Matrix.Forward * 2.0);
-                        soundEmitter.Entity = (MyEntity)controlledEntity;
-                        soundEmitter.PlaySound(EATING_SOUND);
+                        soundEmitterFood.Entity = (MyEntity)controlledEntity;
+                        if (!soundEmitterFood.IsPlaying) soundEmitterFood.PlaySound(EATING_SOUND);
 
                         playerInventory.Remove(inventoryItem, (MyFixedPoint)canConsumeNum);
 
@@ -1089,9 +1088,8 @@ namespace Stollie.DailyNeeds
 
                     if (canConsumeNum > 0)
                     {
-                        soundEmitter.Entity = (MyEntity)controlledEntity;
-                        soundEmitter.StopSound(true);
-                        soundEmitter.PlaySound(DRINKING_SOUND);
+                        soundEmitterDrink.Entity = (MyEntity)controlledEntity;
+                        if (!soundEmitterDrink.IsPlaying) soundEmitterDrink.PlaySound(DRINKING_SOUND);
 
                         inventory.Remove(inventoryItem, (MyFixedPoint)canConsumeNum);
 

@@ -106,6 +106,31 @@
 		<PhysicalItem>
             <Id>
                 <TypeId>Ore</TypeId>
+                <SubtypeId>Ice</SubtypeId>
+            </Id>
+            <DisplayName>Ice (Gas)</DisplayName>
+            <Icon>Textures\GUI\Icons\ore_H2O_ice.dds</Icon>
+            <Size>
+                <X>0.07</X>
+                <Y>0.07</Y>
+                <Z>0.07</Z>
+            </Size>
+            <Mass>1</Mass>
+            <Volume>0.37</Volume>
+            <Model>Models\Components\Sphere.mwm</Model>
+            <PhysicalMaterial>Stone</PhysicalMaterial>
+            <IconSymbol>Ice-Gas</IconSymbol>
+            <MinimalPricePerUnit>50</MinimalPricePerUnit>
+            <MinimumOfferAmount>1000</MinimumOfferAmount>
+            <MaximumOfferAmount>10000</MaximumOfferAmount>
+            <MinimumOrderAmount>1000</MinimumOrderAmount>
+            <MaximumOrderAmount>20000</MaximumOrderAmount>
+            <CanPlayerOrder>true</CanPlayerOrder>
+		</PhysicalItem>
+		
+		<PhysicalItem>
+            <Id>
+                <TypeId>Ore</TypeId>
                 <SubtypeId>Ice_Dirty</SubtypeId>
 			</Id>
             <DisplayName>Ice (Dirty)</DisplayName>
@@ -127,32 +152,6 @@
             <MaximumOrderAmount>20000</MaximumOrderAmount>
             <CanPlayerOrder>false</CanPlayerOrder>
 		</PhysicalItem>
-		
-		<PhysicalItem>
-            <Id>
-                <TypeId>Ore</TypeId>
-                <SubtypeId>Ice</SubtypeId>
-            </Id>
-            <DisplayName>Ice (Gas)</DisplayName>
-            <Icon>Textures\GUI\Icons\ore_H2O_ice.dds</Icon>
-            <Size>
-                <X>0.07</X>
-                <Y>0.07</Y>
-                <Z>0.07</Z>
-            </Size>
-            <Mass>1</Mass>
-            <Volume>0.37</Volume>
-            <Model>Models\Components\Sphere.mwm</Model>
-            <PhysicalMaterial>Stone</PhysicalMaterial>
-            <IconSymbol>Ice-Gas</IconSymbol>
-
-            <MinimalPricePerUnit>50</MinimalPricePerUnit>
-            <MinimumOfferAmount>1000</MinimumOfferAmount>
-            <MaximumOfferAmount>10000</MaximumOfferAmount>
-            <MinimumOrderAmount>1000</MinimumOrderAmount>
-            <MaximumOrderAmount>20000</MaximumOrderAmount>
-            <CanPlayerOrder>true</CanPlayerOrder>
-        </PhysicalItem>
 		
 		<PhysicalItem>
             <Id>

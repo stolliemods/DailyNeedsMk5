@@ -592,6 +592,7 @@
     <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\Emissives.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\EnclosedHydroponics.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\IceRefinery.cs" />
+    <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\IceRefineryControlsAdjustment.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\Kitchen.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\Manufacturing.cs" />
     <Compile Include="Data\Scripts\DailyNeedsMk5\Blocks\OpenHydroponics.cs" />
